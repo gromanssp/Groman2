@@ -1,0 +1,70 @@
+<div class="home-container">
+  <header class="page-header">
+    <h1 class="heading-2">Dashboard Overview</h1>
+    <p class="text-body">Welcome back, here is your summary for today.</p>
+  </header>
+
+  <section class="stats-grid">
+    <app-stat-card
+      title="Total Users"
+      value="12,345"
+      [icon]="iconUsers"
+      [trend]="12"
+      accent="primary"
+    ></app-stat-card>
+    
+    <app-stat-card
+      title="Revenue"
+      value="$45,678"
+      [icon]="iconRevenue"
+      [trend]="8.5"
+      accent="success"
+    ></app-stat-card>
+    
+    <app-stat-card
+      title="Sales"
+      value="2,341"
+      [icon]="iconSales"
+      [trend]="-2.4"
+      accent="warning"
+    ></app-stat-card>
+    
+    <app-stat-card
+      title="Bounce Rate"
+      value="42.3%"
+      [icon]="iconBounce"
+      [trend]="-5.1"
+      accent="secondary"
+    ></app-stat-card>
+  </section>
+
+  <section class="charts-grid">
+    <div class="glass-panel chart-container">
+      <div class="chart-header">
+        <h3 class="heading-3">Revenue Overview</h3>
+        <span class="badge badge-primary">This Year</span>
+      </div>
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [data]="revenueChartData"
+          [options]="revenueChartOptions"
+          [type]="'line'">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-container">
+      <div class="chart-header">
+        <h3 class="heading-3">Active Users</h3>
+        <span class="badge badge-success">Weekly</span>
+      </div>
+      <div class="chart-wrapper">
+        <canvas baseChart
+          [data]="usersChartData"
+          [options]="usersChartOptions"
+          [type]="'bar'">
+        </canvas>
+      </div>
+    </div>
+  </section>
+</div>

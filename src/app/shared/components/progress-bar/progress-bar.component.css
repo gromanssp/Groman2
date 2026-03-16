@@ -1,0 +1,51 @@
+.progress-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-round);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-round);
+  transition: width 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.fill-primary { background: var(--accent-primary); }
+.fill-success { background: var(--success); }
+.fill-warning { background: var(--warning); }
+.fill-danger { background: var(--danger); }
+
+.striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+.animated {
+  animation: stripeMove 1s linear infinite;
+}
+
+.progress-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes stripeMove {
+  from { background-position: 1rem 0; }
+  to { background-position: 0 0; }
+}

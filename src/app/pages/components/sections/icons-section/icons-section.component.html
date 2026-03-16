@@ -1,0 +1,35 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Icons</h2>
+  <p class="text-body mb-4">A collection of Heroicons-style outline SVG icons. Click any icon to copy its SVG code.</p>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search icons..."
+      [(ngModel)]="searchTerm"
+    />
+  </div>
+
+  <div class="icons-grid">
+    <div
+      class="icon-card glass-panel"
+      *ngFor="let icon of filteredIcons; let i = index"
+      (click)="copyIcon(icon, i)"
+      [class.copied]="copiedIndex === i"
+    >
+      <div class="icon-preview" [innerHTML]="icon.svg"></div>
+      <span class="icon-name">{{ icon.name }}</span>
+      <span class="icon-toast" *ngIf="copiedIndex === i">Copied!</span>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="filteredIcons.length === 0">
+    <p class="text-body">No icons found matching "{{ searchTerm }}"</p>
+  </div>
+
+  <div class="glass-panel showcase-card" style="margin-top: 1.5rem;">
+    <h3 class="card-title">Usage</h3>
+    <app-code-snippet [code]="codes.usage"></app-code-snippet>
+  </div>
+</div>

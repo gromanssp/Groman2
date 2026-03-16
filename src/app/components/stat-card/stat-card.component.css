@@ -1,0 +1,92 @@
+.stat-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-normal);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  background: var(--bg-surface-hover);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.stat-card.accent-primary::after { background: var(--accent-gradient); }
+.stat-card.accent-secondary::after { background: var(--accent-secondary); }
+.stat-card.accent-success::after { background: var(--success); }
+.stat-card.accent-warning::after { background: var(--warning); }
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-title {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.stat-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.stat-icon-wrapper ::ng-deep svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stat-body {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.stat-value {
+  margin: 0;
+  line-height: 1;
+}
+
+.stat-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-round);
+}
+
+.stat-trend svg {
+  width: 14px;
+  height: 14px;
+}
+
+.trend-up {
+  color: var(--success);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.trend-down {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+}

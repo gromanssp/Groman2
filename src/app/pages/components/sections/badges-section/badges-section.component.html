@@ -1,0 +1,76 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Badges</h2>
+  <p class="text-body mb-4">Small status indicators for counts, labels, and categorization.</p>
+
+  <div class="components-grid">
+    <!-- Variants -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Variants</h3>
+      <div class="demo-area">
+        <app-badge variant="primary">Primary</app-badge>
+        <app-badge variant="success">Success</app-badge>
+        <app-badge variant="warning">Warning</app-badge>
+        <app-badge variant="danger">Danger</app-badge>
+        <app-badge variant="secondary">Secondary</app-badge>
+        <app-badge variant="outline">Outline</app-badge>
+      </div>
+      <app-code-snippet [code]="codes.variants"></app-code-snippet>
+    </div>
+
+    <!-- Sizes -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Sizes</h3>
+      <div class="demo-area" style="align-items: center;">
+        <app-badge variant="primary" size="sm">Small</app-badge>
+        <app-badge variant="primary" size="md">Medium</app-badge>
+        <app-badge variant="primary" size="lg">Large</app-badge>
+      </div>
+      <app-code-snippet [code]="codes.sizes"></app-code-snippet>
+    </div>
+
+    <!-- With Buttons -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Badges with Buttons</h3>
+      <div class="demo-area">
+        <button class="btn btn-primary badge-btn">
+          Notifications <app-badge variant="danger" size="sm">4</app-badge>
+        </button>
+        <button class="btn btn-secondary badge-btn">
+          Messages <app-badge variant="success" size="sm">12</app-badge>
+        </button>
+      </div>
+      <app-code-snippet [code]="codes.withButtons"></app-code-snippet>
+    </div>
+
+    <!-- Interactive Counter -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Interactive Counter</h3>
+      <div class="demo-area" style="align-items: center;">
+        <button class="btn btn-outline-primary btn-sm" (click)="decrement()">-</button>
+        <app-badge [variant]="counter > 5 ? 'danger' : counter > 2 ? 'warning' : 'success'" size="lg">{{ counter }}</app-badge>
+        <button class="btn btn-outline-primary btn-sm" (click)="increment()">+</button>
+      </div>
+      <app-code-snippet [code]="codes.counter"></app-code-snippet>
+    </div>
+
+    <!-- Status Indicators -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Status Indicators</h3>
+      <div class="demo-area">
+        <span class="status-row">
+          <app-badge variant="success" size="sm">Active</app-badge>
+          <span class="text-body">Server is running</span>
+        </span>
+        <span class="status-row">
+          <app-badge variant="warning" size="sm">Pending</app-badge>
+          <span class="text-body">Awaiting approval</span>
+        </span>
+        <span class="status-row">
+          <app-badge variant="danger" size="sm">Error</app-badge>
+          <span class="text-body">Connection failed</span>
+        </span>
+      </div>
+      <app-code-snippet [code]="codes.status"></app-code-snippet>
+    </div>
+  </div>
+</div>

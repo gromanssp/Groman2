@@ -1,0 +1,13 @@
+<div class="collapse-panel">
+  <button class="collapse-header" (click)="toggle()">
+    <span class="collapse-title">{{ title }}</span>
+    <svg class="collapse-icon" [class.rotated]="expanded" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div [appCollapse]="!expanded" class="collapse-body">
+    <div class="collapse-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

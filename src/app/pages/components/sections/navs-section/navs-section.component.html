@@ -1,0 +1,76 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Navs</h2>
+  <p class="text-body mb-4">Navigation components including tabs, pills, and vertical navigation patterns.</p>
+
+  <div class="components-grid">
+    <!-- Tab Navigation -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Tab Navigation</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <nav class="nav nav-tabs">
+          <a class="nav-item nav-link" [class.active]="activeTab === 'home'"
+             (click)="activeTab = 'home'">Home</a>
+          <a class="nav-item nav-link" [class.active]="activeTab === 'features'"
+             (click)="activeTab = 'features'">Features</a>
+          <a class="nav-item nav-link" [class.active]="activeTab === 'pricing'"
+             (click)="activeTab = 'pricing'">Pricing</a>
+          <a class="nav-item nav-link disabled">Disabled</a>
+        </nav>
+        <div class="tab-content">
+          <div *ngIf="activeTab === 'home'" class="tab-pane">Welcome to the home tab content area.</div>
+          <div *ngIf="activeTab === 'features'" class="tab-pane">Explore our amazing features here.</div>
+          <div *ngIf="activeTab === 'pricing'" class="tab-pane">View our competitive pricing plans.</div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.tabs"></app-code-snippet>
+    </div>
+
+    <!-- Pill Navigation -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Pill Navigation</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <nav class="nav nav-pills">
+          <a class="nav-item nav-link" [class.active]="activePill === 'overview'"
+             (click)="activePill = 'overview'">Overview</a>
+          <a class="nav-item nav-link" [class.active]="activePill === 'analytics'"
+             (click)="activePill = 'analytics'">Analytics</a>
+          <a class="nav-item nav-link" [class.active]="activePill === 'reports'"
+             (click)="activePill = 'reports'">Reports</a>
+          <a class="nav-item nav-link" [class.active]="activePill === 'settings'"
+             (click)="activePill = 'settings'">Settings</a>
+        </nav>
+        <div class="tab-content">
+          <div *ngIf="activePill === 'overview'" class="tab-pane">Overview dashboard content.</div>
+          <div *ngIf="activePill === 'analytics'" class="tab-pane">Analytics and data insights.</div>
+          <div *ngIf="activePill === 'reports'" class="tab-pane">Generated reports section.</div>
+          <div *ngIf="activePill === 'settings'" class="tab-pane">Application settings panel.</div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.pills"></app-code-snippet>
+    </div>
+
+    <!-- Vertical Navigation -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Vertical Navigation</h3>
+      <div class="demo-area" style="align-items: stretch;">
+        <nav class="nav nav-vertical">
+          <a class="nav-item nav-link" [class.active]="activeVertical === 'profile'"
+             (click)="activeVertical = 'profile'">Profile</a>
+          <a class="nav-item nav-link" [class.active]="activeVertical === 'account'"
+             (click)="activeVertical = 'account'">Account</a>
+          <a class="nav-item nav-link" [class.active]="activeVertical === 'security'"
+             (click)="activeVertical = 'security'">Security</a>
+          <a class="nav-item nav-link" [class.active]="activeVertical === 'notifications'"
+             (click)="activeVertical = 'notifications'">Notifications</a>
+        </nav>
+        <div class="vertical-content">
+          <div *ngIf="activeVertical === 'profile'" class="tab-pane">Edit your profile information.</div>
+          <div *ngIf="activeVertical === 'account'" class="tab-pane">Manage your account settings.</div>
+          <div *ngIf="activeVertical === 'security'" class="tab-pane">Security and authentication.</div>
+          <div *ngIf="activeVertical === 'notifications'" class="tab-pane">Notification preferences.</div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.vertical"></app-code-snippet>
+    </div>
+  </div>
+</div>

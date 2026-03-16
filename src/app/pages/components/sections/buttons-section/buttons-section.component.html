@@ -1,0 +1,76 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Buttons</h2>
+  <p class="text-body mb-4">Versatile button styles for actions with multiple variants, sizes, and states.</p>
+
+  <div class="components-grid">
+    <!-- Solid Buttons -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Solid Buttons</h3>
+      <div class="demo-area">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+      </div>
+      <app-code-snippet [code]="codes.solid"></app-code-snippet>
+    </div>
+
+    <!-- Outline Buttons -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Outline Buttons</h3>
+      <div class="demo-area">
+        <button class="btn btn-outline-primary">Outline Primary</button>
+        <button class="btn btn-outline-secondary">Outline Secondary</button>
+      </div>
+      <app-code-snippet [code]="codes.outline"></app-code-snippet>
+    </div>
+
+    <!-- Ghost & Gradient -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Ghost &amp; Gradient</h3>
+      <div class="demo-area">
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-gradient">Gradient</button>
+        <button class="btn btn-gradient-glow">Gradient Glow</button>
+      </div>
+      <app-code-snippet [code]="codes.ghost"></app-code-snippet>
+    </div>
+
+    <!-- Sizes -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Sizes</h3>
+      <div class="demo-area" style="align-items: center;">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+      </div>
+      <app-code-snippet [code]="codes.sizes"></app-code-snippet>
+    </div>
+
+    <!-- Disabled State -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Disabled State</h3>
+      <div class="demo-area">
+        <button class="btn btn-primary" disabled>Primary Disabled</button>
+        <button class="btn btn-secondary" disabled>Secondary Disabled</button>
+        <button class="btn btn-outline-primary" disabled>Outline Disabled</button>
+        <button class="btn btn-gradient" disabled>Gradient Disabled</button>
+      </div>
+      <app-code-snippet [code]="codes.disabled"></app-code-snippet>
+    </div>
+
+    <!-- Loading State -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Interactive Loading</h3>
+      <div class="demo-area">
+        <button class="btn btn-primary" [disabled]="isLoading" (click)="simulateLoading()">
+          {{ isLoading ? 'Loading...' : 'Click to Load' }}
+        </button>
+        <button class="btn btn-success" [disabled]="isLoading" (click)="simulateLoading()">
+          {{ isLoading ? 'Processing...' : 'Submit' }}
+        </button>
+      </div>
+      <app-code-snippet [code]="codes.loading"></app-code-snippet>
+    </div>
+  </div>
+</div>

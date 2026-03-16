@@ -1,0 +1,71 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Modals</h2>
+  <p class="text-body mb-4">Overlay dialogs for focused interactions with small, medium, and large size options.</p>
+
+  <div class="components-grid">
+    <!-- Small Modal -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Small Modal</h3>
+      <div class="demo-area">
+        <button class="btn btn-primary" (click)="showSmall = true">Open Small Modal</button>
+      </div>
+      <app-code-snippet [code]="codes.small"></app-code-snippet>
+    </div>
+
+    <!-- Medium Modal -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Medium Modal (Default)</h3>
+      <div class="demo-area">
+        <button class="btn btn-secondary" (click)="showMedium = true">Open Medium Modal</button>
+      </div>
+      <app-code-snippet [code]="codes.medium"></app-code-snippet>
+    </div>
+
+    <!-- Large Modal -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Large Modal</h3>
+      <div class="demo-area">
+        <button class="btn btn-gradient" (click)="showLarge = true">Open Large Modal</button>
+      </div>
+      <app-code-snippet [code]="codes.large"></app-code-snippet>
+    </div>
+  </div>
+
+  <!-- Modal instances -->
+  <app-modal [isOpen]="showSmall" title="Small Modal" size="sm" (closed)="showSmall = false">
+    <p class="modal-text">This is a small modal dialog. Suitable for confirmations and brief messages.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm" (click)="showSmall = false">Confirm</button>
+      <button class="btn btn-ghost btn-sm" (click)="showSmall = false">Cancel</button>
+    </div>
+  </app-modal>
+
+  <app-modal [isOpen]="showMedium" title="Medium Modal" size="md" (closed)="showMedium = false">
+    <p class="modal-text">This is the default medium-sized modal. It works well for forms, detailed content, and moderate interactions.</p>
+    <div class="form-group" style="margin-top: 1rem;">
+      <label class="form-label">Sample Input</label>
+      <input type="text" class="form-control" placeholder="Type something...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm" (click)="showMedium = false">Save</button>
+      <button class="btn btn-ghost btn-sm" (click)="showMedium = false">Discard</button>
+    </div>
+  </app-modal>
+
+  <app-modal [isOpen]="showLarge" title="Large Modal" size="lg" (closed)="showLarge = false">
+    <p class="modal-text">This is a large modal with plenty of space for complex content, tables, or multi-step workflows.</p>
+    <div class="modal-grid">
+      <div class="glass-panel modal-inner-card">
+        <h4 class="modal-inner-title">Section A</h4>
+        <p class="modal-text">Content for section A with detailed information.</p>
+      </div>
+      <div class="glass-panel modal-inner-card">
+        <h4 class="modal-inner-title">Section B</h4>
+        <p class="modal-text">Content for section B with additional details.</p>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-gradient btn-sm" (click)="showLarge = false">Done</button>
+    </div>
+  </app-modal>
+</div>

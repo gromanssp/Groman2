@@ -1,0 +1,60 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="heading-2">Calendar</h1>
+    <p class="text-body">Interactive calendar with event management.</p>
+  </header>
+
+  <div class="calendar-layout">
+    <div class="glass-panel calendar-card">
+      <div class="calendar-nav">
+        <button class="nav-btn" (click)="prevMonth()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h2 class="month-title">{{ monthYear }}</h2>
+        <button class="nav-btn" (click)="nextMonth()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="calendar-grid">
+        <div class="day-header" *ngFor="let d of weekDays">{{ d }}</div>
+        <ng-container *ngFor="let week of weeks">
+          <div *ngFor="let day of week"
+               class="day-cell"
+               [class.other-month]="!day.isCurrentMonth"
+               [class.today]="day.isToday"
+               [class.selected]="day.isSelected"
+               [class.has-events]="day.events.length > 0"
+               (click)="selectDay(day)">
+            <span class="day-number">{{ day.date }}</span>
+            <div class="event-dots" *ngIf="day.events.length > 0">
+              <span class="event-dot" *ngFor="let ev of day.events" [style.background]="ev.color"></span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="glass-panel events-panel">
+      <h3 class="events-title">
+        {{ selectedDate ? (selectedDate | date:'MMMM d, yyyy') : 'Select a date' }}
+      </h3>
+      <div class="events-list" *ngIf="selectedDateEvents.length > 0">
+        <div class="event-item" *ngFor="let ev of selectedDateEvents">
+          <span class="event-indicator" [style.background]="ev.color"></span>
+          <span class="event-name">{{ ev.title }}</span>
+        </div>
+      </div>
+      <p class="no-events" *ngIf="selectedDate && selectedDateEvents.length === 0">
+        No events for this day.
+      </p>
+      <p class="no-events" *ngIf="!selectedDate">
+        Click on a date to view events.
+      </p>
+    </div>
+  </div>
+</div>

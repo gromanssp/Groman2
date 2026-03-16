@@ -1,0 +1,86 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Progress Bars</h2>
+  <p class="text-body mb-4">Visual indicators for task completion, loading states, and data representation.</p>
+
+  <div class="components-grid">
+    <!-- Basic Values -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Different Values</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <app-progress-bar [value]="25" label="25%"></app-progress-bar>
+        <app-progress-bar [value]="50" label="50%"></app-progress-bar>
+        <app-progress-bar [value]="75" label="75%"></app-progress-bar>
+        <app-progress-bar [value]="100" label="100%"></app-progress-bar>
+      </div>
+      <app-code-snippet [code]="codes.values"></app-code-snippet>
+    </div>
+
+    <!-- Variants -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Color Variants</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <app-progress-bar [value]="60" variant="primary" label="Primary"></app-progress-bar>
+        <app-progress-bar [value]="70" variant="success" label="Success"></app-progress-bar>
+        <app-progress-bar [value]="50" variant="warning" label="Warning"></app-progress-bar>
+        <app-progress-bar [value]="40" variant="danger" label="Danger"></app-progress-bar>
+      </div>
+      <app-code-snippet [code]="codes.variants"></app-code-snippet>
+    </div>
+
+    <!-- Striped & Animated -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Striped &amp; Animated</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <app-progress-bar [value]="65" variant="primary" [striped]="true" label="Striped"></app-progress-bar>
+        <app-progress-bar [value]="80" variant="success" [striped]="true" [animated]="true" label="Animated"></app-progress-bar>
+        <app-progress-bar [value]="45" variant="warning" [striped]="true" [animated]="true" label="Warning Animated"></app-progress-bar>
+      </div>
+      <app-code-snippet [code]="codes.striped"></app-code-snippet>
+    </div>
+
+    <!-- Heights -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Custom Heights</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <app-progress-bar [value]="60" [height]="4" label="4px"></app-progress-bar>
+        <app-progress-bar [value]="60" [height]="8" label="8px (default)"></app-progress-bar>
+        <app-progress-bar [value]="60" [height]="16" label="16px"></app-progress-bar>
+        <app-progress-bar [value]="60" [height]="24" label="24px"></app-progress-bar>
+      </div>
+      <app-code-snippet [code]="codes.heights"></app-code-snippet>
+    </div>
+
+    <!-- Interactive -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Interactive Control</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
+        <app-progress-bar
+          [value]="dynamicValue"
+          [variant]="dynamicValue >= 80 ? 'success' : dynamicValue >= 50 ? 'warning' : 'danger'"
+          [striped]="true"
+          [animated]="dynamicValue < 100"
+          [height]="12"
+          [label]="dynamicValue + '%'">
+        </app-progress-bar>
+        <div class="progress-controls">
+          <button class="btn btn-outline-primary btn-sm" (click)="decrease()">- 10</button>
+          <span class="progress-value">{{ dynamicValue }}%</span>
+          <button class="btn btn-outline-primary btn-sm" (click)="increase()">+ 10</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.interactive"></app-code-snippet>
+    </div>
+
+    <!-- Stacked -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Stacked Progress</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 0.5rem;">
+        <div class="stacked-label">Project Completion</div>
+        <app-progress-bar [value]="30" variant="success" [height]="10" label="Complete 30%"></app-progress-bar>
+        <app-progress-bar [value]="20" variant="warning" [height]="10" label="In Progress 20%"></app-progress-bar>
+        <app-progress-bar [value]="10" variant="danger" [height]="10" label="Blocked 10%"></app-progress-bar>
+      </div>
+      <app-code-snippet [code]="codes.stacked"></app-code-snippet>
+    </div>
+  </div>
+</div>

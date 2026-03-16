@@ -1,0 +1,119 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Forms</h2>
+  <p class="text-body mb-4">Comprehensive form elements with validation states and accessibility.</p>
+
+  <div class="components-grid">
+    <!-- Text Inputs -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Text Inputs</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="form-group">
+          <label class="form-label">Text Input</label>
+          <input type="text" class="form-control" placeholder="Enter text..." [(ngModel)]="sampleText">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Input</label>
+          <input type="email" class="form-control" placeholder="email@example.com" [(ngModel)]="sampleEmail">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password Input</label>
+          <input type="password" class="form-control" placeholder="Enter password..." [(ngModel)]="samplePassword">
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.textInputs"></app-code-snippet>
+    </div>
+
+    <!-- Textarea & Select -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Textarea &amp; Select</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="form-group">
+          <label class="form-label">Textarea</label>
+          <textarea class="form-control" rows="3" placeholder="Enter long text..." [(ngModel)]="sampleTextarea"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Select</label>
+          <select class="form-control" [(ngModel)]="sampleSelect">
+            <option value="" disabled>Choose an option...</option>
+            <option value="1">Option One</option>
+            <option value="2">Option Two</option>
+            <option value="3">Option Three</option>
+          </select>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.textareaSelect"></app-code-snippet>
+    </div>
+
+    <!-- Checkboxes & Radios -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Checkboxes &amp; Radios</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="check1" [(ngModel)]="checkboxOne">
+          <label class="form-check-label" for="check1">Checkbox unchecked</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="check2" [(ngModel)]="checkboxTwo">
+          <label class="form-check-label" for="check2">Checkbox checked</label>
+        </div>
+        <hr class="divider">
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="radio1" name="radioGroup"
+                 value="option1" [(ngModel)]="radioValue">
+          <label class="form-check-label" for="radio1">Radio Option 1</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="radio2" name="radioGroup"
+                 value="option2" [(ngModel)]="radioValue">
+          <label class="form-check-label" for="radio2">Radio Option 2</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="radio3" name="radioGroup"
+                 value="option3" [(ngModel)]="radioValue">
+          <label class="form-check-label" for="radio3">Radio Option 3</label>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.checkboxRadio"></app-code-snippet>
+    </div>
+
+    <!-- Validation States -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Validation States</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="form-group">
+          <label class="form-label">Valid Input</label>
+          <input type="text" class="form-control is-valid" value="Correct value">
+          <span class="form-feedback valid">Looks good!</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Invalid Input</label>
+          <input type="text" class="form-control is-invalid" value="Wrong value">
+          <span class="form-feedback invalid">Please enter a valid value.</span>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.validation"></app-code-snippet>
+    </div>
+
+    <!-- Disabled State -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Disabled State</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="form-group">
+          <label class="form-label">Disabled Input</label>
+          <input type="text" class="form-control" value="Cannot edit" disabled>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Disabled Select</label>
+          <select class="form-control" disabled>
+            <option>Locked option</option>
+          </select>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="checkDisabled" disabled>
+          <label class="form-check-label" for="checkDisabled">Disabled checkbox</label>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.disabled"></app-code-snippet>
+    </div>
+  </div>
+</div>

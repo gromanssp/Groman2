@@ -1,0 +1,92 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="heading-2">Charts</h1>
+    <p class="text-body">Data visualizations powered by Chart.js with dark theme styling.</p>
+  </header>
+
+  <div class="charts-grid">
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Line Chart</h3>
+        <span class="chart-subtitle">Revenue vs Expenses</span>
+      </div>
+      <div class="chart-body">
+        <canvas baseChart
+          [type]="'line'"
+          [data]="lineData"
+          [options]="lineOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Bar Chart</h3>
+        <span class="chart-subtitle">Weekly Comparison</span>
+      </div>
+      <div class="chart-body">
+        <canvas baseChart
+          [type]="'bar'"
+          [data]="barData"
+          [options]="barOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Doughnut Chart</h3>
+        <span class="chart-subtitle">Traffic Sources</span>
+      </div>
+      <div class="chart-body chart-body-centered">
+        <canvas baseChart
+          [type]="'doughnut'"
+          [data]="doughnutData"
+          [options]="doughnutOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Radar Chart</h3>
+        <span class="chart-subtitle">Product Comparison</span>
+      </div>
+      <div class="chart-body chart-body-centered">
+        <canvas baseChart
+          [type]="'radar'"
+          [data]="radarData"
+          [options]="radarOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Polar Area Chart</h3>
+        <span class="chart-subtitle">Marketing Channels</span>
+      </div>
+      <div class="chart-body chart-body-centered">
+        <canvas baseChart
+          [type]="'polarArea'"
+          [data]="polarData"
+          [options]="polarOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="glass-panel chart-card">
+      <div class="chart-header">
+        <h3 class="chart-title">Bubble Chart</h3>
+        <span class="chart-subtitle">Market Analysis</span>
+      </div>
+      <div class="chart-body">
+        <canvas baseChart
+          [type]="'bubble'"
+          [data]="bubbleData"
+          [options]="bubbleOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

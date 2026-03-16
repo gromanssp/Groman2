@@ -1,0 +1,117 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mb-4 { margin-bottom: 1.5rem; }
+.p-3 { padding: 1rem; }
+
+.wizard-container {
+  max-width: 700px;
+  width: 100%;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wizard-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all var(--transition-normal);
+}
+
+.step-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+/* Step Active State */
+.step.active .step-circle {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+.step.active .step-label {
+  color: var(--accent-primary);
+}
+
+/* Step Completed State */
+.step.completed .step-circle {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: #fff;
+}
+.step.completed .step-label {
+  color: var(--text-primary);
+}
+
+.step-line {
+  flex: 2;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 -15px;
+  position: relative;
+  top: -12px;
+  z-index: 1;
+  transition: background var(--transition-normal);
+}
+
+.step-line.active {
+  background: var(--accent-primary);
+}
+
+.wizard-content {
+  min-height: 220px;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.wizard-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin-top: auto;
+}

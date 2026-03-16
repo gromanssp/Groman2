@@ -1,0 +1,77 @@
+.section-container { animation: fadeIn 0.3s ease-out; }
+.components-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+.showcase-card { padding: 1.5rem; }
+.showcase-card--wide { grid-column: 1 / -1; }
+.card-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
+.demo-area { margin-bottom: 1rem; }
+.demo-area--grid { display: block; }
+
+/* Grid System */
+.row { display: flex; flex-wrap: wrap; margin: -0.5rem; margin-bottom: 0.5rem; }
+.col, [class*="col-"] { padding: 0.5rem; box-sizing: border-box; }
+.col { flex: 1; }
+.col-1 { width: 8.333%; }
+.col-2 { width: 16.666%; }
+.col-3 { width: 25%; }
+.col-4 { width: 33.333%; }
+.col-5 { width: 41.666%; }
+.col-6 { width: 50%; }
+.col-7 { width: 58.333%; }
+.col-8 { width: 66.666%; }
+.col-9 { width: 75%; }
+.col-10 { width: 83.333%; }
+.col-11 { width: 91.666%; }
+.col-12 { width: 100%; }
+
+/* Offsets */
+.col-offset-1 { margin-left: 8.333%; }
+.col-offset-2 { margin-left: 16.666%; }
+.col-offset-3 { margin-left: 25%; }
+.col-offset-4 { margin-left: 33.333%; }
+.col-offset-5 { margin-left: 41.666%; }
+.col-offset-6 { margin-left: 50%; }
+
+/* Responsive breakpoints */
+@media (max-width: 576px) {
+  .col-sm-12 { width: 100%; }
+  .col-sm-6 { width: 50%; }
+}
+@media (min-width: 577px) and (max-width: 768px) {
+  .col-md-6 { width: 50%; }
+  .col-md-4 { width: 33.333%; }
+  .col-md-12 { width: 100%; }
+}
+@media (min-width: 769px) {
+  .col-lg-4 { width: 33.333%; }
+  .col-lg-6 { width: 50%; }
+  .col-lg-3 { width: 25%; }
+  .col-lg-12 { width: 100%; }
+}
+
+/* Demo boxes */
+.grid-box {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 6px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.grid-box--parent {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px dashed rgba(99, 102, 241, 0.4);
+  padding: 0.75rem;
+  text-align: left;
+}
+.grid-box--nested {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 768px) { .components-grid { grid-template-columns: 1fr; } }

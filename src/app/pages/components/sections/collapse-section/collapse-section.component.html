@@ -1,0 +1,39 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Collapse</h2>
+  <p class="text-body mb-4">Collapsible panels for toggling content visibility, with optional accordion behavior.</p>
+
+  <div class="components-grid">
+    <!-- Independent Panels -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Independent Panels</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <app-collapse-panel
+          *ngFor="let panel of panels"
+          [title]="panel.title"
+          [expanded]="panel.expanded">
+          <p class="panel-content">{{ panel.content }}</p>
+        </app-collapse-panel>
+      </div>
+      <app-code-snippet [code]="codes.independent"></app-code-snippet>
+    </div>
+
+    <!-- Accordion Pattern -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Accordion (Single Open)</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div *ngFor="let panel of accordionPanels; let i = index" class="accordion-item">
+          <div class="accordion-header" (click)="toggleAccordion(i)">
+            <span>{{ panel.title }}</span>
+            <span class="accordion-icon" [class.rotated]="panel.expanded">&#9660;</span>
+          </div>
+          <div class="accordion-body" [class.open]="panel.expanded">
+            <div class="accordion-content">
+              <p class="panel-content">{{ panel.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.accordion"></app-code-snippet>
+    </div>
+  </div>
+</div>

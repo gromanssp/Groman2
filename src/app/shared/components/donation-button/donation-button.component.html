@@ -1,0 +1,31 @@
+<div class="donation-wrapper" [class.compact]="compact">
+  <button class="donation-btn" (click)="toggleExpand()">
+    <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    <span class="btn-text">Support this project</span>
+  </button>
+
+  <div class="donation-panel" *ngIf="expanded">
+    <p class="donation-message">
+      This project is free and open source. Donations help cover hosting and development costs to keep it available for everyone.
+    </p>
+
+    <div *ngIf="status === 'success'" class="donation-status success">{{ statusMessage }}</div>
+    <div *ngIf="status === 'error'" class="donation-status error">{{ statusMessage }}</div>
+
+    <div class="donation-amounts" *ngIf="status !== 'success'">
+      <button class="amount-btn" (click)="onDonate(3)" [disabled]="status === 'processing'">$3</button>
+      <button class="amount-btn" (click)="onDonate(5)" [disabled]="status === 'processing'">$5</button>
+      <button class="amount-btn featured" (click)="onDonate(10)" [disabled]="status === 'processing'">$10</button>
+      <button class="amount-btn" (click)="onDonate(25)" [disabled]="status === 'processing'">$25</button>
+    </div>
+    <div class="custom-amount-row" *ngIf="status !== 'success'">
+      <span class="currency-sign">$</span>
+      <input type="number" class="custom-input" placeholder="Custom" [(ngModel)]="customAmount" min="1">
+      <button class="custom-btn" (click)="onCustomDonate()" [disabled]="status === 'processing'">Donate</button>
+    </div>
+
+    <div *ngIf="status === 'processing'" class="donation-status processing">Processing...</div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Date Picker</h2>
+  <p class="text-body mb-4">Flexible date picker component supporting single date, date range, and min/max constraints.</p>
+
+  <div class="components-grid">
+    <!-- Single Date -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Single Date</h3>
+      <div class="demo-area">
+        <app-date-picker mode="single"></app-date-picker>
+      </div>
+      <app-code-snippet [code]="codes.single"></app-code-snippet>
+    </div>
+
+    <!-- Date Range -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Date Range</h3>
+      <div class="demo-area">
+        <app-date-picker mode="range"></app-date-picker>
+      </div>
+      <app-code-snippet [code]="codes.range"></app-code-snippet>
+    </div>
+
+    <!-- Min/Max Date -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Min/Max Date</h3>
+      <div class="demo-area">
+        <app-date-picker mode="minmax" [minDate]="minDate" [maxDate]="maxDate"></app-date-picker>
+      </div>
+      <app-code-snippet [code]="codes.minmax"></app-code-snippet>
+    </div>
+  </div>
+</div>

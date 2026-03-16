@@ -1,0 +1,69 @@
+.page-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.components-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  min-height: 0;
+}
+
+.components-sidenav {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: fit-content;
+  position: sticky;
+  top: 0;
+}
+
+.sidenav-item {
+  display: block;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.sidenav-item:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.sidenav-item.active {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-primary);
+}
+
+.components-content {
+  min-width: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .components-layout {
+    grid-template-columns: 1fr;
+  }
+  .components-sidenav {
+    flex-direction: row;
+    overflow-x: auto;
+    position: static;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .components-sidenav::-webkit-scrollbar { display: none; }
+  .sidenav-item { white-space: nowrap; }
+}

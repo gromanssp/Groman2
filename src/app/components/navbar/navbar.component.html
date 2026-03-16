@@ -1,0 +1,65 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <button class="hamburger-btn" (click)="toggleSidebar()" title="Toggle sidebar">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <div class="search-container">
+      <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input type="text" placeholder="Search components, flows..." class="search-input">
+    </div>
+  </div>
+
+  <div class="navbar-actions">
+    <app-donation-button class="d-none d-sm-block"></app-donation-button>
+    <button class="icon-btn">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      </svg>
+      <span class="notification-badge"></span>
+    </button>
+
+    <div class="user-profile" (click)="toggleUserMenu()">
+      <div class="user-avatar">
+        <img *ngIf="profile$ | async as profile; else defaultAvatar"
+             [src]="'https://ui-avatars.com/api/?name=' + (profile.displayName | slice:0:20) + '&background=6366f1&color=fff'"
+             alt="User">
+        <ng-template #defaultAvatar>
+          <img src="https://ui-avatars.com/api/?name=Guest&background=6366f1&color=fff" alt="User">
+        </ng-template>
+      </div>
+      <div class="user-info d-none d-sm-block">
+        <ng-container *ngIf="profile$ | async as profile; else guestInfo">
+          <p class="user-name">{{ profile.displayName }}</p>
+          <p class="user-role">{{ profile.role }}</p>
+        </ng-container>
+        <ng-template #guestInfo>
+          <p class="user-name">Guest</p>
+          <p class="user-role">Not signed in</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="user-menu" *ngIf="showUserMenu">
+      <ng-container *ngIf="user$ | async; else loginLink">
+        <button class="user-menu-item" (click)="logout()">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Sign out
+        </button>
+      </ng-container>
+      <ng-template #loginLink>
+        <a class="user-menu-item" routerLink="/auth/login" (click)="showUserMenu = false">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
+          Sign in
+        </a>
+      </ng-template>
+    </div>
+  </div>
+</header>

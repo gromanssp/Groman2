@@ -1,0 +1,42 @@
+.collapse-panel {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.collapse-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.collapse-header:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.collapse-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  transition: transform var(--transition-normal);
+}
+
+.collapse-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.collapse-content {
+  padding: 1rem 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}

@@ -1,0 +1,118 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Grid System</h2>
+  <p class="text-body mb-4">A 12-column responsive grid system built with flexbox for flexible layouts.</p>
+
+  <div class="components-grid">
+    <!-- Basic Grid -->
+    <div class="glass-panel showcase-card showcase-card--wide">
+      <h3 class="card-title">Basic Grid</h3>
+      <div class="demo-area demo-area--grid">
+        <div class="row">
+          <div class="col-6"><div class="grid-box">col-6</div></div>
+          <div class="col-6"><div class="grid-box">col-6</div></div>
+        </div>
+        <div class="row">
+          <div class="col-4"><div class="grid-box">col-4</div></div>
+          <div class="col-4"><div class="grid-box">col-4</div></div>
+          <div class="col-4"><div class="grid-box">col-4</div></div>
+        </div>
+        <div class="row">
+          <div class="col-3"><div class="grid-box">col-3</div></div>
+          <div class="col-3"><div class="grid-box">col-3</div></div>
+          <div class="col-3"><div class="grid-box">col-3</div></div>
+          <div class="col-3"><div class="grid-box">col-3</div></div>
+        </div>
+        <div class="row">
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+          <div class="col-2"><div class="grid-box">col-2</div></div>
+        </div>
+        <div class="row">
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+          <div class="col-1"><div class="grid-box">1</div></div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.basic"></app-code-snippet>
+    </div>
+
+    <!-- Auto Layout -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Auto Layout</h3>
+      <div class="demo-area demo-area--grid">
+        <div class="row">
+          <div class="col"><div class="grid-box">Equal</div></div>
+          <div class="col"><div class="grid-box">Equal</div></div>
+          <div class="col"><div class="grid-box">Equal</div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="grid-box">1/4</div></div>
+          <div class="col"><div class="grid-box">1/4</div></div>
+          <div class="col"><div class="grid-box">1/4</div></div>
+          <div class="col"><div class="grid-box">1/4</div></div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.auto"></app-code-snippet>
+    </div>
+
+    <!-- Responsive -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Responsive</h3>
+      <div class="demo-area demo-area--grid">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-4"><div class="grid-box">sm-12 / md-6 / lg-4</div></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><div class="grid-box">sm-12 / md-6 / lg-4</div></div>
+          <div class="col-sm-12 col-md-6 col-lg-4"><div class="grid-box">sm-12 / md-6 / lg-4</div></div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.responsive"></app-code-snippet>
+    </div>
+
+    <!-- Offset -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Offset</h3>
+      <div class="demo-area demo-area--grid">
+        <div class="row">
+          <div class="col-4"><div class="grid-box">col-4</div></div>
+          <div class="col-4 col-offset-4"><div class="grid-box">col-4 offset-4</div></div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-offset-3"><div class="grid-box">col-6 offset-3</div></div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.offset"></app-code-snippet>
+    </div>
+
+    <!-- Nested -->
+    <div class="glass-panel showcase-card showcase-card--wide">
+      <h3 class="card-title">Nested Grid</h3>
+      <div class="demo-area demo-area--grid">
+        <div class="row">
+          <div class="col-8">
+            <div class="grid-box grid-box--parent">
+              Parent col-8
+              <div class="row" style="margin-top: 0.5rem;">
+                <div class="col-6"><div class="grid-box grid-box--nested">Nested col-6</div></div>
+                <div class="col-6"><div class="grid-box grid-box--nested">Nested col-6</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4"><div class="grid-box">col-4</div></div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.nested"></app-code-snippet>
+    </div>
+  </div>
+</div>

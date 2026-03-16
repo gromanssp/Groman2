@@ -1,0 +1,72 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Tables</h2>
+  <p class="text-body mb-4">Data tables with sorting, striping, and interactive configuration options.</p>
+
+  <div class="components-grid">
+    <!-- Default Table -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Default Table</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <app-data-table
+          [columns]="columns"
+          [data]="data">
+        </app-data-table>
+      </div>
+      <app-code-snippet [code]="codes.default"></app-code-snippet>
+    </div>
+
+    <!-- Striped Table -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Striped Table</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <app-data-table
+          [columns]="columns"
+          [data]="data"
+          [striped]="true"
+          [hover]="false">
+        </app-data-table>
+      </div>
+      <app-code-snippet [code]="codes.striped"></app-code-snippet>
+    </div>
+
+    <!-- Bordered Table -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Bordered Table</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <app-data-table
+          [columns]="columns"
+          [data]="data"
+          [bordered]="true"
+          [hover]="false">
+        </app-data-table>
+      </div>
+      <app-code-snippet [code]="codes.bordered"></app-code-snippet>
+    </div>
+
+    <!-- Interactive Configuration -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Interactive Configuration</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="table-toggles">
+          <label class="toggle-label">
+            <input type="checkbox" [(ngModel)]="striped"> Striped
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" [(ngModel)]="hover"> Hover
+          </label>
+          <label class="toggle-label">
+            <input type="checkbox" [(ngModel)]="bordered"> Bordered
+          </label>
+        </div>
+        <app-data-table
+          [columns]="columns"
+          [data]="data"
+          [striped]="striped"
+          [hover]="hover"
+          [bordered]="bordered">
+        </app-data-table>
+      </div>
+      <app-code-snippet [code]="codes.interactive"></app-code-snippet>
+    </div>
+  </div>
+</div>

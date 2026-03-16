@@ -1,0 +1,52 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Spinners</h2>
+  <p class="text-body mb-4">Loading indicators with multiple variants, sizes, and customizable colors.</p>
+
+  <div class="components-grid">
+    <!-- Circular Spinner -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Circular Spinner</h3>
+      <div class="demo-area">
+        <app-spinner variant="circular" size="sm"></app-spinner>
+        <app-spinner variant="circular" size="md"></app-spinner>
+        <app-spinner variant="circular" size="lg"></app-spinner>
+      </div>
+      <app-code-snippet [code]="codes.circular"></app-code-snippet>
+    </div>
+
+    <!-- Dots Spinner -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Dots Spinner</h3>
+      <div class="demo-area">
+        <app-spinner variant="dots" size="sm"></app-spinner>
+        <app-spinner variant="dots" size="md"></app-spinner>
+        <app-spinner variant="dots" size="lg"></app-spinner>
+      </div>
+      <app-code-snippet [code]="codes.dots"></app-code-snippet>
+    </div>
+
+    <!-- Pulse Spinner -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Pulse Spinner</h3>
+      <div class="demo-area">
+        <app-spinner variant="pulse" size="sm"></app-spinner>
+        <app-spinner variant="pulse" size="md"></app-spinner>
+        <app-spinner variant="pulse" size="lg"></app-spinner>
+      </div>
+      <app-code-snippet [code]="codes.pulse"></app-code-snippet>
+    </div>
+
+    <!-- Color Customization -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Color Customization</h3>
+      <div class="demo-area">
+        <app-spinner variant="circular" [color]="'var(--success)'"></app-spinner>
+        <app-spinner variant="circular" [color]="'var(--danger)'"></app-spinner>
+        <app-spinner variant="circular" [color]="'var(--warning)'"></app-spinner>
+        <app-spinner variant="dots" [color]="'var(--info)'"></app-spinner>
+        <app-spinner variant="pulse" [color]="'var(--success)'"></app-spinner>
+      </div>
+      <app-code-snippet [code]="codes.colors"></app-code-snippet>
+    </div>
+  </div>
+</div>

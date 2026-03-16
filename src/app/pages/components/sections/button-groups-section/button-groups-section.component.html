@@ -1,0 +1,91 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Button Groups</h2>
+  <p class="text-body mb-4">Group related buttons together using the btn-group class for cohesive action sets.</p>
+
+  <div class="components-grid">
+    <!-- Basic Group -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Basic Group</h3>
+      <div class="demo-area">
+        <div class="btn-group">
+          <button class="btn btn-primary">Left</button>
+          <button class="btn btn-primary">Center</button>
+          <button class="btn btn-primary">Right</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.basic"></app-code-snippet>
+    </div>
+
+    <!-- Active State Toggle -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Active State Toggle</h3>
+      <div class="demo-area">
+        <div class="btn-group">
+          <button class="btn" [class.btn-primary]="activeIndex === 0"
+                  [class.btn-outline-primary]="activeIndex !== 0"
+                  (click)="activeIndex = 0">First</button>
+          <button class="btn" [class.btn-primary]="activeIndex === 1"
+                  [class.btn-outline-primary]="activeIndex !== 1"
+                  (click)="activeIndex = 1">Second</button>
+          <button class="btn" [class.btn-primary]="activeIndex === 2"
+                  [class.btn-outline-primary]="activeIndex !== 2"
+                  (click)="activeIndex = 2">Third</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.active"></app-code-snippet>
+    </div>
+
+    <!-- Outline Group -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Outline Group</h3>
+      <div class="demo-area">
+        <div class="btn-group">
+          <button class="btn btn-outline-primary">Option A</button>
+          <button class="btn btn-outline-primary">Option B</button>
+          <button class="btn btn-outline-primary">Option C</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.outline"></app-code-snippet>
+    </div>
+
+    <!-- Size Variants -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Size Variants</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: flex-start;">
+        <div class="btn-group">
+          <button class="btn btn-secondary btn-sm"
+                  [class.btn-primary]="activeSize === 'sm'"
+                  [class.btn-secondary]="activeSize !== 'sm'"
+                  (click)="activeSize = 'sm'">Small</button>
+          <button class="btn btn-secondary btn-sm"
+                  [class.btn-primary]="activeSize === 'md'"
+                  [class.btn-secondary]="activeSize !== 'md'"
+                  (click)="activeSize = 'md'">Medium</button>
+          <button class="btn btn-secondary btn-sm"
+                  [class.btn-primary]="activeSize === 'lg'"
+                  [class.btn-secondary]="activeSize !== 'lg'"
+                  (click)="activeSize = 'lg'">Large</button>
+        </div>
+        <div class="btn-group" style="margin-top: 0.75rem;">
+          <button class="btn btn-success" [ngClass]="'btn-' + activeSize">A</button>
+          <button class="btn btn-success" [ngClass]="'btn-' + activeSize">B</button>
+          <button class="btn btn-success" [ngClass]="'btn-' + activeSize">C</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.sizes"></app-code-snippet>
+    </div>
+
+    <!-- Mixed Variants -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Mixed Variants</h3>
+      <div class="demo-area">
+        <div class="btn-group">
+          <button class="btn btn-primary">Save</button>
+          <button class="btn btn-secondary">Draft</button>
+          <button class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.mixed"></app-code-snippet>
+    </div>
+  </div>
+</div>

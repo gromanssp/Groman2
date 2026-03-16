@@ -1,0 +1,19 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="heading-2">Component Library</h1>
+    <p class="text-body">Interactive showcase of all available UI components with usage examples.</p>
+  </header>
+  <div class="components-layout">
+    <nav class="components-sidenav glass-panel">
+      <a *ngFor="let item of navItems"
+         [routerLink]="item.path"
+         routerLinkActive="active"
+         class="sidenav-item">
+        {{ item.label }}
+      </a>
+    </nav>
+    <div class="components-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

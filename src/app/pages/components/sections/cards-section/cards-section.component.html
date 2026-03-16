@@ -1,0 +1,77 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Cards</h2>
+  <p class="text-body mb-4">Flexible glass-panel card containers for grouping related content.</p>
+
+  <div class="components-grid">
+    <!-- Basic Card -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Basic Card</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="glass-panel demo-card">
+          <h4 class="demo-card-title">Card Title</h4>
+          <p class="demo-card-text">This is a basic card with some placeholder content. Cards are great for organizing related information.</p>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.basic"></app-code-snippet>
+    </div>
+
+    <!-- Card with Header & Footer -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Header &amp; Footer</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="glass-panel demo-card no-padding">
+          <div class="demo-card-header">Featured</div>
+          <div class="demo-card-body">
+            <h4 class="demo-card-title">Special Content</h4>
+            <p class="demo-card-text">Card with distinct header and footer sections for structured layouts.</p>
+            <div class="form-group"> 
+              <label class="form-label">Text Input</label> 
+              <input type="text" class="form-control" placeholder="Enter text...">
+            </div>
+          </div>
+          <div class="demo-card-footer">
+            <button class="btn btn-primary btn-sm">Action</button>
+            <button class="btn btn-ghost btn-sm">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.headerFooter"></app-code-snippet>
+    </div>
+
+    <!-- Card with Image Placeholder -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Card with Image</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="glass-panel demo-card no-padding">
+          <div class="demo-card-image">
+            <span class="image-placeholder-text">Image Placeholder</span>
+          </div>
+          <div class="demo-card-body">
+            <h4 class="demo-card-title">Media Card</h4>
+            <p class="demo-card-text">Cards can include images or media at the top for visual emphasis.</p>
+            <button class="btn btn-primary btn-sm">View More</button>
+          </div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.image"></app-code-snippet>
+    </div>
+
+    <!-- Horizontal Card -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Horizontal Card</h3>
+      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+        <div class="glass-panel demo-card no-padding horizontal-card">
+          <div class="demo-card-image-side">
+            <span class="image-placeholder-text">IMG</span>
+          </div>
+          <div class="demo-card-body">
+            <h4 class="demo-card-title">Horizontal Layout</h4>
+            <p class="demo-card-text">Side-by-side layout for list-style content.</p>
+            <button class="btn btn-outline-primary btn-sm">Details</button>
+          </div>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.horizontal"></app-code-snippet>
+    </div>
+  </div>
+</div>

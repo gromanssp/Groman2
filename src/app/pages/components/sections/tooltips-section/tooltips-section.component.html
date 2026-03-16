@@ -1,0 +1,63 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Tooltips</h2>
+  <p class="text-body mb-4">Contextual hover information using the appTooltip directive with four position options.</p>
+
+  <div class="components-grid">
+    <!-- All Positions -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Tooltip Positions</h3>
+      <div class="demo-area tooltip-demo">
+        <button class="btn btn-primary"
+                appTooltip="Tooltip on top"
+                tooltipPosition="top">Top</button>
+        <button class="btn btn-secondary"
+                appTooltip="Tooltip on bottom"
+                tooltipPosition="bottom">Bottom</button>
+        <button class="btn btn-success"
+                appTooltip="Tooltip on left"
+                tooltipPosition="left">Left</button>
+        <button class="btn btn-danger"
+                appTooltip="Tooltip on right"
+                tooltipPosition="right">Right</button>
+      </div>
+      <app-code-snippet [code]="codes.positions"></app-code-snippet>
+    </div>
+
+    <!-- On Different Elements -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">On Various Elements</h3>
+      <div class="demo-area">
+        <span class="tooltip-text"
+              appTooltip="This is a text tooltip"
+              tooltipPosition="top">Hover over this text</span>
+        <button class="btn btn-outline-primary btn-sm"
+                appTooltip="Icon button action"
+                tooltipPosition="bottom">&#9733; Star</button>
+        <button class="btn btn-ghost btn-sm"
+                appTooltip="More options available"
+                tooltipPosition="right">&#8942; Menu</button>
+      </div>
+      <app-code-snippet [code]="codes.elements"></app-code-snippet>
+    </div>
+
+    <!-- Contextual Tooltips -->
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Contextual Usage</h3>
+      <div class="demo-area">
+        <button class="btn btn-success btn-sm"
+                appTooltip="Save your changes"
+                tooltipPosition="top">Save</button>
+        <button class="btn btn-danger btn-sm"
+                appTooltip="This action cannot be undone"
+                tooltipPosition="top">Delete</button>
+        <button class="btn btn-secondary btn-sm"
+                appTooltip="Download as PDF"
+                tooltipPosition="top">Export</button>
+        <button class="btn btn-outline-primary btn-sm"
+                appTooltip="Copy to clipboard"
+                tooltipPosition="top">Copy</button>
+      </div>
+      <app-code-snippet [code]="codes.contextual"></app-code-snippet>
+    </div>
+  </div>
+</div>
