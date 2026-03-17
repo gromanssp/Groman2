@@ -29,6 +29,8 @@ build/
 # Environment
 .env
 .env.local
+/src/environments/environment.prod.ts
+/src/environments/environment.ts
 
 # OS
 .DS_Store
