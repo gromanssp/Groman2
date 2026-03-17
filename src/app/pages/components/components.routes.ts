@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ComponentsPageComponent } from './components.component';
 import { ButtonsSectionComponent } from './sections/buttons-section/buttons-section.component';
 import { ButtonGroupsSectionComponent } from './sections/button-groups-section/button-groups-section.component';
@@ -17,7 +16,7 @@ import { GridSectionComponent } from './sections/grid-section/grid-section.compo
 import { IconsSectionComponent } from './sections/icons-section/icons-section.component';
 import { SpinnerSectionComponent } from './sections/spinner-section/spinner-section.component';
 
-const routes: Routes = [
+export const COMPONENTS_ROUTES: Routes = [
   {
     path: '',
     component: ComponentsPageComponent,
@@ -41,9 +40,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class ComponentsRoutingModule {}

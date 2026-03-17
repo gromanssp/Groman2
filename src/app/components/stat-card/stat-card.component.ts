@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-stat-card',
-  templateUrl: './stat-card.component.html',
-  styleUrls: ['./stat-card.component.css']
+    selector: 'app-stat-card',
+    templateUrl: './stat-card.component.html',
+    styleUrls: ['./stat-card.component.css'],
+    imports: [NgClass]
 })
 export class StatCardComponent {
   @Input() title: string = 'Statistic';

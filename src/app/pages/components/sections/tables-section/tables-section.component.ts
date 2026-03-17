@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { TableColumn } from '../../../../shared/components/data-table/data-table.component';
+import { TableColumn, DataTableComponent } from '../../../../shared/components/data-table/data-table.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-tables-section',
-  templateUrl: './tables-section.component.html',
-  styleUrl: './tables-section.component.css'
+    selector: 'app-tables-section',
+    templateUrl: './tables-section.component.html',
+    styleUrl: './tables-section.component.css',
+    imports: [DataTableComponent, CodeSnippetComponent, FormsModule]
 })
 export class TablesSectionComponent {
   striped = true;

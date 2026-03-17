@@ -1,12 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
+import { DonationButtonComponent } from '../../shared/components/donation-button/donation-button.component';
+import { AsyncPipe, SlicePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css',
+    imports: [DonationButtonComponent, RouterLink, AsyncPipe, SlicePipe]
 })
 export class NavbarComponent {
   private sidebarService = inject(SidebarService);

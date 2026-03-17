@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-spinner-section',
-  templateUrl: './spinner-section.component.html',
-  styleUrl: './spinner-section.component.css'
+    selector: 'app-spinner-section',
+    templateUrl: './spinner-section.component.html',
+    styleUrl: './spinner-section.component.css',
+    imports: [SpinnerComponent, CodeSnippetComponent]
 })
 export class SpinnerSectionComponent {
   codes = {

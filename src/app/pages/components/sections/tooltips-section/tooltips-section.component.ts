@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { TooltipDirective } from '../../../../directives/tooltip.directive';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-tooltips-section',
-  templateUrl: './tooltips-section.component.html',
-  styleUrl: './tooltips-section.component.css'
+    selector: 'app-tooltips-section',
+    templateUrl: './tooltips-section.component.html',
+    styleUrl: './tooltips-section.component.css',
+    imports: [TooltipDirective, CodeSnippetComponent]
 })
 export class TooltipsSectionComponent {
   codes = {

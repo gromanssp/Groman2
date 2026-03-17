@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-button-groups-section',
-  templateUrl: './button-groups-section.component.html',
-  styleUrl: './button-groups-section.component.css'
+    selector: 'app-button-groups-section',
+    templateUrl: './button-groups-section.component.html',
+    styleUrl: './button-groups-section.component.css',
+    imports: [CodeSnippetComponent, NgClass]
 })
 export class ButtonGroupsSectionComponent {
   activeIndex = 1;

@@ -1,0 +1,125 @@
+<div class="components-section">
+  <h2 class="section-title">Shared Components ({{ sharedComponents.length }})</h2>
+  <p class="text-body section-desc">Reusable UI components located in <code>src/app/shared/components/</code>.</p>
+
+  @for (comp of sharedComponents; track comp.selector) {
+    <div class="doc-card">
+      <div class="component-header">
+        <h3 class="component-name">{{ comp.name }}</h3>
+        <span class="selector-badge">{{ comp.selector }}</span>
+      </div>
+      <p class="component-desc">{{ comp.description }}</p>
+
+      @if (comp.inputs.length > 0) {
+        <h4 class="subsection-title">Inputs</h4>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (input of comp.inputs; track input.name) {
+              <tr>
+                <td><code>{{ input.name }}</code></td>
+                <td><code>{{ input.type }}</code></td>
+                <td><code>{{ input.default }}</code></td>
+                <td>{{ input.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+      @if (comp.outputs.length > 0) {
+        <h4 class="subsection-title">Outputs</h4>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (output of comp.outputs; track output.name) {
+              <tr>
+                <td><code>{{ output.name }}</code></td>
+                <td><code>{{ output.type }}</code></td>
+                <td>{{ output.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+      <h4 class="subsection-title">Usage</h4>
+      <app-code-snippet [code]="comp.usage"></app-code-snippet>
+    </div>
+  }
+
+  <h2 class="section-title">Core Components ({{ coreComponents.length }})</h2>
+  <p class="text-body section-desc">Layout and structural components located in <code>src/app/components/</code>.</p>
+
+  @for (comp of coreComponents; track comp.selector) {
+    <div class="doc-card">
+      <div class="component-header">
+        <h3 class="component-name">{{ comp.name }}</h3>
+        <span class="selector-badge">{{ comp.selector }}</span>
+      </div>
+      <p class="component-desc">{{ comp.description }}</p>
+
+      @if (comp.inputs.length > 0) {
+        <h4 class="subsection-title">Inputs</h4>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (input of comp.inputs; track input.name) {
+              <tr>
+                <td><code>{{ input.name }}</code></td>
+                <td><code>{{ input.type }}</code></td>
+                <td><code>{{ input.default }}</code></td>
+                <td>{{ input.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+      @if (comp.outputs.length > 0) {
+        <h4 class="subsection-title">Outputs</h4>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (output of comp.outputs; track output.name) {
+              <tr>
+                <td><code>{{ output.name }}</code></td>
+                <td><code>{{ output.type }}</code></td>
+                <td>{{ output.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+      <h4 class="subsection-title">Usage</h4>
+      <app-code-snippet [code]="comp.usage"></app-code-snippet>
+    </div>
+  }
+</div>

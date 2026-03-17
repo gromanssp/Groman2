@@ -1,0 +1,21 @@
+<div class="pages-section">
+  <h2 class="section-title">Pages ({{ pages.length }})</h2>
+  <p class="text-body section-desc">All application pages and their routes. Pages are located in <code>src/app/pages/</code>.</p>
+
+  <div class="pages-grid">
+    @for (page of pages; track page.route) {
+      <div class="doc-card page-card">
+        <div class="page-header">
+          <h3 class="page-name">{{ page.name }}</h3>
+          <span class="route-badge">{{ page.route }}</span>
+        </div>
+        <p class="page-desc">{{ page.description }}</p>
+        <ul class="feature-list">
+          @for (feature of page.features; track feature) {
+            <li class="feature-item">{{ feature }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</div>

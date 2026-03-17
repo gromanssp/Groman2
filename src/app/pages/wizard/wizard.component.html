@@ -13,14 +13,14 @@
         <div class="step-label">Account Info</div>
       </div>
       <div class="step-line" [class.active]="currentStep > 1"></div>
-      
+
       <!-- Step 2 -->
       <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
         <div class="step-circle">2</div>
         <div class="step-label">Preferences</div>
       </div>
       <div class="step-line" [class.active]="currentStep > 2"></div>
-      
+
       <!-- Step 3 -->
       <div class="step" [class.active]="currentStep === 3" [class.completed]="currentStep > 3">
         <div class="step-circle">3</div>
@@ -29,56 +29,66 @@
     </div>
 
     <!-- Step 1 Content -->
-    <div class="wizard-content" *ngIf="currentStep === 1">
-      <h3 class="heading-3 mb-4">Account Information</h3>
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-        <input type="text" class="form-control" placeholder="Jane Doe">
+    @if (currentStep === 1) {
+      <div class="wizard-content">
+        <h3 class="heading-3 mb-4">Account Information</h3>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" placeholder="jane@example.com">
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-control" placeholder="jane@example.com">
-      </div>
-    </div>
+    }
 
     <!-- Step 2 Content -->
-    <div class="wizard-content" *ngIf="currentStep === 2">
-      <h3 class="heading-3 mb-4">Set Your Preferences</h3>
-      <div class="form-group">
-        <label class="form-label">Theme Mode</label>
-        <select class="form-control">
-          <option>System Default</option>
-          <option>Dark Mode</option>
-          <option>Light Mode</option>
-        </select>
+    @if (currentStep === 2) {
+      <div class="wizard-content">
+        <h3 class="heading-3 mb-4">Set Your Preferences</h3>
+        <div class="form-group">
+          <label class="form-label">Theme Mode</label>
+          <select class="form-control">
+            <option>System Default</option>
+            <option>Dark Mode</option>
+            <option>Light Mode</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notifications</label>
+          <select class="form-control">
+            <option>All Alerts</option>
+            <option>Important Only</option>
+            <option>Disabled</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Notifications</label>
-        <select class="form-control">
-          <option>All Alerts</option>
-          <option>Important Only</option>
-          <option>Disabled</option>
-        </select>
-      </div>
-    </div>
+    }
 
     <!-- Step 3 Content -->
-    <div class="wizard-content" *ngIf="currentStep === 3">
-      <h3 class="heading-3 mb-4">Almost Done!</h3>
-      <p class="text-secondary mb-4">Review your settings and click complete to finalize your setup. You can always change these settings later.</p>
-      <div class="glass-panel p-3 mb-4">
-        <p class="text-small"><strong>Name:</strong> Jane Doe</p>
-        <p class="text-small"><strong>Email:</strong> jane&#64;example.com</p>
-        <p class="text-small"><strong>Theme:</strong> Dark Mode</p>
+    @if (currentStep === 3) {
+      <div class="wizard-content">
+        <h3 class="heading-3 mb-4">Almost Done!</h3>
+        <p class="text-secondary mb-4">Review your settings and click complete to finalize your setup. You can always change these settings later.</p>
+        <div class="glass-panel p-3 mb-4">
+          <p class="text-small"><strong>Name:</strong> Jane Doe</p>
+          <p class="text-small"><strong>Email:</strong> jane&#64;example.com</p>
+          <p class="text-small"><strong>Theme:</strong> Dark Mode</p>
+        </div>
       </div>
-    </div>
+    }
 
     <!-- Wizard Footer Actions -->
     <div class="wizard-footer">
       <button class="btn btn-outline-secondary" [disabled]="currentStep === 1" (click)="prev()">Back</button>
-      
-      <button *ngIf="currentStep < 3" class="btn btn-primary" (click)="next()">Continue</button>
-      <button *ngIf="currentStep === 3" class="btn btn-gradient" (click)="submit()">Complete Setup</button>
+
+      @if (currentStep < 3) {
+        <button class="btn btn-primary" (click)="next()">Continue</button>
+      }
+      @if (currentStep === 3) {
+        <button class="btn btn-gradient" (click)="submit()">Complete Setup</button>
+      }
     </div>
   </div>
 </div>

@@ -1,10 +1,12 @@
 import { Component, Input, inject } from '@angular/core';
 import { PaymentService } from '../../../services/payment.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-donation-button',
-  templateUrl: './donation-button.component.html',
-  styleUrl: './donation-button.component.css'
+    selector: 'app-donation-button',
+    templateUrl: './donation-button.component.html',
+    styleUrl: './donation-button.component.css',
+    imports: [FormsModule]
 })
 export class DonationButtonComponent {
   @Input() compact = false;

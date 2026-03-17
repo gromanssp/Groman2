@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { ProgressBarComponent } from '../../../../shared/components/progress-bar/progress-bar.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-progress-section',
-  templateUrl: './progress-section.component.html',
-  styleUrl: './progress-section.component.css'
+    selector: 'app-progress-section',
+    templateUrl: './progress-section.component.html',
+    styleUrl: './progress-section.component.css',
+    imports: [ProgressBarComponent, CodeSnippetComponent]
 })
 export class ProgressSectionComponent {
   dynamicValue = 45;

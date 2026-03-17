@@ -6,26 +6,35 @@
     <span class="btn-text">Support this project</span>
   </button>
 
-  <div class="donation-panel" *ngIf="expanded">
-    <p class="donation-message">
-      This project is free and open source. Donations help cover hosting and development costs to keep it available for everyone.
-    </p>
-
-    <div *ngIf="status === 'success'" class="donation-status success">{{ statusMessage }}</div>
-    <div *ngIf="status === 'error'" class="donation-status error">{{ statusMessage }}</div>
-
-    <div class="donation-amounts" *ngIf="status !== 'success'">
-      <button class="amount-btn" (click)="onDonate(3)" [disabled]="status === 'processing'">$3</button>
-      <button class="amount-btn" (click)="onDonate(5)" [disabled]="status === 'processing'">$5</button>
-      <button class="amount-btn featured" (click)="onDonate(10)" [disabled]="status === 'processing'">$10</button>
-      <button class="amount-btn" (click)="onDonate(25)" [disabled]="status === 'processing'">$25</button>
+  @if (expanded) {
+    <div class="donation-panel">
+      <p class="donation-message">
+        This project is free and open source. Donations help cover hosting and development costs to keep it available for everyone.
+      </p>
+      @if (status === 'success') {
+        <div class="donation-status success">{{ statusMessage }}</div>
+      }
+      @if (status === 'error') {
+        <div class="donation-status error">{{ statusMessage }}</div>
+      }
+      @if (status !== 'success') {
+        <div class="donation-amounts">
+          <button class="amount-btn" (click)="onDonate(3)" [disabled]="status === 'processing'">$3</button>
+          <button class="amount-btn" (click)="onDonate(5)" [disabled]="status === 'processing'">$5</button>
+          <button class="amount-btn featured" (click)="onDonate(10)" [disabled]="status === 'processing'">$10</button>
+          <button class="amount-btn" (click)="onDonate(25)" [disabled]="status === 'processing'">$25</button>
+        </div>
+      }
+      @if (status !== 'success') {
+        <div class="custom-amount-row">
+          <span class="currency-sign">$</span>
+          <input type="number" class="custom-input" placeholder="Custom" [(ngModel)]="customAmount" min="1">
+          <button class="custom-btn" (click)="onCustomDonate()" [disabled]="status === 'processing'">Donate</button>
+        </div>
+      }
+      @if (status === 'processing') {
+        <div class="donation-status processing">Processing...</div>
+      }
     </div>
-    <div class="custom-amount-row" *ngIf="status !== 'success'">
-      <span class="currency-sign">$</span>
-      <input type="number" class="custom-input" placeholder="Custom" [(ngModel)]="customAmount" min="1">
-      <button class="custom-btn" (click)="onCustomDonate()" [disabled]="status === 'processing'">Donate</button>
-    </div>
-
-    <div *ngIf="status === 'processing'" class="donation-status processing">Processing...</div>
-  </div>
+  }
 </div>

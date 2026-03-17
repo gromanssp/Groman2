@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-cards-section',
-  templateUrl: './cards-section.component.html',
-  styleUrl: './cards-section.component.css'
+    selector: 'app-cards-section',
+    templateUrl: './cards-section.component.html',
+    styleUrl: './cards-section.component.css',
+    imports: [CodeSnippetComponent]
 })
 export class CardsSectionComponent {
   codes = {

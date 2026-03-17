@@ -1,5 +1,7 @@
 <div class="dashboard-layout" [class.sidebar-collapsed]="collapsed$ | async" [class.sidebar-mobile-open]="mobileOpen$ | async">
-  <div class="sidebar-backdrop" *ngIf="mobileOpen$ | async" (click)="closeMobile()"></div>
+  @if (mobileOpen$ | async) {
+    <div class="sidebar-backdrop" (click)="closeMobile()"></div>
+  }
   <app-sidebar class="sidebar-container"></app-sidebar>
   <div class="main-content">
     <app-navbar></app-navbar>

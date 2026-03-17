@@ -1,29 +1,33 @@
 <div class="spinner-wrapper" [ngClass]="'size-' + size">
   <!-- Circular spinner -->
-  <div
-    *ngIf="variant === 'circular'"
-    class="spinner-circular"
-    [style.width.px]="sizeInPx"
-    [style.height.px]="sizeInPx"
-    [style.borderColor]="'transparent'"
-    [style.borderTopColor]="color"
-    [style.borderRightColor]="color"
-    [style.borderBottomColor]="color"
-  ></div>
+  @if (variant === 'circular') {
+    <div
+      class="spinner-circular"
+      [style.width.px]="sizeInPx"
+      [style.height.px]="sizeInPx"
+      [style.borderColor]="'transparent'"
+      [style.borderTopColor]="color"
+      [style.borderRightColor]="color"
+      [style.borderBottomColor]="color"
+    ></div>
+  }
 
   <!-- Dots spinner -->
-  <div *ngIf="variant === 'dots'" class="spinner-dots">
-    <span class="dot dot-1" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
-    <span class="dot dot-2" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
-    <span class="dot dot-3" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
-  </div>
+  @if (variant === 'dots') {
+    <div class="spinner-dots">
+      <span class="dot dot-1" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
+      <span class="dot dot-2" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
+      <span class="dot dot-3" [style.backgroundColor]="color" [style.width.px]="sizeInPx * 0.28" [style.height.px]="sizeInPx * 0.28"></span>
+    </div>
+  }
 
   <!-- Pulse spinner -->
-  <div
-    *ngIf="variant === 'pulse'"
-    class="spinner-pulse"
-    [style.width.px]="sizeInPx"
-    [style.height.px]="sizeInPx"
-    [style.backgroundColor]="color"
-  ></div>
+  @if (variant === 'pulse') {
+    <div
+      class="spinner-pulse"
+      [style.width.px]="sizeInPx"
+      [style.height.px]="sizeInPx"
+      [style.backgroundColor]="color"
+    ></div>
+  }
 </div>

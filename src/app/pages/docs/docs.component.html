@@ -1,0 +1,21 @@
+<div class="page-container">
+  <header class="page-header">
+    <h1 class="heading-2">Documentation</h1>
+    <p class="text-body">Complete reference for all components, directives, services, and project architecture.</p>
+  </header>
+  <div class="docs-layout">
+    <nav class="docs-sidenav glass-panel">
+      @for (item of navItems; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          class="sidenav-item">
+          {{ item.label }}
+        </a>
+      }
+    </nav>
+    <div class="docs-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

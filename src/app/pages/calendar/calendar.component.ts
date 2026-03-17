@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 interface CalendarEvent {
   title: string;
@@ -19,7 +22,9 @@ interface CalendarDay {
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.css'
+  styleUrl: './calendar.component.css',
+  imports: [DatePipe, FormsModule, ModalComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent implements OnInit {
   currentDate = new Date();
@@ -36,6 +41,20 @@ export class CalendarComponent implements OnInit {
     { title: 'Code Freeze', date: new Date(2026, 2, 20), color: 'var(--danger)' },
     { title: 'Team Lunch', date: new Date(2026, 2, 25), color: 'var(--success)' },
     { title: 'Quarterly Review', date: new Date(2026, 2, 28), color: 'var(--accent-primary)' },
+  ];
+
+  // Create event modal
+  showCreateModal = false;
+  newEventTitle = '';
+  newEventColor = 'var(--accent-primary)';
+  newEventDate = '';
+
+  eventColors = [
+    { name: 'Primary', value: 'var(--accent-primary)' },
+    { name: 'Success', value: 'var(--success)' },
+    { name: 'Warning', value: 'var(--warning)' },
+    { name: 'Danger', value: 'var(--danger)' },
+    { name: 'Info', value: 'var(--info)' },
   ];
 
   get monthYear(): string {
@@ -69,6 +88,42 @@ export class CalendarComponent implements OnInit {
     if (!day.isCurrentMonth) return;
     this.selectedDate = new Date(day.year, day.month, day.date);
     this.generateCalendar();
+  }
+
+  openCreateModal(): void {
+    this.showCreateModal = true;
+    if (this.selectedDate) {
+      const y = this.selectedDate.getFullYear();
+      const m = String(this.selectedDate.getMonth() + 1).padStart(2, '0');
+      const d = String(this.selectedDate.getDate()).padStart(2, '0');
+      this.newEventDate = `${y}-${m}-${d}`;
+    } else {
+      const today = new Date();
+      const y = today.getFullYear();
+      const m = String(today.getMonth() + 1).padStart(2, '0');
+      const d = String(today.getDate()).padStart(2, '0');
+      this.newEventDate = `${y}-${m}-${d}`;
+    }
+  }
+
+  closeCreateModal(): void {
+    this.showCreateModal = false;
+    this.newEventTitle = '';
+    this.newEventColor = 'var(--accent-primary)';
+    this.newEventDate = '';
+  }
+
+  createEvent(): void {
+    if (!this.newEventTitle || !this.newEventDate) return;
+    const parts = this.newEventDate.split('-');
+    const date = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    this.events.push({
+      title: this.newEventTitle,
+      date,
+      color: this.newEventColor,
+    });
+    this.generateCalendar();
+    this.closeCreateModal();
   }
 
   private generateCalendar(): void {

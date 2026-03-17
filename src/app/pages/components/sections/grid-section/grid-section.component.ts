@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-grid-section',
-  templateUrl: './grid-section.component.html',
-  styleUrl: './grid-section.component.css'
+    selector: 'app-grid-section',
+    templateUrl: './grid-section.component.html',
+    styleUrl: './grid-section.component.css',
+    imports: [CodeSnippetComponent]
 })
 export class GridSectionComponent {
   codes = {

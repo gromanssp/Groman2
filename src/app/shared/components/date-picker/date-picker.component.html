@@ -14,40 +14,43 @@
     </svg>
   </div>
 
-  <div class="dropdown" *ngIf="isOpen">
-    <div class="calendar-header">
-      <button class="nav-btn" (click)="prevMonth(); $event.stopPropagation()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <span class="month-label">{{ monthLabel }}</span>
-      <button class="nav-btn" (click)="nextMonth(); $event.stopPropagation()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="9 6 15 12 9 18"/>
-        </svg>
-      </button>
+  @if (isOpen) {
+    <div class="dropdown">
+      <div class="calendar-header">
+        <button class="nav-btn" (click)="prevMonth(); $event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <span class="month-label">{{ monthLabel }}</span>
+        <button class="nav-btn" (click)="nextMonth(); $event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 6 15 12 9 18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="weekdays">
+        @for (wd of weekDays; track wd) {
+          <span class="weekday">{{ wd }}</span>
+        }
+      </div>
+      <div class="days-grid">
+        @for (day of calendarDays; track day) {
+          <span
+            class="day-cell"
+            [class.empty]="!day"
+            [class.today]="isToday(day)"
+            [class.selected]="isSelected(day)"
+            [class.in-range]="isInRange(day)"
+            [class.range-start]="isRangeStart(day)"
+            [class.range-end]="isRangeEnd(day)"
+            [class.disabled]="isDisabled(day)"
+            (click)="selectDay(day); $event.stopPropagation()"
+            >
+            {{ day ? day.getDate() : '' }}
+          </span>
+        }
+      </div>
     </div>
-
-    <div class="weekdays">
-      <span class="weekday" *ngFor="let wd of weekDays">{{ wd }}</span>
-    </div>
-
-    <div class="days-grid">
-      <span
-        *ngFor="let day of calendarDays"
-        class="day-cell"
-        [class.empty]="!day"
-        [class.today]="isToday(day)"
-        [class.selected]="isSelected(day)"
-        [class.in-range]="isInRange(day)"
-        [class.range-start]="isRangeStart(day)"
-        [class.range-end]="isRangeEnd(day)"
-        [class.disabled]="isDisabled(day)"
-        (click)="selectDay(day); $event.stopPropagation()"
-      >
-        {{ day ? day.getDate() : '' }}
-      </span>
-    </div>
-  </div>
+  }
 </div>
