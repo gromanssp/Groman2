@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
 
 @Component({
-  selector: 'app-date-picker',
-  templateUrl: './date-picker.component.html',
-  styleUrl: './date-picker.component.css'
+    selector: 'app-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrl: './date-picker.component.css'
 })
 export class DatePickerComponent {
   @Input() mode: 'single' | 'range' | 'minmax' = 'single';

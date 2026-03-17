@@ -1,7 +1,9 @@
 <div class="progress-container" [style.height.px]="height">
   <div class="progress-fill"
-       [ngClass]="['fill-' + variant, striped ? 'striped' : '', animated ? 'animated' : '']"
-       [style.width.%]="value">
-    <span class="progress-label" *ngIf="label">{{ label }}</span>
+    [ngClass]="['fill-' + variant, striped ? 'striped' : '', animated ? 'animated' : '']"
+    [style.width.%]="value">
+    @if (label) {
+      <span class="progress-label">{{ label }}</span>
+    }
   </div>
 </div>

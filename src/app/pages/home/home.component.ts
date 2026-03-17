@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { StatCardComponent } from '../../components/stat-card/stat-card.component';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css'],
+    imports: [StatCardComponent, BaseChartDirective]
 })
 export class HomeComponent {
   // Chart Data Configurations

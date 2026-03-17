@@ -1,8 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
-@Directive({
-  selector: '[appCollapse]'
-})
+@Directive({ selector: '[appCollapse]' })
 export class CollapseDirective implements OnChanges {
   @Input('appCollapse') isCollapsed = false;
 

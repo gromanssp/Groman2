@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-buttons-section',
-  templateUrl: './buttons-section.component.html',
-  styleUrl: './buttons-section.component.css'
+    selector: 'app-buttons-section',
+    templateUrl: './buttons-section.component.html',
+    styleUrl: './buttons-section.component.css',
+    imports: [CodeSnippetComponent]
 })
 export class ButtonsSectionComponent {
   isLoading = false;

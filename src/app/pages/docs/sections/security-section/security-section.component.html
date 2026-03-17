@@ -1,0 +1,66 @@
+<div class="security-section">
+  <h2 class="section-title">Security Audit</h2>
+
+  <div class="doc-card summary-card">
+    <div class="summary-header">
+      <h3 class="summary-title">No Critical Vulnerabilities Found</h3>
+      <app-badge variant="success" size="sm">Passed</app-badge>
+    </div>
+    <div class="severity-counts">
+      <div class="severity-count">
+        <span class="count critical">{{ criticalCount }}</span>
+        <span class="count-label">Critical</span>
+      </div>
+      <div class="severity-count">
+        <span class="count medium">{{ mediumCount }}</span>
+        <span class="count-label">Medium</span>
+      </div>
+      <div class="severity-count">
+        <span class="count low">{{ lowCount }}</span>
+        <span class="count-label">Low</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-title">Findings</h3>
+
+  @for (finding of findings; track finding.title) {
+    <div class="doc-card finding-card">
+      <div class="finding-header">
+        <app-badge [variant]="getSeverityVariant(finding.severity)" size="sm">
+          {{ finding.severity | uppercase }}
+        </app-badge>
+        <h4 class="finding-title">{{ finding.title }}</h4>
+      </div>
+
+      @if (finding.files.length > 0) {
+        <div class="finding-files">
+          @for (file of finding.files; track file) {
+            <span class="file-badge">{{ file }}</span>
+          }
+        </div>
+      }
+
+      <p class="finding-desc">{{ finding.description }}</p>
+
+      <div class="recommendation">
+        <span class="rec-label">Recommendation:</span>
+        {{ finding.recommendation }}
+      </div>
+    </div>
+  }
+
+  <h3 class="section-title">Positive Security Findings</h3>
+
+  <div class="positives-grid">
+    @for (positive of positiveFindings; track positive.title) {
+      <div class="doc-card positive-card">
+        <div class="positive-icon">&#10003;</div>
+        <div class="positive-content">
+          <h4 class="positive-title">{{ positive.title }}</h4>
+          <p class="positive-desc">{{ positive.description }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</div>

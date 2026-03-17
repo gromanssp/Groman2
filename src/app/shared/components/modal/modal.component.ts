@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrl: './modal.component.css'
+    selector: 'app-modal',
+    templateUrl: './modal.component.html',
+    styleUrl: './modal.component.css',
+    imports: [NgClass]
 })
 export class ModalComponent {
   @Input() isOpen = false;

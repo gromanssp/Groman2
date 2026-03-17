@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-icons-section',
-  templateUrl: './icons-section.component.html',
-  styleUrl: './icons-section.component.css'
+    selector: 'app-icons-section',
+    templateUrl: './icons-section.component.html',
+    styleUrl: './icons-section.component.css',
+    imports: [FormsModule, CodeSnippetComponent]
 })
 export class IconsSectionComponent {
   searchTerm = '';

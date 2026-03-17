@@ -5,12 +5,14 @@
   </header>
   <div class="components-layout">
     <nav class="components-sidenav glass-panel">
-      <a *ngFor="let item of navItems"
-         [routerLink]="item.path"
-         routerLinkActive="active"
-         class="sidenav-item">
-        {{ item.label }}
-      </a>
+      @for (item of navItems; track item) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          class="sidenav-item">
+          {{ item.label }}
+        </a>
+      }
     </nav>
     <div class="components-content">
       <router-outlet></router-outlet>

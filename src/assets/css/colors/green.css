@@ -1,0 +1,6 @@
+:root {
+  --accent-primary: #10b981;
+  --accent-secondary: #059669;
+  --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}

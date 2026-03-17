@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Legend, plugins } from 'chart.js';
 import { color } from 'chart.js/helpers';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-  selector: 'app-grafico',
-  templateUrl: './grafico.component.html',
-  styleUrl: './grafico.component.css'
+    selector: 'app-grafico',
+    templateUrl: './grafico.component.html',
+    styleUrl: './grafico.component.css',
+    imports: [BaseChartDirective]
 })
 export class GraficoComponent {
 

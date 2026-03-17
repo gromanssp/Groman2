@@ -7,9 +7,9 @@ export interface TableColumn {
 }
 
 @Component({
-  selector: 'app-data-table',
-  templateUrl: './data-table.component.html',
-  styleUrl: './data-table.component.css'
+    selector: 'app-data-table',
+    templateUrl: './data-table.component.html',
+    styleUrl: './data-table.component.css'
 })
 export class DataTableComponent {
   @Input() columns: TableColumn[] = [];

@@ -1,0 +1,44 @@
+<div class="download-section">
+  <h2 class="section-title">Download Template</h2>
+
+  <div class="doc-card">
+    <p class="description">{{ description }}</p>
+  </div>
+
+  <h3 class="section-title">Included Files</h3>
+  <div class="doc-card">
+    <app-code-snippet [code]="fileTree"></app-code-snippet>
+  </div>
+
+  <h3 class="section-title">Getting Started</h3>
+  <div class="doc-card">
+    <ol class="instructions-list">
+      @for (step of instructions; track step; let i = $index) {
+        <li class="instruction-item">
+          <span class="step-number">{{ i + 1 }}</span>
+          <span class="step-text">{{ step }}</span>
+        </li>
+      }
+    </ol>
+  </div>
+
+  <div class="download-area">
+    <button
+      class="download-button"
+      (click)="downloadTemplate()"
+      [disabled]="isGenerating()">
+      @if (isGenerating()) {
+        <app-spinner variant="circular" size="sm" color="#ffffff"></app-spinner>
+        <span>Generating Template...</span>
+      } @else {
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download Groman2 Template</span>
+      }
+    </button>
+    <p class="download-note">ZIP archive with all components, services, and styles pre-configured.</p>
+  </div>
+</div>

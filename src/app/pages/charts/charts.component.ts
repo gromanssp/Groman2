@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
-  selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrl: './charts.component.css'
+    selector: 'app-charts',
+    templateUrl: './charts.component.html',
+    styleUrl: './charts.component.css',
+    imports: [BaseChartDirective]
 })
 export class ChartsComponent {
   private baseOptions: ChartOptions = {

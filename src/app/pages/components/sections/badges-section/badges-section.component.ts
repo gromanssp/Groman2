@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-badges-section',
-  templateUrl: './badges-section.component.html',
-  styleUrl: './badges-section.component.css'
+    selector: 'app-badges-section',
+    templateUrl: './badges-section.component.html',
+    styleUrl: './badges-section.component.css',
+    imports: [BadgeComponent, CodeSnippetComponent]
 })
 export class BadgesSectionComponent {
   counter = 3;

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { DatePickerComponent } from '../../../../shared/components/date-picker/date-picker.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-datepicker-section',
-  templateUrl: './datepicker-section.component.html',
-  styleUrl: './datepicker-section.component.css'
+    selector: 'app-datepicker-section',
+    templateUrl: './datepicker-section.component.html',
+    styleUrl: './datepicker-section.component.css',
+    imports: [DatePickerComponent, CodeSnippetComponent]
 })
 export class DatepickerSectionComponent {
   minDate = new Date();

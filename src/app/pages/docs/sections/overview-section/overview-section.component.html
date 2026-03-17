@@ -1,0 +1,36 @@
+<div class="overview-section">
+  <div class="doc-card project-header">
+    <div class="project-info">
+      <h2 class="section-title">{{ projectName }}</h2>
+      <div class="version-badges">
+        <span class="version-badge">v{{ projectVersion }}</span>
+        <span class="version-badge angular">Angular {{ angularVersion }}</span>
+      </div>
+      <p class="text-body">
+        A modern Angular dashboard template featuring a dark glass-morphism design system,
+        reusable components, and production-ready architecture.
+      </p>
+    </div>
+  </div>
+
+  <h3 class="section-title">Tech Stack</h3>
+  <div class="tech-grid">
+    @for (tech of techStack; track tech.name) {
+      <div class="doc-card tech-card">
+        <div class="tech-name">{{ tech.name }}</div>
+        <div class="tech-version">v{{ tech.version }}</div>
+        <p class="tech-desc">{{ tech.description }}</p>
+      </div>
+    }
+  </div>
+
+  <h3 class="section-title">Project Structure</h3>
+  <div class="doc-card">
+    <app-code-snippet [code]="folderTree"></app-code-snippet>
+  </div>
+
+  <h3 class="section-title">Quick Start</h3>
+  <div class="doc-card">
+    <app-code-snippet [code]="quickStartCode"></app-code-snippet>
+  </div>
+</div>

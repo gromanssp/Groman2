@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
-  styleUrl: './spinner.component.css'
+    selector: 'app-spinner',
+    templateUrl: './spinner.component.html',
+    styleUrl: './spinner.component.css',
+    imports: [NgClass]
 })
 export class SpinnerComponent {
   @Input() variant: 'circular' | 'dots' | 'pulse' = 'circular';

@@ -1,7 +1,10 @@
 <div class="page-container">
   <header class="page-header">
-    <h1 class="heading-2">Calendar</h1>
-    <p class="text-body">Interactive calendar with event management.</p>
+    <div>
+      <h1 class="heading-2">Calendar</h1>
+      <p class="text-body">Interactive calendar with event management.</p>
+    </div>
+    <button class="btn btn-gradient" (click)="openCreateModal()">+ New Event</button>
   </header>
 
   <div class="calendar-layout">
@@ -21,21 +24,29 @@
       </div>
 
       <div class="calendar-grid">
-        <div class="day-header" *ngFor="let d of weekDays">{{ d }}</div>
-        <ng-container *ngFor="let week of weeks">
-          <div *ngFor="let day of week"
-               class="day-cell"
-               [class.other-month]="!day.isCurrentMonth"
-               [class.today]="day.isToday"
-               [class.selected]="day.isSelected"
-               [class.has-events]="day.events.length > 0"
-               (click)="selectDay(day)">
-            <span class="day-number">{{ day.date }}</span>
-            <div class="event-dots" *ngIf="day.events.length > 0">
-              <span class="event-dot" *ngFor="let ev of day.events" [style.background]="ev.color"></span>
+        @for (d of weekDays; track d) {
+          <div class="day-header">{{ d }}</div>
+        }
+        @for (week of weeks; track week) {
+          @for (day of week; track day) {
+            <div
+              class="day-cell"
+              [class.other-month]="!day.isCurrentMonth"
+              [class.today]="day.isToday"
+              [class.selected]="day.isSelected"
+              [class.has-events]="day.events.length > 0"
+              (click)="selectDay(day)">
+              <span class="day-number">{{ day.date }}</span>
+              @if (day.events.length > 0) {
+                <div class="event-dots">
+                  @for (ev of day.events; track ev) {
+                    <span class="event-dot" [style.background]="ev.color"></span>
+                  }
+                </div>
+              }
             </div>
-          </div>
-        </ng-container>
+          }
+        }
       </div>
     </div>
 
@@ -43,18 +54,60 @@
       <h3 class="events-title">
         {{ selectedDate ? (selectedDate | date:'MMMM d, yyyy') : 'Select a date' }}
       </h3>
-      <div class="events-list" *ngIf="selectedDateEvents.length > 0">
-        <div class="event-item" *ngFor="let ev of selectedDateEvents">
-          <span class="event-indicator" [style.background]="ev.color"></span>
-          <span class="event-name">{{ ev.title }}</span>
+      @if (selectedDateEvents.length > 0) {
+        <div class="events-list">
+          @for (ev of selectedDateEvents; track ev) {
+            <div class="event-item">
+              <span class="event-indicator" [style.background]="ev.color"></span>
+              <span class="event-name">{{ ev.title }}</span>
+            </div>
+          }
         </div>
-      </div>
-      <p class="no-events" *ngIf="selectedDate && selectedDateEvents.length === 0">
-        No events for this day.
-      </p>
-      <p class="no-events" *ngIf="!selectedDate">
-        Click on a date to view events.
-      </p>
+      }
+      @if (selectedDate && selectedDateEvents.length === 0) {
+        <p class="no-events">
+          No events for this day.
+        </p>
+      }
+      @if (!selectedDate) {
+        <p class="no-events">
+          Click on a date to view events.
+        </p>
+      }
     </div>
   </div>
 </div>
+
+<app-modal [isOpen]="showCreateModal" title="Create Event" (closed)="closeCreateModal()">
+  <div class="create-event-form">
+    <div class="form-group">
+      <label class="form-label">Event Title</label>
+      <input type="text" class="form-input" [(ngModel)]="newEventTitle" placeholder="Enter event title" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Date</label>
+      <input type="date" class="form-input" [(ngModel)]="newEventDate" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Color</label>
+      <div class="color-options">
+        @for (color of eventColors; track color.value) {
+          <label class="color-option" [class.selected]="newEventColor === color.value">
+            <input
+              type="radio"
+              name="eventColor"
+              [value]="color.value"
+              [(ngModel)]="newEventColor"
+              class="color-radio" />
+            <span class="color-preview" [style.background]="color.value"></span>
+            <span class="color-name">{{ color.name }}</span>
+          </label>
+        }
+      </div>
+    </div>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="closeCreateModal()">Cancel</button>
+    <button class="btn btn-gradient" (click)="createEvent()" [disabled]="!newEventTitle || !newEventDate">Create</button>
+  </div>
+</app-modal>

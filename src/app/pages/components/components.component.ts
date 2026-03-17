@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-components',
-  templateUrl: './components.component.html',
-  styleUrl: './components.component.css'
+    selector: 'app-components',
+    templateUrl: './components.component.html',
+    styleUrl: './components.component.css',
+    imports: [RouterLinkActive, RouterLink, RouterOutlet]
 })
 export class ComponentsPageComponent {
   navItems = [

@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -10,7 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
@@ -19,11 +18,23 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       {
         path: 'components',
-        loadChildren: () => import('./pages/components/components.module').then(m => m.ComponentsModule)
+        loadChildren: () => import('./pages/components/components.routes').then(m => m.COMPONENTS_ROUTES)
       },
       { path: 'wizard', component: WizardComponent },
       { path: 'calendar', component: CalendarComponent },
       { path: 'charts', component: ChartsComponent },
+      {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent)
+      },
+      {
+        path: 'docs',
+        loadChildren: () => import('./pages/docs/docs.routes').then(m => m.DOCS_ROUTES)
+      },
       { path: 'buttons', redirectTo: 'components/buttons', pathMatch: 'full' }
     ]
   },
@@ -39,9 +50,3 @@ const routes: Routes = [
   { path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}

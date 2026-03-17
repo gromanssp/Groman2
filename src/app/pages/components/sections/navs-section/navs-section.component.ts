@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-navs-section',
-  templateUrl: './navs-section.component.html',
-  styleUrl: './navs-section.component.css'
+    selector: 'app-navs-section',
+    templateUrl: './navs-section.component.html',
+    styleUrl: './navs-section.component.css',
+    imports: [CodeSnippetComponent]
 })
 export class NavsSectionComponent {
   activeTab = 'home';

@@ -1,8 +1,6 @@
 import { Directive, ElementRef, Input, OnDestroy, Renderer2, HostListener } from '@angular/core';
 
-@Directive({
-  selector: '[appTooltip]'
-})
+@Directive({ selector: '[appTooltip]' })
 export class TooltipDirective implements OnDestroy {
   @Input('appTooltip') tooltipText = '';
   @Input() tooltipPosition: 'top' | 'bottom' | 'left' | 'right' = 'top';

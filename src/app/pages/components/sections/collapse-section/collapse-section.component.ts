@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CollapsePanelComponent } from '../../../../shared/components/collapse-panel/collapse-panel.component';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 interface Panel {
   title: string;
@@ -7,9 +9,10 @@ interface Panel {
 }
 
 @Component({
-  selector: 'app-collapse-section',
-  templateUrl: './collapse-section.component.html',
-  styleUrl: './collapse-section.component.css'
+    selector: 'app-collapse-section',
+    templateUrl: './collapse-section.component.html',
+    styleUrl: './collapse-section.component.css',
+    imports: [CollapsePanelComponent, CodeSnippetComponent]
 })
 export class CollapseSectionComponent {
   panels: Panel[] = [

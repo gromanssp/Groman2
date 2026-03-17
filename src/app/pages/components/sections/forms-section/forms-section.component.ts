@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
-  selector: 'app-forms-section',
-  templateUrl: './forms-section.component.html',
-  styleUrl: './forms-section.component.css'
+    selector: 'app-forms-section',
+    templateUrl: './forms-section.component.html',
+    styleUrl: './forms-section.component.css',
+    imports: [FormsModule, CodeSnippetComponent]
 })
 export class FormsSectionComponent {
   sampleText = '';

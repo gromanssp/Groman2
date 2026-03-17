@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
-  selector: 'app-modals-section',
-  templateUrl: './modals-section.component.html',
-  styleUrl: './modals-section.component.css'
+    selector: 'app-modals-section',
+    templateUrl: './modals-section.component.html',
+    styleUrl: './modals-section.component.css',
+    imports: [CodeSnippetComponent, ModalComponent]
 })
 export class ModalsSectionComponent {
   showSmall = false;
