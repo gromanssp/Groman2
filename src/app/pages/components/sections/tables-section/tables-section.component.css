@@ -1,6 +1,7 @@
 .section-container { animation: fadeIn 0.3s ease-out; }
-.components-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
-.showcase-card { padding: 1.5rem; }
+.components-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 1.5rem; }
+.showcase-card { padding: 1.5rem; overflow: hidden; }
+.demo-area { overflow-x: auto; }
 .card-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
 .demo-area { margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 .table-toggles {

@@ -1,3 +1,15 @@
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-label-outside {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
 .progress-container {
   width: 100%;
   background: rgba(255, 255, 255, 0.06);
