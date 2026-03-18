@@ -9,7 +9,7 @@ import { SlicePipe } from '@angular/common';
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css',
-    imports: [DonationButtonComponent, RouterLink, SlicePipe]
+    imports: [RouterLink, SlicePipe]
 })
 export class NavbarComponent {
   private sidebarService = inject(SidebarService);
