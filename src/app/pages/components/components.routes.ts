@@ -15,6 +15,7 @@ import { DatepickerSectionComponent } from './sections/datepicker-section/datepi
 import { GridSectionComponent } from './sections/grid-section/grid-section.component';
 import { IconsSectionComponent } from './sections/icons-section/icons-section.component';
 import { SpinnerSectionComponent } from './sections/spinner-section/spinner-section.component';
+import { CarouselSectionComponent } from './sections/carousel-section/carousel-section.component';
 
 export const COMPONENTS_ROUTES: Routes = [
   {
@@ -26,6 +27,7 @@ export const COMPONENTS_ROUTES: Routes = [
       { path: 'button-groups', component: ButtonGroupsSectionComponent },
       { path: 'badges', component: BadgesSectionComponent },
       { path: 'cards', component: CardsSectionComponent },
+      { path: 'carousel', component: CarouselSectionComponent },
       { path: 'collapse', component: CollapseSectionComponent },
       { path: 'forms', component: FormsSectionComponent },
       { path: 'modals', component: ModalsSectionComponent },

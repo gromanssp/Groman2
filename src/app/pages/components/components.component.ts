@@ -13,6 +13,7 @@ export class ComponentsPageComponent {
     { path: 'button-groups', label: 'Button Groups' },
     { path: 'badges', label: 'Badges' },
     { path: 'cards', label: 'Cards' },
+    { path: 'carousel', label: 'Carousel' },
     { path: 'collapse', label: 'Collapse' },
     { path: 'forms', label: 'Forms' },
     { path: 'modals', label: 'Modals' },

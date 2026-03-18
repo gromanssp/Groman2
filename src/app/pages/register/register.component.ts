@@ -33,19 +33,10 @@ export class RegisterComponent {
     try {
       await this.authService.register(this.email, this.password, this.fullName);
       this.router.navigate(['/']);
-    } catch (err: any) {
-      this.errorMessage = this.getErrorMessage(err.code);
+    } catch {
+      this.errorMessage = 'An error occurred. Please try again.';
     } finally {
       this.loading = false;
-    }
-  }
-
-  private getErrorMessage(code: string): string {
-    switch (code) {
-      case 'auth/email-already-in-use': return 'An account with this email already exists.';
-      case 'auth/invalid-email': return 'Invalid email address.';
-      case 'auth/weak-password': return 'Password is too weak.';
-      default: return 'An error occurred. Please try again.';
     }
   }
 }
