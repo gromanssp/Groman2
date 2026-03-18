@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
   imports: [CommonModule, FormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   private authService = inject(AuthService);
 
   displayName = '';
@@ -22,8 +22,9 @@ export class ProfileComponent implements OnInit {
   saveStatus: 'idle' | 'saved' | 'error' = 'idle';
   passwordStatus: 'idle' | 'saved' | 'mismatch' = 'idle';
 
-  ngOnInit(): void {
-    this.authService.profile$.subscribe(profile => {
+  constructor() {
+    effect(() => {
+      const profile = this.authService.profile();
       if (profile) {
         this.displayName = profile.displayName;
         this.email = profile.email;

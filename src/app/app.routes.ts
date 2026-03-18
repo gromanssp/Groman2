@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
-import { AuthComponent } from './layouts/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WizardComponent } from './pages/wizard/wizard.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
@@ -35,16 +34,9 @@ export const routes: Routes = [
         path: 'docs',
         loadChildren: () => import('./pages/docs/docs.routes').then(m => m.DOCS_ROUTES)
       },
+      { path: 'auth/login', component: LoginComponent },
+      { path: 'auth/register', component: RegisterComponent },
       { path: 'buttons', redirectTo: 'components/buttons', pathMatch: 'full' }
-    ]
-  },
-  {
-    path: 'auth',
-    component: AuthComponent,
-    children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
     ]
   },
   { path: '404', component: NotFoundComponent },

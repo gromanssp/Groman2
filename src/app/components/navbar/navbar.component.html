@@ -24,18 +24,18 @@
 
     <div class="user-profile" (click)="toggleUserMenu()">
       <div class="user-avatar">
-        @if (profile$ | async; as profile) {
+        @if (profile(); as p) {
           <img
-            [src]="'https://ui-avatars.com/api/?name=' + (profile.displayName | slice:0:20) + '&background=6366f1&color=fff'"
+            [src]="'https://ui-avatars.com/api/?name=' + (p.displayName | slice:0:20) + '&background=6366f1&color=fff'"
             alt="User">
         } @else {
           <img src="https://ui-avatars.com/api/?name=Guest&background=6366f1&color=fff" alt="User">
         }
       </div>
       <div class="user-info d-none d-sm-block">
-        @if (profile$ | async; as profile) {
-          <p class="user-name">{{ profile.displayName }}</p>
-          <p class="user-role">{{ profile.role }}</p>
+        @if (profile(); as p) {
+          <p class="user-name">{{ p.displayName }}</p>
+          <p class="user-role">{{ p.role }}</p>
         } @else {
           <p class="user-name">Guest</p>
           <p class="user-role">Not signed in</p>
@@ -59,7 +59,7 @@
           Settings
         </a>
         <div class="menu-divider"></div>
-        @if (user$ | async) {
+        @if (isAuthenticated()) {
           <button class="user-menu-item" (click)="logout()">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

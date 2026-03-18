@@ -1,9 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, addDoc, query, where, getDocs, orderBy, Timestamp } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 
 export interface Donation {
-  id?: string;
+  id: string;
   userId: string;
   email: string;
   amount: number;
@@ -17,12 +16,13 @@ export interface Donation {
   providedIn: 'root'
 })
 export class PaymentService {
-  private firestore = inject(Firestore);
   private authService = inject(AuthService);
 
   async createDonation(amount: number, message?: string): Promise<string> {
-    const user = this.authService.currentUser;
-    const donation: Omit<Donation, 'id'> = {
+    const user = this.authService.profile();
+    const id = crypto.randomUUID();
+    const donation: Donation = {
+      id,
       userId: user?.uid || 'anonymous',
       email: user?.email || 'anonymous',
       amount,
@@ -31,44 +31,38 @@ export class PaymentService {
       createdAt: new Date(),
       message
     };
-
-    const docRef = await addDoc(collection(this.firestore, 'donations'), {
-      ...donation,
-      createdAt: Timestamp.fromDate(donation.createdAt)
-    });
-    return docRef.id;
+    const donations = this.getDonationsFromStorage();
+    donations.push(donation);
+    localStorage.setItem('groman-donations', JSON.stringify(donations));
+    return id;
   }
 
   async completeDonation(donationId: string): Promise<void> {
-    const { doc, updateDoc } = await import('@angular/fire/firestore');
-    const donationRef = doc(this.firestore, 'donations', donationId);
-    await updateDoc(donationRef, { status: 'completed' });
+    const donations = this.getDonationsFromStorage();
+    const donation = donations.find(d => d.id === donationId);
+    if (donation) {
+      donation.status = 'completed';
+      localStorage.setItem('groman-donations', JSON.stringify(donations));
+    }
   }
 
   async getUserDonations(): Promise<Donation[]> {
-    const user = this.authService.currentUser;
+    const user = this.authService.profile();
     if (!user) return [];
-
-    const q = query(
-      collection(this.firestore, 'donations'),
-      where('userId', '==', user.uid),
-      orderBy('createdAt', 'desc')
-    );
-
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(d => ({
-      id: d.id,
-      ...d.data(),
-      createdAt: (d.data()['createdAt'] as Timestamp).toDate()
-    } as Donation));
+    return this.getDonationsFromStorage().filter(d => d.userId === user.uid);
   }
 
   async getTotalDonations(): Promise<number> {
-    const q = query(
-      collection(this.firestore, 'donations'),
-      where('status', '==', 'completed')
-    );
-    const snapshot = await getDocs(q);
-    return snapshot.docs.reduce((sum, d) => sum + (d.data()['amount'] as number), 0);
+    return this.getDonationsFromStorage()
+      .filter(d => d.status === 'completed')
+      .reduce((sum, d) => sum + d.amount, 0);
+  }
+
+  private getDonationsFromStorage(): Donation[] {
+    try {
+      return JSON.parse(localStorage.getItem('groman-donations') || '[]');
+    } catch {
+      return [];
+    }
   }
 }

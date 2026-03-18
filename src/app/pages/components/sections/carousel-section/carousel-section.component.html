@@ -1,0 +1,48 @@
+<div class="component-section">
+  <h2 class="heading-2 mb-2">Image Carousel</h2>
+  <p class="text-body mb-4">A responsive image carousel with navigation arrows, indicator dots, and auto-play support.</p>
+
+  <div class="glass-panel p-4 mb-4">
+    <h3 class="heading-4 mb-3">Default Carousel</h3>
+    <app-carousel [images]="images()" [autoPlay]="true" [interval]="5000"></app-carousel>
+  </div>
+
+  <div class="glass-panel p-4 mb-4">
+    <h3 class="heading-4 mb-3">Without Auto-play</h3>
+    <app-carousel [images]="images()" [autoPlay]="false"></app-carousel>
+  </div>
+
+  <div class="glass-panel p-4">
+    <h3 class="heading-4 mb-3">API Reference</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>images</code></td>
+          <td><code>CarouselImage[]</code></td>
+          <td><code>[]</code></td>
+          <td>Array of images with src and alt</td>
+        </tr>
+        <tr>
+          <td><code>autoPlay</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Enable automatic slide transition</td>
+        </tr>
+        <tr>
+          <td><code>interval</code></td>
+          <td><code>number</code></td>
+          <td><code>4000</code></td>
+          <td>Auto-play interval in milliseconds</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

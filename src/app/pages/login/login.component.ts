@@ -28,8 +28,8 @@ export class LoginComponent {
     try {
       await this.authService.login(this.email, this.password);
       this.router.navigate(['/']);
-    } catch (err: any) {
-      this.errorMessage = this.getErrorMessage(err.code);
+    } catch {
+      this.errorMessage = 'An error occurred. Please try again.';
     } finally {
       this.loading = false;
     }
@@ -41,21 +41,10 @@ export class LoginComponent {
     try {
       await this.authService.loginWithGoogle();
       this.router.navigate(['/']);
-    } catch (err: any) {
-      this.errorMessage = this.getErrorMessage(err.code);
+    } catch {
+      this.errorMessage = 'An error occurred. Please try again.';
     } finally {
       this.loading = false;
-    }
-  }
-
-  private getErrorMessage(code: string): string {
-    switch (code) {
-      case 'auth/user-not-found': return 'No account found with this email.';
-      case 'auth/wrong-password': return 'Incorrect password.';
-      case 'auth/invalid-email': return 'Invalid email address.';
-      case 'auth/too-many-requests': return 'Too many attempts. Please try again later.';
-      case 'auth/popup-closed-by-user': return 'Google sign-in was cancelled.';
-      default: return 'An error occurred. Please try again.';
     }
   }
 }

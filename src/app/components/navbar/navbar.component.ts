@@ -3,21 +3,21 @@ import { Router, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
 import { DonationButtonComponent } from '../../shared/components/donation-button/donation-button.component';
-import { AsyncPipe, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css',
-    imports: [DonationButtonComponent, RouterLink, AsyncPipe, SlicePipe]
+    imports: [DonationButtonComponent, RouterLink, SlicePipe]
 })
 export class NavbarComponent {
   private sidebarService = inject(SidebarService);
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  profile$ = this.authService.profile$;
-  user$ = this.authService.user$;
+  profile = this.authService.profile;
+  isAuthenticated = this.authService.isAuthenticated;
   showUserMenu = false;
 
   toggleSidebar(): void {
@@ -32,9 +32,9 @@ export class NavbarComponent {
     this.showUserMenu = !this.showUserMenu;
   }
 
-  async logout(): Promise<void> {
+  logout(): void {
     this.showUserMenu = false;
-    await this.authService.logout();
+    this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
 }
