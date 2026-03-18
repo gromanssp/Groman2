@@ -6,9 +6,17 @@
 
   <div class="glass-panel profile-card">
     <div class="avatar-section">
-      <img [src]="avatarUrl" alt="Avatar" class="avatar" />
+      <div class="avatar">
+        @if (displayName) {
+          <span class="avatar-initials">{{ displayName | slice:0:2 | uppercase }}</span>
+        } @else {
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="avatar-icon">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        }
+      </div>
       <h2 class="avatar-name">{{ displayName || 'User' }}</h2>
-      <p class="avatar-email">{{ email }}</p>
+      <p class="avatar-email">{{ email || 'Not signed in' }}</p>
     </div>
 
     <div class="form-section">
