@@ -29,8 +29,8 @@ export class DownloadSectionComponent {
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 tooltip.directive.ts
 \u2502   \u2502   \u2502   \u2514\u2500\u2500 collapse.directive.ts
 \u2502   \u2502   \u251C\u2500\u2500 layouts/
-\u2502   \u2502   \u2502   \u251C\u2500\u2500 dashboard-layout/
-\u2502   \u2502   \u2502   \u2514\u2500\u2500 auth-layout/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 dashboard/
+\u2502   \u2502   \u2502   \u2514\u2500\u2500 auth/
 \u2502   \u2502   \u251C\u2500\u2500 shared/components/
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 badge/
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 modal/
@@ -39,14 +39,22 @@ export class DownloadSectionComponent {
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 data-table/
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 code-snippet/
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 spinner/
-\u2502   \u2502   \u2502   \u251C\u2500\u2500 donation-button/
-\u2502   \u2502   \u2502   \u2514\u2500\u2500 date-picker/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 date-picker/
+\u2502   \u2502   \u2502   \u2514\u2500\u2500 carousel/
 \u2502   \u2502   \u251C\u2500\u2500 services/
 \u2502   \u2502   \u2502   \u251C\u2500\u2500 sidebar.service.ts
-\u2502   \u2502   \u2502   \u2514\u2500\u2500 theme.service.ts
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 theme.service.ts
+\u2502   \u2502   \u2502   \u2514\u2500\u2500 auth.service.ts
+\u2502   \u2502   \u251C\u2500\u2500 pages/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 home/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 profile/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 settings/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 calendar/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 login/
+\u2502   \u2502   \u2502   \u251C\u2500\u2500 register/
+\u2502   \u2502   \u2502   \u2514\u2500\u2500 not-found/
 \u2502   \u2502   \u251C\u2500\u2500 app.config.ts
 \u2502   \u2502   \u2514\u2500\u2500 app.routes.ts
-\u2502   \u251C\u2500\u2500 assets/css/colors/
 \u2502   \u251C\u2500\u2500 environments/
 \u2502   \u2514\u2500\u2500 styles.css
 \u251C\u2500\u2500 angular.json

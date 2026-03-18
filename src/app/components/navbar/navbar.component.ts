@@ -1,15 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { AuthService } from '../../services/auth.service';
-import { DonationButtonComponent } from '../../shared/components/donation-button/donation-button.component';
-import { SlicePipe } from '@angular/common';
+import { SlicePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css',
-    imports: [DonationButtonComponent, RouterLink, SlicePipe]
+    imports: [RouterLink, SlicePipe, UpperCasePipe]
 })
 export class NavbarComponent {
   private sidebarService = inject(SidebarService);
@@ -30,6 +29,14 @@ export class NavbarComponent {
 
   toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.user-profile') && !target.closest('.user-menu')) {
+      this.showUserMenu = false;
+    }
   }
 
   logout(): void {

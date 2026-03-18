@@ -72,9 +72,15 @@ export class TemplateGeneratorService {
     zip.file('src/app/directives/tooltip.directive.ts', this.tooltipDirectiveTs());
     zip.file('src/app/directives/collapse.directive.ts', this.collapseDirectiveTs());
 
+    // Shared - Carousel
+    zip.file('src/app/shared/components/carousel/carousel.component.ts', this.carouselTs());
+    zip.file('src/app/shared/components/carousel/carousel.component.html', this.carouselHtml());
+    zip.file('src/app/shared/components/carousel/carousel.component.css', this.carouselCss());
+
     // Services
     zip.file('src/app/services/sidebar.service.ts', this.sidebarServiceTs());
     zip.file('src/app/services/theme.service.ts', this.themeServiceTs());
+    zip.file('src/app/services/auth.service.ts', this.authServiceTs());
 
     // Pages
     zip.file('src/app/pages/home/home.component.ts', this.homeTs());
@@ -83,6 +89,32 @@ export class TemplateGeneratorService {
     zip.file('src/app/pages/not-found/not-found.component.ts', this.notFoundTs());
     zip.file('src/app/pages/not-found/not-found.component.html', this.notFoundHtml());
     zip.file('src/app/pages/not-found/not-found.component.css', this.notFoundCss());
+
+    // Profile
+    zip.file('src/app/pages/profile/profile.component.ts', this.profileTs());
+    zip.file('src/app/pages/profile/profile.component.html', this.profileHtml());
+    zip.file('src/app/pages/profile/profile.component.css', this.profileCss());
+
+    // Settings
+    zip.file('src/app/pages/settings/settings.component.ts', this.settingsTs());
+    zip.file('src/app/pages/settings/settings.component.html', this.settingsHtml());
+    zip.file('src/app/pages/settings/settings.component.css', this.settingsCss());
+
+    // Calendar
+    zip.file('src/app/pages/calendar/calendar.component.ts', this.calendarTs());
+    zip.file('src/app/pages/calendar/calendar.component.html', this.calendarHtml());
+    zip.file('src/app/pages/calendar/calendar.component.css', this.calendarCss());
+
+    // Auth
+    zip.file('src/app/pages/login/login.component.ts', this.loginTs());
+    zip.file('src/app/pages/login/login.component.html', this.loginHtml());
+    zip.file('src/app/pages/login/login.component.css', this.loginCss());
+    zip.file('src/app/pages/register/register.component.ts', this.registerTs());
+    zip.file('src/app/pages/register/register.component.html', this.registerHtml());
+    zip.file('src/app/pages/register/register.component.css', this.registerCss());
+    zip.file('src/app/layouts/auth/auth.component.ts', this.authLayoutTs());
+    zip.file('src/app/layouts/auth/auth.component.html', this.authLayoutHtml());
+    zip.file('src/app/layouts/auth/auth.component.css', this.authLayoutCss());
 
     // Environment
     zip.file('src/environments/environment.ts', this.environmentTs());
@@ -1159,36 +1191,63 @@ export interface ThemeConfig {
   primary: string;
   secondary: string;
   gradientHover: string;
+  navbarBg: string;
+  navbarText: string;
+  navbarMode: 'dark' | 'colored';
 }
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  readonly themes: ThemeConfig[] = [
-    { key: 'indigo', name: 'Indigo', primary: '#6366f1', secondary: '#8b5cf6', gradientHover: 'linear-gradient(135deg, #818cf8, #a78bfa)' },
-    { key: 'blue', name: 'Blue', primary: '#3b82f6', secondary: '#2563eb', gradientHover: 'linear-gradient(135deg, #60a5fa, #3b82f6)' },
-    { key: 'green', name: 'Green', primary: '#10b981', secondary: '#059669', gradientHover: 'linear-gradient(135deg, #34d399, #10b981)' },
-    { key: 'purple', name: 'Purple', primary: '#a855f7', secondary: '#7c3aed', gradientHover: 'linear-gradient(135deg, #c084fc, #a78bfa)' },
-    { key: 'red', name: 'Red', primary: '#ef4444', secondary: '#dc2626', gradientHover: 'linear-gradient(135deg, #f87171, #ef4444)' },
-    { key: 'teal', name: 'Teal', primary: '#14b8a6', secondary: '#0d9488', gradientHover: 'linear-gradient(135deg, #2dd4bf, #14b8a6)' }
+  private static readonly COLORS = [
+    { key: 'indigo', name: 'Indigo', primary: '#6366f1', secondary: '#8b5cf6', gradientHover: '#818cf8, #a78bfa' },
+    { key: 'blue', name: 'Blue', primary: '#3b82f6', secondary: '#2563eb', gradientHover: '#60a5fa, #3b82f6' },
+    { key: 'green', name: 'Green', primary: '#10b981', secondary: '#059669', gradientHover: '#34d399, #10b981' },
+    { key: 'purple', name: 'Purple', primary: '#a855f7', secondary: '#7c3aed', gradientHover: '#c084fc, #a78bfa' },
+    { key: 'red', name: 'Red', primary: '#ef4444', secondary: '#dc2626', gradientHover: '#f87171, #ef4444' },
+    { key: 'teal', name: 'Teal', primary: '#14b8a6', secondary: '#0d9488', gradientHover: '#2dd4bf, #14b8a6' },
   ];
 
-  constructor() {
-    this.applyTheme(this.getTheme());
-  }
+  themes: ThemeConfig[] = [
+    ...ThemeService.COLORS.map(c => ({ ...c, navbarBg: '', navbarText: '', navbarMode: 'dark' as const })),
+    ...ThemeService.COLORS.map(c => ({
+      ...c, key: c.key + '-nav',
+      navbarBg: 'linear-gradient(135deg, ' + c.primary + ' 0%, ' + c.secondary + ' 100%)',
+      navbarText: '#ffffff', navbarMode: 'colored' as const,
+    })),
+  ];
+
+  get darkNavbarThemes(): ThemeConfig[] { return this.themes.filter(t => t.navbarMode === 'dark'); }
+  get coloredNavbarThemes(): ThemeConfig[] { return this.themes.filter(t => t.navbarMode === 'colored'); }
+
+  constructor() { this.applyTheme(this.getTheme()); }
 
   applyTheme(key: string): void {
-    const theme = this.themes.find(t => t.key === key) || this.themes[0];
+    const theme = this.themes.find(t => t.key === key);
+    if (!theme) return;
     const style = document.documentElement.style;
     style.setProperty('--accent-primary', theme.primary);
     style.setProperty('--accent-secondary', theme.secondary);
-    style.setProperty('--accent-gradient', \`linear-gradient(135deg, \${theme.primary} 0%, \${theme.secondary} 100%)\`);
-    style.setProperty('--accent-gradient-hover', theme.gradientHover);
+    style.setProperty('--accent-gradient', 'linear-gradient(135deg, ' + theme.primary + ' 0%, ' + theme.secondary + ' 100%)');
+    const [hoverStart, hoverEnd] = theme.gradientHover.split(', ');
+    style.setProperty('--accent-gradient-hover', 'linear-gradient(135deg, ' + hoverStart + ' 0%, ' + hoverEnd + ' 100%)');
+    if (theme.navbarBg) {
+      style.setProperty('--navbar-bg', theme.navbarBg);
+      style.setProperty('--navbar-text', theme.navbarText);
+      style.setProperty('--navbar-text-secondary', 'rgba(255,255,255,0.8)');
+      style.setProperty('--navbar-text-muted', 'rgba(255,255,255,0.55)');
+      style.setProperty('--navbar-hover-bg', 'rgba(255,255,255,0.15)');
+      style.setProperty('--navbar-border', '1px solid rgba(255,255,255,0.18)');
+      style.setProperty('--navbar-search-bg', 'rgba(255,255,255,0.15)');
+      style.setProperty('--navbar-search-border', 'rgba(255,255,255,0.25)');
+    } else {
+      ['--navbar-bg','--navbar-text','--navbar-text-secondary','--navbar-text-muted',
+       '--navbar-hover-bg','--navbar-border','--navbar-search-bg','--navbar-search-border'
+      ].forEach(p => style.removeProperty(p));
+    }
     localStorage.setItem('groman-theme', key);
   }
 
-  getTheme(): string {
-    return localStorage.getItem('groman-theme') || 'indigo';
-  }
+  getTheme(): string { return localStorage.getItem('groman-theme') || 'indigo'; }
 }
 `;
   }
@@ -1306,10 +1365,13 @@ Open http://localhost:4200
 
 - Dark glassmorphism UI design system
 - CSS custom properties for easy theming
-- 9 reusable shared components
+- 10 reusable shared components (Badge, Modal, Collapse, Progress, Table, Code Snippet, Spinner, Date Picker, Carousel)
 - 2 custom directives
-- Sidebar + Navbar layout
-- 6 color themes (Indigo, Blue, Green, Purple, Red, Teal)
+- Sidebar + Navbar layout (dark & colored variants)
+- 12 color themes (6 dark navbar + 6 colored navbar)
+- Profile & Settings pages
+- Calendar with event management
+- Auth pages (Login/Register)
 - Chart.js integration ready
 - Fully standalone components (no NgModules)
 - OnPush change detection
@@ -1321,5 +1383,522 @@ Open http://localhost:4200
 - Chart.js 4 + ng2-charts 10
 - CSS Custom Properties
 `;
+  }
+
+  // ─── New Feature Methods ──────────────────────────────
+
+  private carouselTs(): string {
+    return `import { Component, ChangeDetectionStrategy, input, signal, computed, OnInit, OnDestroy } from '@angular/core';
+
+export interface CarouselImage { src: string; alt: string; }
+
+@Component({
+  selector: 'app-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrl: './carousel.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class CarouselComponent implements OnInit, OnDestroy {
+  images = input<CarouselImage[]>([]);
+  autoPlay = input(false);
+  interval = input(4000);
+  currentIndex = signal(0);
+  private intervalId: ReturnType<typeof setInterval> | null = null;
+  totalSlides = computed(() => this.images().length);
+  translateX = computed(() => \`translateX(-\${this.currentIndex() * 100}%)\`);
+
+  ngOnInit(): void { if (this.autoPlay()) this.startAutoPlay(); }
+  ngOnDestroy(): void { this.stopAutoPlay(); }
+  next(): void { const t = this.totalSlides(); if (t) this.currentIndex.update(i => (i + 1) % t); }
+  prev(): void { const t = this.totalSlides(); if (t) this.currentIndex.update(i => (i - 1 + t) % t); }
+  goTo(index: number): void { this.currentIndex.set(index); }
+  onMouseEnter(): void { this.stopAutoPlay(); }
+  onMouseLeave(): void { if (this.autoPlay()) this.startAutoPlay(); }
+  private startAutoPlay(): void { this.stopAutoPlay(); this.intervalId = setInterval(() => this.next(), this.interval()); }
+  private stopAutoPlay(): void { if (this.intervalId) { clearInterval(this.intervalId); this.intervalId = null; } }
+}`;
+  }
+
+  private carouselHtml(): string {
+    return `<div class="carousel" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <div class="carousel-track" [style.transform]="translateX()">
+    @for (img of images(); track img.src) {
+      <div class="carousel-slide"><img [src]="img.src" [alt]="img.alt" loading="lazy" /></div>
+    }
+  </div>
+  @if (totalSlides() > 1) {
+    <button class="carousel-btn carousel-btn-prev" (click)="prev()" aria-label="Previous"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+    <button class="carousel-btn carousel-btn-next" (click)="next()" aria-label="Next"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+    <div class="carousel-indicators">
+      @for (img of images(); track img.src; let i = $index) {
+        <button class="carousel-dot" [class.active]="i === currentIndex()" (click)="goTo(i)"></button>
+      }
+    </div>
+  }
+</div>`;
+  }
+
+  private carouselCss(): string {
+    return `.carousel { position:relative; width:100%; overflow:hidden; border-radius:var(--radius-md); background:rgba(0,0,0,0.2); }
+.carousel-track { display:flex; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change:transform; }
+.carousel-slide { min-width:100%; flex-shrink:0; }
+.carousel-slide img { width:100%; aspect-ratio:2/1; object-fit:cover; display:block; }
+.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:var(--radius-round); background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; opacity:0; z-index:2; }
+.carousel:hover .carousel-btn { opacity:1; }
+.carousel-btn:hover { background:rgba(0,0,0,0.7); }
+.carousel-btn svg { width:20px; height:20px; }
+.carousel-btn-prev { left:12px; }
+.carousel-btn-next { right:12px; }
+.carousel-indicators { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:2; }
+.carousel-dot { width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.4); cursor:pointer; transition:all 0.2s; padding:0; }
+.carousel-dot.active { background:#fff; transform:scale(1.3); }`;
+  }
+
+  private authServiceTs(): string {
+    return `import { Injectable, signal, computed } from '@angular/core';
+
+export interface UserProfile { uid: string; email: string; displayName: string; role: string; createdAt: Date; }
+
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private _user = signal<UserProfile | null>(null);
+  user = this._user.asReadonly();
+  isAuthenticated = computed(() => this._user() !== null);
+  profile = computed(() => this._user());
+
+  constructor() {
+    const stored = localStorage.getItem('groman-user');
+    if (stored) { try { this._user.set(JSON.parse(stored)); } catch {} }
+  }
+
+  async register(email: string, password: string, displayName: string): Promise<void> {
+    const profile: UserProfile = { uid: crypto.randomUUID(), email, displayName, role: 'user', createdAt: new Date() };
+    this._user.set(profile);
+    localStorage.setItem('groman-user', JSON.stringify(profile));
+  }
+
+  async login(email: string, password: string): Promise<void> {
+    const stored = localStorage.getItem('groman-user');
+    if (stored) { this._user.set(JSON.parse(stored)); return; }
+    const profile: UserProfile = { uid: crypto.randomUUID(), email, displayName: email.split('@')[0], role: 'user', createdAt: new Date() };
+    this._user.set(profile);
+    localStorage.setItem('groman-user', JSON.stringify(profile));
+  }
+
+  async loginWithGoogle(): Promise<void> { await this.login('user@gmail.com', ''); }
+  logout(): void { this._user.set(null); localStorage.removeItem('groman-user'); }
+}`;
+  }
+
+  private profileTs(): string {
+    return `import { Component, ChangeDetectionStrategy, inject, effect } from '@angular/core';
+import { CommonModule, UpperCasePipe, SlicePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
+@Component({
+  selector: 'app-profile', templateUrl: './profile.component.html', styleUrl: './profile.component.css',
+  imports: [CommonModule, FormsModule, UpperCasePipe, SlicePipe], changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ProfileComponent {
+  private authService = inject(AuthService);
+  displayName = ''; email = '';
+  currentPassword = ''; newPassword = ''; confirmPassword = '';
+  saveStatus: 'idle'|'saved'|'error' = 'idle';
+  passwordStatus: 'idle'|'saved'|'mismatch' = 'idle';
+
+  constructor() {
+    effect(() => { const p = this.authService.profile(); if (p) { this.displayName = p.displayName; this.email = p.email; } });
+  }
+  saveProfile(): void { this.saveStatus = 'saved'; setTimeout(() => this.saveStatus = 'idle', 2000); }
+  savePassword(): void {
+    if (this.newPassword !== this.confirmPassword) { this.passwordStatus = 'mismatch'; setTimeout(() => this.passwordStatus = 'idle', 2000); return; }
+    this.passwordStatus = 'saved'; this.currentPassword = ''; this.newPassword = ''; this.confirmPassword = '';
+    setTimeout(() => this.passwordStatus = 'idle', 2000);
+  }
+}`;
+  }
+
+  private profileHtml(): string {
+    return `<div class="page-container">
+  <header class="page-header"><h1 class="heading-2">Profile</h1><p class="text-body">Manage your account information.</p></header>
+  <div class="glass-panel profile-card">
+    <div class="avatar-section">
+      <div class="avatar">
+        @if (displayName) { <span class="avatar-initials">{{ displayName | slice:0:2 | uppercase }}</span> }
+        @else { <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="avatar-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg> }
+      </div>
+      <h2 class="avatar-name">{{ displayName || 'User' }}</h2>
+      <p class="avatar-email">{{ email || 'Not signed in' }}</p>
+    </div>
+    <div class="form-section">
+      <div class="form-group"><label class="form-label">Display Name</label><input type="text" class="form-control" [(ngModel)]="displayName" placeholder="Your name" /></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" [(ngModel)]="email" placeholder="your@email.com" /></div>
+      <div class="form-actions"><button class="btn btn-gradient" (click)="saveProfile()">Save Profile</button>@if (saveStatus === 'saved') { <span class="status-success">Profile saved!</span> }</div>
+    </div>
+    <div class="separator"></div>
+    <div class="form-section">
+      <h3 class="section-title">Change Password</h3>
+      <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-control" [(ngModel)]="currentPassword" /></div>
+      <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-control" [(ngModel)]="newPassword" /></div>
+      <div class="form-group"><label class="form-label">Confirm New Password</label><input type="password" class="form-control" [(ngModel)]="confirmPassword" /></div>
+      <div class="form-actions">
+        <button class="btn btn-gradient" (click)="savePassword()">Update Password</button>
+        @if (passwordStatus === 'saved') { <span class="status-success">Password updated!</span> }
+        @if (passwordStatus === 'mismatch') { <span class="status-error">Passwords do not match.</span> }
+      </div>
+    </div>
+  </div>
+</div>`;
+  }
+
+  private profileCss(): string {
+    return `.page-container { animation:fadeIn 0.5s ease-out; }
+.page-header { margin-bottom:2rem; }
+.profile-card { max-width:600px; margin:0 auto; padding:2.5rem; }
+.avatar-section { display:flex; flex-direction:column; align-items:center; margin-bottom:2rem; }
+.avatar { width:96px; height:96px; border-radius:50%; border:3px solid var(--accent-primary); box-shadow:0 4px 16px rgba(99,102,241,0.3); margin-bottom:1rem; background:var(--accent-primary); display:flex; align-items:center; justify-content:center; }
+.avatar-initials { font-size:2rem; font-weight:700; color:white; letter-spacing:1px; line-height:1; }
+.avatar-icon { width:44px; height:44px; color:rgba(255,255,255,0.8); }
+.avatar-name { font-size:1.25rem; font-weight:600; color:var(--text-primary); margin-bottom:0.25rem; }
+.avatar-email { font-size:0.9rem; color:var(--text-muted); }
+.form-section { margin-bottom:1.5rem; }
+.section-title { font-size:1.1rem; font-weight:600; color:var(--text-primary); margin-bottom:1.25rem; }
+.separator { height:1px; background:rgba(255,255,255,0.06); margin:2rem 0; }
+.form-actions { display:flex; align-items:center; gap:1rem; }
+.status-success { font-size:0.875rem; color:var(--success); font-weight:500; }
+.status-error { font-size:0.875rem; color:var(--danger); font-weight:500; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }`;
+  }
+
+  private settingsTs(): string {
+    return `import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ThemeService, ThemeConfig } from '../../services/theme.service';
+
+@Component({
+  selector: 'app-settings', templateUrl: './settings.component.html', styleUrl: './settings.component.css',
+  imports: [CommonModule, FormsModule], changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class SettingsComponent {
+  private themeService = inject(ThemeService);
+  darkNavbarThemes: ThemeConfig[] = this.themeService.darkNavbarThemes;
+  coloredNavbarThemes: ThemeConfig[] = this.themeService.coloredNavbarThemes;
+  selectedTheme: string = this.themeService.getTheme();
+  selectTheme(key: string): void { this.themeService.applyTheme(key); this.selectedTheme = key; }
+}`;
+  }
+
+  private settingsHtml(): string {
+    return `<div class="page-container">
+  <header class="page-header"><h1 class="heading-2">Settings</h1><p class="text-body">Customize your application preferences.</p></header>
+  <div class="glass-panel settings-card">
+    <h3 class="section-title">Dark Navbar</h3><p class="section-desc">Standard dark navigation bar with colored accents.</p>
+    <div class="swatch-grid">
+      @for (theme of darkNavbarThemes; track theme.key) {
+        <label class="swatch-card" [class.selected]="selectedTheme === theme.key">
+          <input type="radio" name="theme" [value]="theme.key" [checked]="selectedTheme === theme.key" (change)="selectTheme(theme.key)" class="swatch-radio" />
+          <div class="swatch-preview-wrapper">
+            <div class="swatch-nav-preview dark-nav"><span class="nav-dot" [style.background]="theme.primary"></span><span class="nav-line"></span><span class="nav-line short"></span></div>
+            <div class="swatch-color" [style.background]="theme.primary"></div>
+          </div>
+          <span class="swatch-name">{{ theme.name }}</span>
+        </label>
+      }
+    </div>
+  </div>
+  <div class="glass-panel settings-card">
+    <h3 class="section-title">Colored Navbar</h3><p class="section-desc">Navigation bar uses the accent color with white contrast elements.</p>
+    <div class="swatch-grid">
+      @for (theme of coloredNavbarThemes; track theme.key) {
+        <label class="swatch-card" [class.selected]="selectedTheme === theme.key">
+          <input type="radio" name="theme" [value]="theme.key" [checked]="selectedTheme === theme.key" (change)="selectTheme(theme.key)" class="swatch-radio" />
+          <div class="swatch-preview-wrapper">
+            <div class="swatch-nav-preview" [style.background]="'linear-gradient(135deg, ' + theme.primary + ', ' + theme.secondary + ')'"><span class="nav-dot white-dot"></span><span class="nav-line white-line"></span><span class="nav-line short white-line"></span></div>
+            <div class="swatch-color" [style.background]="theme.primary"></div>
+          </div>
+          <span class="swatch-name">{{ theme.name }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</div>`;
+  }
+
+  private settingsCss(): string {
+    return `.page-container { animation:fadeIn 0.5s ease-out; }
+.page-header { margin-bottom:2rem; }
+.settings-card { max-width:680px; padding:2rem; margin-bottom:1.5rem; }
+.section-title { font-size:1.1rem; font-weight:600; color:var(--text-primary); margin-bottom:0.25rem; }
+.section-desc { font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem; }
+.swatch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.swatch-card { display:flex; flex-direction:column; align-items:center; gap:0.75rem; padding:1.25rem; border-radius:var(--radius-md); background:rgba(255,255,255,0.03); border:2px solid transparent; cursor:pointer; transition:all var(--transition-fast); }
+.swatch-card:hover { background:rgba(255,255,255,0.06); }
+.swatch-card.selected { border-color:var(--accent-primary); background:rgba(255,255,255,0.06); }
+.swatch-radio { position:absolute; opacity:0; pointer-events:none; }
+.swatch-preview-wrapper { display:flex; flex-direction:column; width:100%; border-radius:6px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+.swatch-nav-preview { display:flex; align-items:center; gap:6px; padding:6px 8px; height:22px; }
+.swatch-nav-preview.dark-nav { background:#1e1e2e; }
+.nav-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.nav-line { height:3px; width:24px; background:rgba(255,255,255,0.15); border-radius:2px; }
+.nav-line.short { width:16px; }
+.white-dot { background:rgba(255,255,255,0.9)!important; }
+.white-line { background:rgba(255,255,255,0.35); }
+.swatch-color { height:24px; width:100%; }
+.swatch-name { font-size:0.85rem; font-weight:500; color:var(--text-secondary); }
+.swatch-card.selected .swatch-name { color:var(--text-primary); }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:480px) { .swatch-grid { grid-template-columns:repeat(2,1fr); } }`;
+  }
+
+  private calendarTs(): string {
+    return `import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
+
+interface CalendarEvent { title: string; date: Date; color: string; }
+interface CalendarDay { date: number; month: number; year: number; isCurrentMonth: boolean; isToday: boolean; isSelected: boolean; events: CalendarEvent[]; }
+
+@Component({
+  selector: 'app-calendar', templateUrl: './calendar.component.html', styleUrl: './calendar.component.css',
+  imports: [DatePipe, FormsModule, ModalComponent], changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class CalendarComponent implements OnInit {
+  currentDate = new Date();
+  selectedDate: Date | null = null;
+  weeks: CalendarDay[][] = [];
+  weekDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  events: CalendarEvent[] = [];
+  showCreateModal = false;
+  newEventTitle = ''; newEventColor = 'var(--accent-primary)'; newEventDate = '';
+  eventColors = [
+    { name:'Primary', value:'var(--accent-primary)' }, { name:'Success', value:'var(--success)' },
+    { name:'Warning', value:'var(--warning)' }, { name:'Danger', value:'var(--danger)' }
+  ];
+  get monthYear(): string { return this.currentDate.toLocaleDateString('en-US',{month:'long',year:'numeric'}); }
+  get selectedDateEvents(): CalendarEvent[] {
+    if (!this.selectedDate) return [];
+    return this.events.filter(e => e.date.getDate()===this.selectedDate!.getDate() && e.date.getMonth()===this.selectedDate!.getMonth() && e.date.getFullYear()===this.selectedDate!.getFullYear());
+  }
+  ngOnInit(): void { this.generateCalendar(); }
+  prevMonth(): void { this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()-1, 1); this.generateCalendar(); }
+  nextMonth(): void { this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth()+1, 1); this.generateCalendar(); }
+  selectDay(day: CalendarDay): void { if (!day.isCurrentMonth) return; this.selectedDate = new Date(day.year, day.month, day.date); this.generateCalendar(); }
+  openCreateModal(): void { this.showCreateModal = true; const d = this.selectedDate || new Date(); this.newEventDate = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  closeCreateModal(): void { this.showCreateModal = false; this.newEventTitle = ''; this.newEventColor = 'var(--accent-primary)'; }
+  createEvent(): void {
+    if (!this.newEventTitle || !this.newEventDate) return;
+    const [y,m,d] = this.newEventDate.split('-').map(Number);
+    this.events.push({ title: this.newEventTitle, date: new Date(y,m-1,d), color: this.newEventColor });
+    this.generateCalendar(); this.closeCreateModal();
+  }
+  private generateCalendar(): void {
+    const year = this.currentDate.getFullYear(), month = this.currentDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay(), daysInMonth = new Date(year, month+1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate(), today = new Date();
+    const days: CalendarDay[] = [];
+    for (let i = firstDay-1; i >= 0; i--) days.push(this.createDay(daysInPrevMonth-i, month-1, year, false, today));
+    for (let d = 1; d <= daysInMonth; d++) days.push(this.createDay(d, month, year, true, today));
+    const remaining = 42-days.length;
+    for (let d = 1; d <= remaining; d++) days.push(this.createDay(d, month+1, year, false, today));
+    this.weeks = [];
+    for (let i = 0; i < days.length; i += 7) this.weeks.push(days.slice(i, i+7));
+  }
+  private createDay(date: number, month: number, year: number, isCurrentMonth: boolean, today: Date): CalendarDay {
+    const isToday = isCurrentMonth && date===today.getDate() && month===today.getMonth() && year===today.getFullYear();
+    const isSelected = this.selectedDate!==null && isCurrentMonth && date===this.selectedDate.getDate() && month===this.selectedDate.getMonth() && year===this.selectedDate.getFullYear();
+    const dayEvents = isCurrentMonth ? this.events.filter(e => e.date.getDate()===date && e.date.getMonth()===month && e.date.getFullYear()===year) : [];
+    return { date, month, year, isCurrentMonth, isToday, isSelected, events: dayEvents };
+  }
+}`;
+  }
+
+  private calendarHtml(): string {
+    return `<div class="page-container">
+  <header class="page-header"><div><h1 class="heading-2">Calendar</h1><p class="text-body">Interactive calendar with event management.</p></div><button class="btn btn-gradient" (click)="openCreateModal()">+ New Event</button></header>
+  <div class="calendar-layout">
+    <div class="glass-panel calendar-card">
+      <div class="calendar-nav"><button class="nav-btn" (click)="prevMonth()"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button><h2 class="month-title">{{ monthYear }}</h2><button class="nav-btn" (click)="nextMonth()"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button></div>
+      <div class="calendar-grid">
+        @for (d of weekDays; track d) { <div class="day-header">{{ d }}</div> }
+        @for (week of weeks; track week) { @for (day of week; track day) {
+          <div class="day-cell" [class.other-month]="!day.isCurrentMonth" [class.today]="day.isToday" [class.selected]="day.isSelected" (click)="selectDay(day)">
+            <span class="day-number">{{ day.date }}</span>
+            @if (day.events.length > 0) { <div class="event-dots">@for (ev of day.events; track ev) { <span class="event-dot" [style.background]="ev.color"></span> }</div> }
+          </div>
+        } }
+      </div>
+    </div>
+    <div class="glass-panel events-panel">
+      <h3 class="events-title">{{ selectedDate ? (selectedDate | date:'MMMM d, yyyy') : 'Select a date' }}</h3>
+      @if (selectedDateEvents.length > 0) { <div class="events-list">@for (ev of selectedDateEvents; track ev) { <div class="event-item"><span class="event-indicator" [style.background]="ev.color"></span><span class="event-name">{{ ev.title }}</span></div> }</div> }
+      @if (selectedDate && selectedDateEvents.length === 0) { <p class="no-events">No events for this day.</p> }
+      @if (!selectedDate) { <p class="no-events">Click on a date to view events.</p> }
+    </div>
+  </div>
+</div>
+<app-modal [isOpen]="showCreateModal" title="Create Event" (closed)="closeCreateModal()">
+  <div class="create-event-form">
+    <div class="form-group"><label class="form-label">Event Title</label><input type="text" class="form-control" [(ngModel)]="newEventTitle" placeholder="Enter event title" /></div>
+    <div class="form-group"><label class="form-label">Date</label><input type="date" class="form-control" [(ngModel)]="newEventDate" /></div>
+    <div class="form-group"><label class="form-label">Color</label><div class="color-options">@for (color of eventColors; track color.value) {
+      <label class="color-option" [class.selected]="newEventColor === color.value"><input type="radio" name="eventColor" [value]="color.value" [(ngModel)]="newEventColor" class="color-radio" /><span class="color-preview" [style.background]="color.value"></span><span class="color-name">{{ color.name }}</span></label>
+    }</div></div>
+  </div>
+  <div modal-footer><button class="btn btn-secondary" (click)="closeCreateModal()">Cancel</button><button class="btn btn-gradient" (click)="createEvent()" [disabled]="!newEventTitle || !newEventDate">Create</button></div>
+</app-modal>`;
+  }
+
+  private calendarCss(): string {
+    return `.page-container { animation:fadeIn 0.5s ease-out; }
+.page-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2rem; }
+.calendar-layout { display:grid; grid-template-columns:1fr 300px; gap:1.5rem; }
+.calendar-card { padding:1.5rem; }
+.calendar-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; }
+.month-title { font-size:1.25rem; font-weight:600; color:var(--text-primary); }
+.nav-btn { background:transparent; border:1px solid rgba(255,255,255,0.08); color:var(--text-secondary); width:36px; height:36px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-fast); }
+.nav-btn:hover { background:var(--bg-surface-hover); color:var(--text-primary); }
+.nav-btn svg { width:18px; height:18px; }
+.calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+.day-header { padding:0.5rem; text-align:center; font-size:0.75rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; }
+.day-cell { aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:var(--radius-sm); cursor:pointer; transition:all var(--transition-fast); position:relative; gap:2px; }
+.day-cell:hover { background:var(--bg-surface-hover); }
+.day-number { font-size:0.9rem; font-weight:500; color:var(--text-primary); }
+.day-cell.other-month { cursor:default; }
+.day-cell.other-month .day-number { color:var(--text-muted); opacity:0.4; }
+.day-cell.other-month:hover { background:transparent; }
+.day-cell.today { outline:2px solid var(--accent-primary); outline-offset:-2px; }
+.day-cell.today .day-number { color:var(--accent-primary); font-weight:700; }
+.day-cell.selected { background:var(--accent-primary); }
+.day-cell.selected .day-number { color:white; font-weight:700; }
+.event-dots { display:flex; gap:3px; position:absolute; bottom:4px; }
+.event-dot { width:5px; height:5px; border-radius:50%; }
+.events-panel { padding:1.5rem; height:fit-content; }
+.events-title { font-size:1rem; font-weight:600; color:var(--text-primary); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(255,255,255,0.05); }
+.events-list { display:flex; flex-direction:column; gap:0.75rem; }
+.event-item { display:flex; align-items:center; gap:0.75rem; padding:0.75rem; border-radius:var(--radius-sm); background:rgba(255,255,255,0.03); }
+.event-indicator { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.event-name { font-size:0.9rem; color:var(--text-primary); font-weight:500; }
+.no-events { color:var(--text-muted); font-size:0.9rem; text-align:center; padding:2rem 0; }
+.create-event-form { display:flex; flex-direction:column; gap:0.25rem; }
+.color-options { display:flex; flex-wrap:wrap; gap:0.75rem; }
+.color-option { display:flex; align-items:center; gap:0.5rem; padding:0.5rem 0.75rem; border-radius:var(--radius-sm); background:rgba(255,255,255,0.03); border:2px solid transparent; cursor:pointer; }
+.color-option.selected { border-color:var(--accent-primary); }
+.color-radio { display:none; }
+.color-preview { width:16px; height:16px; border-radius:50%; flex-shrink:0; }
+.color-name { font-size:0.85rem; color:var(--text-secondary); }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:768px) { .calendar-layout { grid-template-columns:1fr; } .page-header { flex-direction:column; gap:1rem; } }`;
+  }
+
+  private loginTs(): string {
+    return `import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({ selector: 'app-login', templateUrl: './login.component.html', styleUrl: './login.component.css', imports: [FormsModule, RouterLink] })
+export class LoginComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  email = ''; password = ''; errorMessage = ''; loading = false;
+  async login() { if (!this.email||!this.password) { this.errorMessage='Please fill in all fields.'; return; } this.loading=true; this.errorMessage=''; try { await this.authService.login(this.email,this.password); this.router.navigate(['/']); } catch { this.errorMessage='An error occurred.'; } finally { this.loading=false; } }
+  async loginWithGoogle() { this.loading=true; try { await this.authService.loginWithGoogle(); this.router.navigate(['/']); } catch { this.errorMessage='An error occurred.'; } finally { this.loading=false; } }
+}`;
+  }
+
+  private loginHtml(): string {
+    return `<div class="glass-panel auth-card">
+  <div class="auth-header"><div class="logo-icon"></div><h1 class="heading-2">Welcome Back</h1><p class="text-body">Sign in to your account</p></div>
+  @if (errorMessage) { <div class="alert alert-error">{{ errorMessage }}</div> }
+  <form class="auth-form" (ngSubmit)="login()">
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="name@company.com" [(ngModel)]="email" name="email"></div>
+    <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="••••••••" [(ngModel)]="password" name="password"></div>
+    <button type="submit" class="btn btn-gradient w-100" [disabled]="loading">{{ loading ? 'Signing in...' : 'Sign In' }}</button>
+  </form>
+  <div class="auth-footer"><p class="text-small">Don't have an account? <a routerLink="/auth/register" class="text-primary">Create one now</a></p></div>
+</div>`;
+  }
+
+  private loginCss(): string {
+    return `.auth-card { padding:2.5rem; width:100%; animation:slideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.auth-header { margin-bottom:2rem; text-align:center; }
+.logo-icon { width:48px; height:48px; background:var(--accent-gradient); border-radius:var(--radius-md); box-shadow:0 8px 24px rgba(99,102,241,0.4); margin:0 auto 1rem; }
+.auth-form { display:flex; flex-direction:column; gap:1rem; }
+.w-100 { width:100%; }
+.auth-footer { text-align:center; margin-top:1.5rem; }
+.text-primary { color:var(--accent-primary); text-decoration:none; }
+.alert-error { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:0.75rem 1rem; border-radius:var(--radius-md); font-size:0.875rem; margin-bottom:1rem; }
+button:disabled { opacity:0.6; cursor:not-allowed; }`;
+  }
+
+  private registerTs(): string {
+    return `import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+
+@Component({ selector: 'app-register', templateUrl: './register.component.html', styleUrl: './register.component.css', imports: [FormsModule, RouterLink] })
+export class RegisterComponent {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  fullName = ''; email = ''; password = ''; errorMessage = ''; loading = false;
+  async register() {
+    if (!this.fullName||!this.email||!this.password) { this.errorMessage='Please fill in all fields.'; return; }
+    if (this.password.length<6) { this.errorMessage='Password must be at least 6 characters.'; return; }
+    this.loading=true; this.errorMessage='';
+    try { await this.authService.register(this.email,this.password,this.fullName); this.router.navigate(['/']); }
+    catch { this.errorMessage='An error occurred.'; } finally { this.loading=false; }
+  }
+}`;
+  }
+
+  private registerHtml(): string {
+    return `<div class="glass-panel auth-card">
+  <div class="auth-header"><div class="logo-icon"></div><h1 class="heading-2">Create Account</h1><p class="text-body">Get started today</p></div>
+  @if (errorMessage) { <div class="alert alert-error">{{ errorMessage }}</div> }
+  <form class="auth-form" (ngSubmit)="register()">
+    <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-control" placeholder="Jane Doe" [(ngModel)]="fullName" name="fullName"></div>
+    <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="name@company.com" [(ngModel)]="email" name="email"></div>
+    <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="••••••••" [(ngModel)]="password" name="password"><span class="text-small text-muted">Must be at least 6 characters</span></div>
+    <button type="submit" class="btn btn-gradient w-100" [disabled]="loading">{{ loading ? 'Creating account...' : 'Create Account' }}</button>
+  </form>
+  <div class="auth-footer"><p class="text-small">Already have an account? <a routerLink="/auth/login" class="text-primary">Log in</a></p></div>
+</div>`;
+  }
+
+  private registerCss(): string {
+    return `.auth-card { padding:2.5rem; width:100%; animation:slideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.auth-header { margin-bottom:2rem; text-align:center; }
+.logo-icon { width:48px; height:48px; background:var(--accent-gradient); border-radius:var(--radius-md); box-shadow:0 8px 24px rgba(99,102,241,0.4); margin:0 auto 1rem; }
+.auth-form { display:flex; flex-direction:column; gap:1rem; }
+.w-100 { width:100%; }
+.auth-footer { text-align:center; margin-top:1.5rem; }
+.text-primary { color:var(--accent-primary); text-decoration:none; }
+.text-muted { color:var(--text-muted); }
+.alert-error { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:0.75rem 1rem; border-radius:var(--radius-md); font-size:0.875rem; margin-bottom:1rem; }
+button:disabled { opacity:0.6; cursor:not-allowed; }`;
+  }
+
+  private authLayoutTs(): string {
+    return `import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({ selector: 'app-auth', templateUrl: './auth.component.html', styleUrl: './auth.component.css', imports: [RouterOutlet] })
+export class AuthComponent {}`;
+  }
+
+  private authLayoutHtml(): string {
+    return `<div class="auth-layout"><div class="auth-background-glow"></div><div class="auth-container"><router-outlet></router-outlet></div></div>`;
+  }
+
+  private authLayoutCss(): string {
+    return `.auth-layout { display:flex; align-items:center; justify-content:center; min-height:100vh; width:100vw; background-color:var(--bg-main); position:relative; overflow:hidden; }
+.auth-background-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle,var(--accent-primary) 0%,transparent 60%); opacity:0.15; filter:blur(100px); z-index:0; pointer-events:none; }
+.auth-container { width:100%; max-width:420px; padding:2rem; position:relative; z-index:1; }`;
   }
 }

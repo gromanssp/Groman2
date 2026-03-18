@@ -24,8 +24,8 @@
           <div class="demo-card-body">
             <h4 class="demo-card-title">Special Content</h4>
             <p class="demo-card-text">Card with distinct header and footer sections for structured layouts.</p>
-            <div class="form-group"> 
-              <label class="form-label">Text Input</label> 
+            <div class="form-group">
+              <label class="form-label">Text Input</label>
               <input type="text" class="form-control" placeholder="Enter text...">
             </div>
           </div>
@@ -74,4 +74,252 @@
       <app-code-snippet [code]="codes.horizontal"></app-code-snippet>
     </div>
   </div>
+
+  <!-- Feature Cards Section -->
+  <h2 class="heading-3 mb-4 mt-6">Feature Cards</h2>
+  <p class="text-body mb-4">Rich feature cards with icons, descriptions, and interactive content previews.</p>
+
+  <div class="feature-grid">
+    <!-- Memberships -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #7c3aed;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Memberships</h4>
+      <p class="feature-desc">Manage plans, pricing tiers, and subscription billing for your members.</p>
+      <div class="feature-content">
+        <div class="list-item" style="--li-color: #7c3aed;">
+          <div class="list-item-info">
+            <span class="list-item-name">Monthly Youth</span>
+            <span class="list-item-sub">$200 per month, unlimited</span>
+          </div>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" class="list-arrow"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div class="list-item" style="--li-color: #f97316;">
+          <div class="list-item-info">
+            <span class="list-item-name">Monthly Audit</span>
+            <span class="list-item-sub">$200 per month, unlimited 18+</span>
+          </div>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" class="list-arrow"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div class="list-item" style="--li-color: #eab308;">
+          <div class="list-item-info">
+            <span class="list-item-name">Trial</span>
+            <span class="list-item-sub">$25 one-time</span>
+          </div>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" class="list-arrow"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+        <div class="list-item" style="--li-color: #10b981;">
+          <div class="list-item-info">
+            <span class="list-item-name">Summer Camps</span>
+            <span class="list-item-sub">$499 per year, unlimited 18+</span>
+          </div>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="16" height="16" class="list-arrow"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #3b82f6;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Manager</h4>
+      <p class="feature-desc">View and manage your team members, roles and permissions overview.</p>
+      <div class="feature-content">
+        <div class="avatar-group">
+          <div class="avatar-circle" style="background: #f97316;">JD</div>
+          <div class="avatar-circle" style="background: #3b82f6;">MK</div>
+          <div class="avatar-circle" style="background: #10b981;">AL</div>
+          <div class="avatar-circle" style="background: #ef4444;">SR</div>
+          <div class="avatar-circle" style="background: #8b5cf6;">TP</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trial Sessions -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #6366f1;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Trial Sessions</h4>
+      <p class="feature-desc">Track trial sessions, attendance, and conversion rates for new members.</p>
+      <div class="feature-content">
+        <div class="session-row">
+          <div class="session-info">
+            <span class="session-name">Kids Basic Karate</span>
+            <span class="session-sub">Trial Session</span>
+          </div>
+          <div class="session-meta">
+            <span class="session-count">28 members</span>
+            <div class="mini-avatar-group">
+              <span class="mini-avatar" style="background: #10b981;">N</span>
+              <span class="mini-avatar" style="background: #ef4444;">R</span>
+              <span class="mini-avatar" style="background: #eab308;">Z</span>
+            </div>
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14" class="list-arrow"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reporting -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #8b5cf6;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Reporting</h4>
+      <p class="feature-desc">Visualize key metrics with charts and analytics for informed decisions.</p>
+      <div class="feature-content">
+        <div class="mini-chart">
+          @for (bar of chartBars; track $index) {
+            <div class="mini-bar" [style.height.%]="bar.height" [style.background]="bar.color"></div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #6366f1;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Schedule</h4>
+      <p class="feature-desc">Organize classes, events, and appointments with a visual schedule manager.</p>
+      <div class="feature-content">
+        <div class="schedule-row">
+          <div class="schedule-item" style="--si-color: #10b981;">
+            <span class="schedule-name">Little Tiger</span>
+            <span class="schedule-time">10:00 AM - 10:30 AM</span>
+          </div>
+          <div class="schedule-item" style="--si-color: #f97316;">
+            <span class="schedule-name">Swimming Dolphins</span>
+            <span class="schedule-time">11:00 AM - 11:30 AM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Levels -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #7c3aed;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Levels</h4>
+      <p class="feature-desc">Define skill progression levels, belt ranks, and achievement milestones.</p>
+      <div class="feature-content">
+        <div class="level-badges">
+          <span class="level-badge" style="background: #6366f1;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="white" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+          <span class="level-badge" style="background: #f97316;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="white" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+          <span class="level-badge" style="background: #ef4444;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="white" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+          <span class="level-badge" style="background: #7c3aed;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="white" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+          <span class="level-badge" style="background: #10b981;">
+            <svg fill="none" viewBox="0 0 24 24" stroke="white" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Billing -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #3b82f6;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Billing</h4>
+      <p class="feature-desc">Track invoices, payments, and subscription billing in one place.</p>
+      <div class="feature-content">
+        <div class="billing-row">
+          <div class="billing-info">
+            <span class="billing-label">New Payment</span>
+            <span class="billing-name">Youth Membership</span>
+          </div>
+          <span class="billing-amount">$99.00/mo</span>
+          <span class="billing-badge pending">Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Branding -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #6366f1;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Custom Branding</h4>
+      <p class="feature-desc">Personalize your workspace with logos, colors, and brand identity.</p>
+      <div class="feature-content">
+        <div class="branding-row">
+          <div class="branding-item">
+            <div class="branding-logo-box">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20" style="color: var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <span class="branding-label">Change Logo</span>
+            <span class="branding-sub">PNG, JPG or GIF (max. 2mb)</span>
+          </div>
+          <div class="branding-item">
+            <div class="branding-color-box">
+              <div class="color-swatch" style="background: var(--accent-primary);"></div>
+            </div>
+            <span class="branding-label">Primary Colour</span>
+            <span class="branding-sub branding-hex">#4006BC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="feature-card">
+      <div class="feature-icon" style="--fc-color: #f59e0b;">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+      </div>
+      <h4 class="feature-title">Notifications</h4>
+      <p class="feature-desc">Configure alerts, reminders, and push notification preferences.</p>
+      <div class="feature-content">
+        <div class="notif-list">
+          <div class="notif-item">
+            <span class="notif-dot" style="background: #10b981;"></span>
+            <span class="notif-text">New member registered</span>
+            <span class="notif-time">2m ago</span>
+          </div>
+          <div class="notif-item">
+            <span class="notif-dot" style="background: #3b82f6;"></span>
+            <span class="notif-text">Payment received</span>
+            <span class="notif-time">15m ago</span>
+          </div>
+          <div class="notif-item">
+            <span class="notif-dot" style="background: #f97316;"></span>
+            <span class="notif-text">Class starting soon</span>
+            <span class="notif-time">1h ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-code-snippet [code]="codes.feature"></app-code-snippet>
 </div>
