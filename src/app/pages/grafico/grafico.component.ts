@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Legend, plugins } from 'chart.js';
 import { color } from 'chart.js/helpers';
 import { BaseChartDirective } from 'ng2-charts';
@@ -7,7 +7,8 @@ import { BaseChartDirective } from 'ng2-charts';
     selector: 'app-grafico',
     templateUrl: './grafico.component.html',
     styleUrl: './grafico.component.css',
-    imports: [BaseChartDirective]
+    imports: [BaseChartDirective],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GraficoComponent {
 

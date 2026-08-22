@@ -1,6 +1,16 @@
 <div class="directives-section">
   <h2 class="section-title">Directives ({{ directives.length }})</h2>
-  <p class="text-body section-desc">Attribute directives located in <code>src/app/directives/</code>.</p>
+  <p class="text-body section-desc">
+    The composition kit in <code>src/app/directives/</code>. These are what let components stay
+    small: behaviour that would otherwise be copy-pasted into every component lives here instead.
+    See them running on the
+    <a routerLink="/components/directives" class="text-primary">Directives showcase</a>.
+  </p>
+
+  <div class="doc-card">
+    <h4 class="subsection-title">Importing them</h4>
+    <app-code-snippet [code]="barrelUsage" />
+  </div>
 
   @for (dir of directives; track dir.selector) {
     <div class="doc-card">
@@ -32,8 +42,32 @@
         </tbody>
       </table>
 
+      @if (dir.outputs?.length) {
+        <h4 class="subsection-title">Outputs</h4>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (output of dir.outputs; track output.name) {
+              <tr>
+                <td><code>{{ output.name }}</code></td>
+                <td><code>{{ output.type }}</code></td>
+                <td><code>{{ output.default }}</code></td>
+                <td>{{ output.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
       <h4 class="subsection-title">Usage</h4>
-      <app-code-snippet [code]="dir.usage"></app-code-snippet>
+      <app-code-snippet [code]="dir.usage" />
     </div>
   }
 </div>

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
     selector: 'app-grid-section',
     templateUrl: './grid-section.component.html',
     styleUrl: './grid-section.component.css',
-    imports: [CodeSnippetComponent]
+    imports: [CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridSectionComponent {
   codes = {

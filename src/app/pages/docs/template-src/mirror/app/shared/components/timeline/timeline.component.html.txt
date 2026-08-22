@@ -1,0 +1,24 @@
+<ol class="timeline">
+  @for (item of items(); track $index) {
+    <li class="timeline-item">
+      <span class="timeline-marker marker-{{ item.variant ?? 'primary' }}">
+        @if (item.icon) {
+          <app-icon class="marker-icon" [path]="item.icon" [size]="12" />
+        }
+      </span>
+      <div class="timeline-content">
+        <div class="timeline-head">
+          <p class="timeline-title">{{ item.title }}</p>
+          @if (item.timestamp) {
+            <time class="timeline-time">{{ item.timestamp }}</time>
+          }
+        </div>
+        @if (item.description) {
+          <p class="timeline-description">{{ item.description }}</p>
+        }
+      </div>
+    </li>
+  } @empty {
+    <li class="timeline-empty">No activity yet.</li>
+  }
+</ol>

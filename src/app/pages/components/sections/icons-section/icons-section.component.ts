@@ -1,16 +1,27 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, signal } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
     selector: 'app-icons-section',
     templateUrl: './icons-section.component.html',
     styleUrl: './icons-section.component.css',
-    imports: [FormsModule, CodeSnippetComponent]
+    imports: [CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconsSectionComponent {
-  searchTerm = '';
-  copiedIndex: number | null = null;
+  protected readonly searchTerm = signal('');
+  protected readonly copiedIndex = signal<number | null>(null);
+
+  private timer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => this.timer && clearTimeout(this.timer));
+  }
+
+  protected onSearch(event: Event): void {
+    this.searchTerm.set((event.target as HTMLInputElement).value);
+  }
 
   icons = [
     { name: 'home', svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.126 1.126 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>' },
@@ -40,17 +51,34 @@ export class IconsSectionComponent {
     { name: 'globe', svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>' }
   ];
 
-  get filteredIcons() {
-    if (!this.searchTerm.trim()) return this.icons;
-    const term = this.searchTerm.toLowerCase();
-    return this.icons.filter(icon => icon.name.includes(term));
+  private readonly sanitizer = inject(DomSanitizer);
+
+  /**
+   * Angular's HTML sanitizer strips `<svg>` from `[innerHTML]`, so the preview
+   * markup is trusted explicitly. Safe here because every string is a hardcoded
+   * constant in this file - never do this with user input.
+   */
+  private readonly trusted = new Map<string, SafeHtml>();
+
+  protected safeSvg(markup: string): SafeHtml {
+    let safe = this.trusted.get(markup);
+    if (!safe) {
+      safe = this.sanitizer.bypassSecurityTrustHtml(markup);
+      this.trusted.set(markup, safe);
+    }
+    return safe;
   }
 
-  copyIcon(icon: { name: string; svg: string }, index: number): void {
-    navigator.clipboard.writeText(icon.svg).then(() => {
-      this.copiedIndex = index;
-      setTimeout(() => this.copiedIndex = null, 2000);
-    });
+  protected readonly filteredIcons = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    return term ? this.icons.filter(icon => icon.name.includes(term)) : this.icons;
+  });
+
+  protected async copyIcon(icon: { name: string; svg: string }, index: number): Promise<void> {
+    await navigator.clipboard.writeText(icon.svg);
+    this.copiedIndex.set(index);
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.copiedIndex.set(null), 2000);
   }
 
   codes = {

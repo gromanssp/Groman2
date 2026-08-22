@@ -1,0 +1,15 @@
+<ol class="breadcrumbs">
+  <li class="crumb">
+    <a [routerLink]="homeUrl()">{{ homeLabel() }}</a>
+  </li>
+  @for (crumb of crumbs(); track crumb.url) {
+    <li class="crumb-separator" aria-hidden="true">/</li>
+    <li class="crumb">
+      @if ($last) {
+        <span class="current" aria-current="page">{{ crumb.label }}</span>
+      } @else {
+        <a [routerLink]="crumb.url">{{ crumb.label }}</a>
+      }
+    </li>
+  }
+</ol>

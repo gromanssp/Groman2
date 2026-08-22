@@ -1,0 +1,30 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Alerts</h2>
+  <p class="text-body mb-4">Inline messages for validation results, quota warnings and system notices.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Variants</h3>
+      <div class="demo-area stack">
+        <app-alert variant="success" title="Saved">Your changes are live.</app-alert>
+        <app-alert variant="warning" title="Heads up">Quota is at 80%.</app-alert>
+        <app-alert variant="danger" title="Failed">Could not reach the server.</app-alert>
+        <app-alert variant="info">A new version is available.</app-alert>
+      </div>
+      <app-code-snippet [code]="codes.variants" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Dismissible</h3>
+      <div class="demo-area stack">
+        <app-alert variant="info" title="Tip" [dismissible]="true" [(visible)]="noticeVisible">
+          Press ⌘K to jump anywhere in the app.
+        </app-alert>
+        @if (!noticeVisible()) {
+          <button class="btn btn-secondary btn-sm" (click)="noticeVisible.set(true)">Bring it back</button>
+        }
+      </div>
+      <app-code-snippet [code]="codes.dismissible" />
+    </div>
+  </div>
+</div>

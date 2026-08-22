@@ -1,0 +1,70 @@
+import { Routes } from '@angular/router';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { authGuard } from './services/auth.guard';
+
+/** Chart.js only loads with the routes that actually draw charts. */
+const CHART_PROVIDERS = [provideCharts(withDefaultRegisterables())];
+
+/**
+ * Every route is lazy, including both layouts, so the initial bundle carries
+ * only the app shell and the router.
+ *
+ * `data.breadcrumb` feeds `<app-breadcrumbs>`; `title` feeds the document title.
+ */
+export const routes: Routes = [
+  {
+    path: 'auth',
+    loadComponent: () => import('./layouts/auth/auth.component').then(m => m.AuthComponent),
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: 'login',
+        title: 'Sign in',
+        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
+      },
+      {
+        path: 'register',
+        title: 'Create account',
+        loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent)
+      }
+    ]
+  },
+  {
+    path: '',
+    loadComponent: () => import('./layouts/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        title: 'Dashboard',
+        providers: CHART_PROVIDERS,
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+      },
+      {
+        path: 'calendar',
+        title: 'Calendar',
+        data: { breadcrumb: 'Calendar' },
+        loadComponent: () => import('./pages/calendar/calendar.component').then(m => m.CalendarComponent)
+      },
+      {
+        path: 'profile',
+        title: 'Profile',
+        data: { breadcrumb: 'Profile' },
+        canActivate: [authGuard],
+        loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)
+      },
+      {
+        path: 'settings',
+        title: 'Settings',
+        data: { breadcrumb: 'Settings' },
+        canActivate: [authGuard],
+        loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent)
+      }
+    ]
+  },
+  {
+    path: '**',
+    title: 'Not found',
+    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
+  }
+];

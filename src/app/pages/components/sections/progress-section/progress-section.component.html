@@ -7,68 +7,66 @@
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Different Values</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-        <app-progress-bar [value]="25" label="25%"></app-progress-bar>
-        <app-progress-bar [value]="50" label="50%"></app-progress-bar>
-        <app-progress-bar [value]="75" label="75%"></app-progress-bar>
-        <app-progress-bar [value]="100" label="100%"></app-progress-bar>
+        <app-progress-bar [value]="25" label="25%" />
+        <app-progress-bar [value]="50" label="50%" />
+        <app-progress-bar [value]="75" label="75%" />
+        <app-progress-bar [value]="100" label="100%" />
       </div>
-      <app-code-snippet [code]="codes.values"></app-code-snippet>
+      <app-code-snippet [code]="codes.values" />
     </div>
 
     <!-- Variants -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Color Variants</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-        <app-progress-bar [value]="60" variant="primary" label="Primary"></app-progress-bar>
-        <app-progress-bar [value]="70" variant="success" label="Success"></app-progress-bar>
-        <app-progress-bar [value]="50" variant="warning" label="Warning"></app-progress-bar>
-        <app-progress-bar [value]="40" variant="danger" label="Danger"></app-progress-bar>
+        <app-progress-bar [value]="60" variant="primary" label="Primary" />
+        <app-progress-bar [value]="70" variant="success" label="Success" />
+        <app-progress-bar [value]="50" variant="warning" label="Warning" />
+        <app-progress-bar [value]="40" variant="danger" label="Danger" />
       </div>
-      <app-code-snippet [code]="codes.variants"></app-code-snippet>
+      <app-code-snippet [code]="codes.variants" />
     </div>
 
     <!-- Striped & Animated -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Striped &amp; Animated</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-        <app-progress-bar [value]="65" variant="primary" [striped]="true" label="Striped"></app-progress-bar>
-        <app-progress-bar [value]="80" variant="success" [striped]="true" [animated]="true" label="Animated"></app-progress-bar>
-        <app-progress-bar [value]="45" variant="warning" [striped]="true" [animated]="true" label="Warning Animated"></app-progress-bar>
+        <app-progress-bar [value]="65" variant="primary" [striped]="true" label="Striped" />
+        <app-progress-bar [value]="80" variant="success" [striped]="true" [animated]="true" label="Animated" />
+        <app-progress-bar [value]="45" variant="warning" [striped]="true" [animated]="true" label="Warning Animated" />
       </div>
-      <app-code-snippet [code]="codes.striped"></app-code-snippet>
+      <app-code-snippet [code]="codes.striped" />
     </div>
 
     <!-- Heights -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Custom Heights</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-        <app-progress-bar [value]="60" [height]="4" label="4px"></app-progress-bar>
-        <app-progress-bar [value]="60" [height]="8" label="8px (default)"></app-progress-bar>
-        <app-progress-bar [value]="60" [height]="16" label="16px"></app-progress-bar>
-        <app-progress-bar [value]="60" [height]="24" label="24px"></app-progress-bar>
+        <app-progress-bar [value]="60" [height]="4" label="4px" />
+        <app-progress-bar [value]="60" [height]="8" label="8px (default)" />
+        <app-progress-bar [value]="60" [height]="16" label="16px" />
+        <app-progress-bar [value]="60" [height]="24" label="24px" />
       </div>
-      <app-code-snippet [code]="codes.heights"></app-code-snippet>
+      <app-code-snippet [code]="codes.heights" />
     </div>
 
     <!-- Interactive -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Interactive Control</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 1rem;">
-        <app-progress-bar
-          [value]="dynamicValue"
-          [variant]="dynamicValue >= 80 ? 'success' : dynamicValue >= 50 ? 'warning' : 'danger'"
+        <app-progress-bar [value]="dynamicValue()"
+          [variant]="dynamicValue() >= 80 ? 'success' : dynamicValue() >= 50 ? 'warning' : 'danger'"
           [striped]="true"
-          [animated]="dynamicValue < 100"
+          [animated]="dynamicValue() < 100"
           [height]="12"
-          [label]="dynamicValue + '%'">
-        </app-progress-bar>
+          [label]="dynamicValue() + '%'" />
         <div class="progress-controls">
           <button class="btn btn-outline-primary btn-sm" (click)="decrease()">- 10</button>
-          <span class="progress-value">{{ dynamicValue }}%</span>
+          <span class="progress-value">{{ dynamicValue() }}%</span>
           <button class="btn btn-outline-primary btn-sm" (click)="increase()">+ 10</button>
         </div>
       </div>
-      <app-code-snippet [code]="codes.interactive"></app-code-snippet>
+      <app-code-snippet [code]="codes.interactive" />
     </div>
 
     <!-- Stacked -->
@@ -76,11 +74,11 @@
       <h3 class="card-title">Stacked Progress</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch; gap: 0.5rem;">
         <div class="stacked-label">Project Completion</div>
-        <app-progress-bar [value]="30" variant="success" [height]="10" label="Complete 30%"></app-progress-bar>
-        <app-progress-bar [value]="20" variant="warning" [height]="10" label="In Progress 20%"></app-progress-bar>
-        <app-progress-bar [value]="10" variant="danger" [height]="10" label="Blocked 10%"></app-progress-bar>
+        <app-progress-bar [value]="30" variant="success" [height]="10" label="Complete 30%" />
+        <app-progress-bar [value]="20" variant="warning" [height]="10" label="In Progress 20%" />
+        <app-progress-bar [value]="10" variant="danger" [height]="10" label="Blocked 10%" />
       </div>
-      <app-code-snippet [code]="codes.stacked"></app-code-snippet>
+      <app-code-snippet [code]="codes.stacked" />
     </div>
   </div>
 </div>

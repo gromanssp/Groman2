@@ -1,0 +1,18 @@
+:host { display: block; }
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.crumb a {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+.crumb a:hover { color: var(--accent-primary); }
+.crumb .current { color: var(--text-primary); font-weight: 500; }
+.crumb-separator { color: var(--text-muted); opacity: 0.5; }

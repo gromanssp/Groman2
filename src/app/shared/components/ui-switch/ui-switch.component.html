@@ -1,0 +1,25 @@
+<div class="switch-row" [class.disabled]="disabled()">
+  <button
+    class="switch"
+    type="button"
+    role="switch"
+    [id]="controlId"
+    [attr.aria-checked]="checked()"
+    [attr.aria-label]="label()"
+    [disabled]="disabled()"
+    [class.on]="checked()"
+    (click)="toggle()">
+    <span class="switch-thumb"></span>
+  </button>
+
+  @if (label() || description()) {
+    <label class="switch-labels" [attr.for]="controlId">
+      @if (label()) {
+        <span class="switch-label">{{ label() }}</span>
+      }
+      @if (description()) {
+        <span class="switch-description">{{ description() }}</span>
+      }
+    </label>
+  }
+</div>

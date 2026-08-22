@@ -1,0 +1,39 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Stepper</h2>
+  <p class="text-body mb-4">
+    Multi-step flows with per-step validation. In linear mode the Next button stays disabled until
+    <code>stepValid</code> is true. The Wizard page is built on this component.
+  </p>
+
+  <div class="glass-panel showcase-card">
+    <h3 class="card-title">Project setup</h3>
+    <app-stepper (completed)="finish()">
+      <ng-template appStep="Project" stepDescription="Name it" [stepValid]="nameValid()">
+        <div class="form-group">
+          <label class="form-label" for="project-name">Project name</label>
+          <input
+            id="project-name"
+            class="form-control"
+            placeholder="At least 3 characters"
+            [value]="projectName()"
+            (input)="onName($event)" />
+          @if (!nameValid()) {
+            <p class="form-text text-danger">Enter at least 3 characters to continue.</p>
+          }
+        </div>
+      </ng-template>
+
+      <ng-template appStep="Team" stepDescription="Optional">
+        <p class="text-body">Invite teammates now or later from Settings.</p>
+      </ng-template>
+
+      <ng-template appStep="Review">
+        <p class="text-body">Creating <strong>{{ projectName() || '—' }}</strong>. Finish to confirm.</p>
+      </ng-template>
+    </app-stepper>
+  </div>
+
+  <div class="mt-4">
+    <app-code-snippet [code]="codes.basic" />
+  </div>
+</div>

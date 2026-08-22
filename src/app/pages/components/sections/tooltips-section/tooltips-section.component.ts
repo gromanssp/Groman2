@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TooltipDirective } from '../../../../directives/tooltip.directive';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
@@ -6,7 +6,8 @@ import { CodeSnippetComponent } from '../../../../shared/components/code-snippet
     selector: 'app-tooltips-section',
     templateUrl: './tooltips-section.component.html',
     styleUrl: './tooltips-section.component.css',
-    imports: [TooltipDirective, CodeSnippetComponent]
+    imports: [TooltipDirective, CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipsSectionComponent {
   codes = {

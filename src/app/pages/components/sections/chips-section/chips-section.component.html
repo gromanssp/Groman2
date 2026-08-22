@@ -1,0 +1,34 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Chips</h2>
+  <p class="text-body mb-4">Compact labels for tags, filters and multi-select values.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Variants & sizes</h3>
+      <div class="demo-area">
+        <app-chip variant="primary">Primary</app-chip>
+        <app-chip variant="success">Success</app-chip>
+        <app-chip variant="warning">Warning</app-chip>
+        <app-chip variant="danger">Danger</app-chip>
+        <app-chip variant="info">Info</app-chip>
+        <app-chip variant="outline">Outline</app-chip>
+        <app-chip variant="primary" size="sm">Small</app-chip>
+        <app-chip variant="primary" size="lg">Large</app-chip>
+      </div>
+      <app-code-snippet [code]="codes.variants" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Removable</h3>
+      <div class="demo-area">
+        @for (tag of tags(); track tag) {
+          <app-chip variant="primary" [removable]="true" (removed)="remove(tag)">{{ tag }}</app-chip>
+        } @empty {
+          <span class="text-small">All chips removed.</span>
+        }
+      </div>
+      <button class="btn btn-secondary btn-sm mb-4" (click)="reset()">Reset</button>
+      <app-code-snippet [code]="codes.removable" />
+    </div>
+  </div>
+</div>

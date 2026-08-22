@@ -103,3 +103,5 @@
   font-size: 0.8rem;
   margin: 0;
 }
+
+.download-progress { width: 100%; max-width: 420px; margin-top: 1rem; }

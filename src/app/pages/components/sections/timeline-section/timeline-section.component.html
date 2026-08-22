@@ -1,0 +1,21 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Timeline</h2>
+  <p class="text-body mb-4">Vertical activity feed for audit logs, deployment history and order tracking.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Activity feed</h3>
+      <div class="demo-area stack">
+        <app-timeline [items]="activity" />
+      </div>
+      <app-code-snippet [code]="codes.basic" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Empty</h3>
+      <div class="demo-area stack">
+        <app-timeline [items]="[]" />
+      </div>
+    </div>
+  </div>
+</div>

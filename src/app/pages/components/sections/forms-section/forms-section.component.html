@@ -1,119 +1,75 @@
 <div class="section-container">
   <h2 class="heading-3 mb-4">Forms</h2>
-  <p class="text-body mb-4">Comprehensive form elements with validation states and accessibility.</p>
+  <p class="text-body mb-4">
+    Every control is bound to Angular 21 <strong>Signal Forms</strong>: the model is a signal, the
+    schema declares the rules, and validation state flows straight into the UI. Errors only appear
+    once the field has been touched.
+  </p>
 
   <div class="components-grid">
-    <!-- Text Inputs -->
     <div class="glass-panel showcase-card">
-      <h3 class="card-title">Text Inputs</h3>
-      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        <div class="form-group">
-          <label class="form-label">Text Input</label>
-          <input type="text" class="form-control" placeholder="Enter text..." [(ngModel)]="sampleText">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Input</label>
-          <input type="email" class="form-control" placeholder="email@example.com" [(ngModel)]="sampleEmail">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password Input</label>
-          <input type="password" class="form-control" placeholder="Enter password..." [(ngModel)]="samplePassword">
-        </div>
-      </div>
-      <app-code-snippet [code]="codes.textInputs"></app-code-snippet>
+      <h3 class="card-title">Signal Forms controls</h3>
+      <form class="demo-area stack" (submit)="onSubmit(); $event.preventDefault()">
+        <app-ui-input label="Name" placeholder="Jane Doe" [required]="true" [field]="demoForm.name" />
+        <app-ui-input label="Email" type="email" placeholder="name@company.com" [required]="true" [field]="demoForm.email" />
+        <app-ui-select label="Role" placeholder="Select a role" [options]="roles" [required]="true" [field]="demoForm.role" />
+        <app-ui-textarea label="Bio" placeholder="A short introduction…" hint="Max 200 characters" [field]="demoForm.bio" />
+        <app-ui-checkbox label="Subscribe to the newsletter" [field]="demoForm.newsletter" />
+
+        <button type="submit" class="btn btn-gradient" [disabled]="demoForm().invalid()">
+          Submit
+        </button>
+        @if (demoForm().invalid() && demoForm().touched()) {
+          <p class="form-text text-danger">Fix the fields above to enable submit.</p>
+        }
+      </form>
+      <app-code-snippet [code]="codes.model" />
+      <app-code-snippet [code]="codes.template" />
     </div>
 
-    <!-- Textarea & Select -->
     <div class="glass-panel showcase-card">
-      <h3 class="card-title">Textarea &amp; Select</h3>
-      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        <div class="form-group">
-          <label class="form-label">Textarea</label>
-          <textarea class="form-control" rows="3" placeholder="Enter long text..." [(ngModel)]="sampleTextarea"></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Select</label>
-          <select class="form-control" [(ngModel)]="sampleSelect">
-            <option value="" disabled>Choose an option...</option>
-            <option value="1">Option One</option>
-            <option value="2">Option Two</option>
-            <option value="3">Option Three</option>
-          </select>
-        </div>
+      <h3 class="card-title">Submitting</h3>
+      <p class="text-small mb-4">
+        <code>submit()</code> marks every field as touched, then runs the callback only if the form
+        is valid.
+      </p>
+      <app-code-snippet [code]="codes.submitCode" />
+
+      <h3 class="card-title mt-4">Switch</h3>
+      <div class="demo-area stack">
+        <app-ui-switch label="Email notifications" description="Weekly digest and mentions" [(checked)]="notifications" />
+        <span class="text-small">Value: {{ notifications() }}</span>
       </div>
-      <app-code-snippet [code]="codes.textareaSelect"></app-code-snippet>
+      <app-code-snippet [code]="codes.switchCode" />
     </div>
 
-    <!-- Checkboxes & Radios -->
     <div class="glass-panel showcase-card">
-      <h3 class="card-title">Checkboxes &amp; Radios</h3>
-      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="check1" [(ngModel)]="checkboxOne">
-          <label class="form-check-label" for="check1">Checkbox unchecked</label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="check2" [(ngModel)]="checkboxTwo">
-          <label class="form-check-label" for="check2">Checkbox checked</label>
-        </div>
-        <hr class="divider">
-        <div class="form-check">
-          <input type="radio" class="form-check-input" id="radio1" name="radioGroup"
-                 value="option1" [(ngModel)]="radioValue">
-          <label class="form-check-label" for="radio1">Radio Option 1</label>
-        </div>
-        <div class="form-check">
-          <input type="radio" class="form-check-input" id="radio2" name="radioGroup"
-                 value="option2" [(ngModel)]="radioValue">
-          <label class="form-check-label" for="radio2">Radio Option 2</label>
-        </div>
-        <div class="form-check">
-          <input type="radio" class="form-check-input" id="radio3" name="radioGroup"
-                 value="option3" [(ngModel)]="radioValue">
-          <label class="form-check-label" for="radio3">Radio Option 3</label>
-        </div>
+      <h3 class="card-title">File upload</h3>
+      <div class="demo-area stack">
+        <app-file-upload accept="image/*" [maxSizeMb]="5" [(files)]="files" (rejected)="onRejected($event)" />
       </div>
-      <app-code-snippet [code]="codes.checkboxRadio"></app-code-snippet>
+      <app-code-snippet [code]="codes.upload" />
     </div>
 
-    <!-- Validation States -->
     <div class="glass-panel showcase-card">
-      <h3 class="card-title">Validation States</h3>
-      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+      <h3 class="card-title">Raw utility classes</h3>
+      <div class="demo-area stack">
         <div class="form-group">
-          <label class="form-label">Valid Input</label>
-          <input type="text" class="form-control is-valid" value="Correct value">
-          <span class="form-feedback valid">Looks good!</span>
+          <label class="form-label" for="raw-valid">Valid state</label>
+          <input id="raw-valid" class="form-control is-valid" value="looks good" />
+          <p class="form-text text-success">Looks good.</p>
         </div>
         <div class="form-group">
-          <label class="form-label">Invalid Input</label>
-          <input type="text" class="form-control is-invalid" value="Wrong value">
-          <span class="form-feedback invalid">Please enter a valid value.</span>
+          <label class="form-label" for="raw-invalid">Invalid state</label>
+          <input id="raw-invalid" class="form-control is-invalid" value="nope" />
+          <p class="form-text text-danger">This value is not allowed.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="raw-disabled">Disabled</label>
+          <input id="raw-disabled" class="form-control" value="Read only" disabled />
         </div>
       </div>
-      <app-code-snippet [code]="codes.validation"></app-code-snippet>
-    </div>
-
-    <!-- Disabled State -->
-    <div class="glass-panel showcase-card">
-      <h3 class="card-title">Disabled State</h3>
-      <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        <div class="form-group">
-          <label class="form-label">Disabled Input</label>
-          <input type="text" class="form-control" value="Cannot edit" disabled>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Disabled Select</label>
-          <select class="form-control" disabled>
-            <option>Locked option</option>
-          </select>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="checkDisabled" disabled>
-          <label class="form-check-label" for="checkDisabled">Disabled checkbox</label>
-        </div>
-      </div>
-      <app-code-snippet [code]="codes.disabled"></app-code-snippet>
+      <app-code-snippet [code]="codes.raw" />
     </div>
   </div>
 </div>

@@ -7,34 +7,34 @@
       type="text"
       class="search-input"
       placeholder="Search icons..."
-      [(ngModel)]="searchTerm"
+      [value]="searchTerm()" (input)="onSearch($event)"
       />
   </div>
 
   <div class="icons-grid">
-    @for (icon of filteredIcons; track icon; let i = $index) {
+    @for (icon of filteredIcons(); track icon; let i = $index) {
       <div
         class="icon-card glass-panel"
         (click)="copyIcon(icon, i)"
-        [class.copied]="copiedIndex === i"
+        [class.copied]="copiedIndex() === i"
         >
-        <div class="icon-preview" [innerHTML]="icon.svg"></div>
+        <div class="icon-preview" [innerHTML]="safeSvg(icon.svg)"></div>
         <span class="icon-name">{{ icon.name }}</span>
-        @if (copiedIndex === i) {
+        @if (copiedIndex() === i) {
           <span class="icon-toast">Copied!</span>
         }
       </div>
     }
   </div>
 
-  @if (filteredIcons.length === 0) {
+  @if (filteredIcons().length === 0) {
     <div class="no-results">
-      <p class="text-body">No icons found matching "{{ searchTerm }}"</p>
+      <p class="text-body">No icons found matching "{{ searchTerm() }}"</p>
     </div>
   }
 
   <div class="glass-panel showcase-card" style="margin-top: 1.5rem;">
     <h3 class="card-title">Usage</h3>
-    <app-code-snippet [code]="codes.usage"></app-code-snippet>
+    <app-code-snippet [code]="codes.usage" />
   </div>
 </div>

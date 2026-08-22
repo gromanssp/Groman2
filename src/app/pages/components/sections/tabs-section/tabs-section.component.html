@@ -1,0 +1,39 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Tabs</h2>
+  <p class="text-body mb-4">
+    Panels are templates, so an unopened tab renders nothing. Arrow keys, Home and End move between
+    triggers per the ARIA tabs pattern.
+  </p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Line variant</h3>
+      <div class="demo-area stack">
+        <app-tabs>
+          <ng-template appTab="Overview">
+            <p class="text-body">Traffic is up 12% week over week.</p>
+          </ng-template>
+          <ng-template appTab="Activity">
+            <p class="text-body">18 deployments in the last 7 days.</p>
+          </ng-template>
+          <ng-template appTab="Archived" [tabDisabled]="true">
+            <p class="text-body">Nothing archived.</p>
+          </ng-template>
+        </app-tabs>
+      </div>
+      <app-code-snippet [code]="codes.basic" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Pill variant</h3>
+      <div class="demo-area stack">
+        <app-tabs variant="pill">
+          <ng-template appTab="Daily"><p class="text-body">24 active users today.</p></ng-template>
+          <ng-template appTab="Weekly"><p class="text-body">312 active users this week.</p></ng-template>
+          <ng-template appTab="Monthly"><p class="text-body">1,204 active users this month.</p></ng-template>
+        </app-tabs>
+      </div>
+      <app-code-snippet [code]="codes.pill" />
+    </div>
+  </div>
+</div>

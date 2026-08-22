@@ -12,7 +12,7 @@
         <button class="btn btn-success">Success</button>
         <button class="btn btn-danger">Danger</button>
       </div>
-      <app-code-snippet [code]="codes.solid"></app-code-snippet>
+      <app-code-snippet [code]="codes.solid" />
     </div>
 
     <!-- Outline Buttons -->
@@ -22,7 +22,7 @@
         <button class="btn btn-outline-primary">Outline Primary</button>
         <button class="btn btn-outline-secondary">Outline Secondary</button>
       </div>
-      <app-code-snippet [code]="codes.outline"></app-code-snippet>
+      <app-code-snippet [code]="codes.outline" />
     </div>
 
     <!-- Ghost & Gradient -->
@@ -33,7 +33,7 @@
         <button class="btn btn-gradient">Gradient</button>
         <button class="btn btn-gradient-glow">Gradient Glow</button>
       </div>
-      <app-code-snippet [code]="codes.ghost"></app-code-snippet>
+      <app-code-snippet [code]="codes.ghost" />
     </div>
 
     <!-- Sizes -->
@@ -44,7 +44,7 @@
         <button class="btn btn-primary">Default</button>
         <button class="btn btn-primary btn-lg">Large</button>
       </div>
-      <app-code-snippet [code]="codes.sizes"></app-code-snippet>
+      <app-code-snippet [code]="codes.sizes" />
     </div>
 
     <!-- Disabled State -->
@@ -56,21 +56,21 @@
         <button class="btn btn-outline-primary" disabled>Outline Disabled</button>
         <button class="btn btn-gradient" disabled>Gradient Disabled</button>
       </div>
-      <app-code-snippet [code]="codes.disabled"></app-code-snippet>
+      <app-code-snippet [code]="codes.disabled" />
     </div>
 
     <!-- Loading State -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Interactive Loading</h3>
       <div class="demo-area">
-        <button class="btn btn-primary" [disabled]="isLoading" (click)="simulateLoading()">
-          {{ isLoading ? 'Loading...' : 'Click to Load' }}
+        <button class="btn btn-primary" [disabled]="isLoading()" (click)="simulateLoading()">
+          {{ isLoading() ? 'Loading...' : 'Click to Load' }}
         </button>
-        <button class="btn btn-success" [disabled]="isLoading" (click)="simulateLoading()">
-          {{ isLoading ? 'Processing...' : 'Submit' }}
+        <button class="btn btn-success" [disabled]="isLoading()" (click)="simulateLoading()">
+          {{ isLoading() ? 'Processing...' : 'Submit' }}
         </button>
       </div>
-      <app-code-snippet [code]="codes.loading"></app-code-snippet>
+      <app-code-snippet [code]="codes.loading" />
     </div>
   </div>
 </div>

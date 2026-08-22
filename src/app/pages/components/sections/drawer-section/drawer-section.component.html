@@ -1,0 +1,31 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Drawer</h2>
+  <p class="text-body mb-4">Off-canvas panel for filters, record details and secondary navigation. Escape and backdrop clicks close it.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Right drawer</h3>
+      <div class="demo-area">
+        <button class="btn btn-gradient" (click)="rightOpen.set(true)">Open filters</button>
+      </div>
+      <app-code-snippet [code]="codes.basic" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Left drawer</h3>
+      <div class="demo-area">
+        <button class="btn btn-secondary" (click)="leftOpen.set(true)">Open navigation</button>
+      </div>
+      <app-code-snippet [code]="codes.side" />
+    </div>
+  </div>
+</div>
+
+<app-drawer title="Filters" [(open)]="rightOpen">
+  <p class="text-body">Narrow the result set by status, owner or date range.</p>
+  <button drawer-footer class="btn btn-primary w-100" (click)="rightOpen.set(false)">Apply filters</button>
+</app-drawer>
+
+<app-drawer title="Navigation" side="left" width="300px" [(open)]="leftOpen">
+  <p class="text-body">A drawer is also how the sidebar behaves below the md breakpoint.</p>
+</app-drawer>

@@ -1,0 +1,94 @@
+:host { display: block; }
+
+.step-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.step-track {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  right: 17px;
+  height: 2px;
+  background: rgba(var(--overlay-rgb), 0.1);
+}
+.step-track-fill {
+  height: 100%;
+  background: var(--accent-gradient);
+  transition: width var(--transition-normal);
+}
+
+.step-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  text-align: center;
+}
+
+.step-bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-main);
+  border: 2px solid rgba(var(--overlay-rgb), 0.15);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+.step-bullet:disabled { cursor: not-allowed; }
+.step-bullet svg { width: 16px; height: 16px; }
+
+.step-item.active .step-bullet {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
+}
+.step-item.done .step-bullet {
+  background: var(--success);
+  border-color: transparent;
+  color: #fff;
+}
+
+.step-labels { display: flex; flex-direction: column; gap: 0.1rem; }
+.step-label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+.step-item.active .step-label { color: var(--text-primary); }
+.step-description { font-size: 0.75rem; color: var(--text-muted); }
+
+.step-panel { min-height: 120px; }
+
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: var(--glass-border);
+}
+
+/* Vertical layout */
+.stepper-vertical .step-header { flex-direction: column; }
+.stepper-vertical .step-item { flex-direction: row; align-items: center; text-align: left; }
+.stepper-vertical .step-labels { align-items: flex-start; }
+
+@media (max-width: 576px) {
+  .step-labels { display: none; }
+  .step-item { flex: 0; }
+  .step-header { justify-content: center; gap: 1.5rem; }
+  .step-track { left: 0; right: 0; }
+}

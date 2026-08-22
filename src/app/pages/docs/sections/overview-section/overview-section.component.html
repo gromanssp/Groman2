@@ -7,10 +7,26 @@
         <span class="version-badge angular">Angular {{ angularVersion }}</span>
       </div>
       <p class="text-body">
-        A modern Angular dashboard template featuring a dark glass-morphism design system,
-        reusable components, and production-ready architecture.
+        A zoneless, signal-first Angular dashboard template: a glassmorphism design system with
+        light and dark schemes, a 28-component UI library, a directive kit for composition, and a
+        starter project you can download that is mirrored from this very codebase.
       </p>
     </div>
+  </div>
+
+  <h3 class="section-title">Architecture</h3>
+  <div class="arch-grid">
+    @for (note of architecture; track note.title) {
+      <div class="doc-card arch-card">
+        <h4 class="arch-title">{{ note.title }}</h4>
+        <p class="arch-detail">{{ note.detail }}</p>
+      </div>
+    }
+  </div>
+
+  <h3 class="section-title">Zoneless in practice</h3>
+  <div class="doc-card">
+    <app-code-snippet [code]="zonelessCode" />
   </div>
 
   <h3 class="section-title">Tech Stack</h3>
@@ -26,11 +42,11 @@
 
   <h3 class="section-title">Project Structure</h3>
   <div class="doc-card">
-    <app-code-snippet [code]="folderTree"></app-code-snippet>
+    <app-code-snippet [code]="folderTree" />
   </div>
 
   <h3 class="section-title">Quick Start</h3>
   <div class="doc-card">
-    <app-code-snippet [code]="quickStartCode"></app-code-snippet>
+    <app-code-snippet [code]="quickStartCode" />
   </div>
 </div>

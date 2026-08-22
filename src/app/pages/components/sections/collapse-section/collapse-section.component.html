@@ -7,27 +7,28 @@
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Independent Panels</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        @for (panel of panels; track panel) {
+        @for (panel of panels(); track panel.title; let i = $index) {
           <app-collapse-panel
             [title]="panel.title"
-            [expanded]="panel.expanded">
+            [expanded]="panel.expanded"
+            (expandedChange)="togglePanel(i)">
             <p class="panel-content">{{ panel.content }}</p>
           </app-collapse-panel>
         }
       </div>
-      <app-code-snippet [code]="codes.independent"></app-code-snippet>
+      <app-code-snippet [code]="codes.independent" />
     </div>
 
     <!-- Accordion Pattern -->
     <div class="glass-panel showcase-card">
       <h3 class="card-title">Accordion (Single Open)</h3>
       <div class="demo-area" style="flex-direction: column; align-items: stretch;">
-        @for (panel of accordionPanels; track panel; let i = $index) {
+        @for (panel of accordionPanels(); track panel.title; let i = $index) {
           <div class="accordion-item">
-            <div class="accordion-header" (click)="toggleAccordion(i)">
+            <button class="accordion-header" type="button" [attr.aria-expanded]="panel.expanded" (click)="toggleAccordion(i)">
               <span>{{ panel.title }}</span>
               <span class="accordion-icon" [class.rotated]="panel.expanded">&#9660;</span>
-            </div>
+            </button>
             <div class="accordion-body" [class.open]="panel.expanded">
               <div class="accordion-content">
                 <p class="panel-content">{{ panel.content }}</p>
@@ -36,7 +37,7 @@
           </div>
         }
       </div>
-      <app-code-snippet [code]="codes.accordion"></app-code-snippet>
+      <app-code-snippet [code]="codes.accordion" />
     </div>
   </div>
 </div>

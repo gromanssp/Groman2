@@ -1,0 +1,27 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Pagination</h2>
+  <p class="text-body mb-4">Page state is a model signal, so the same component drives a list, a table or a remote query.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Paging a list</h3>
+      <div class="demo-area stack">
+        <ul class="text-body" style="list-style: none; display: grid; gap: 0.35rem;">
+          @for (item of visible(); track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <app-pagination [(page)]="page" [pageSize]="5" [total]="total" />
+      </div>
+      <app-code-snippet [code]="codes.basic" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Large ranges</h3>
+      <div class="demo-area stack">
+        <app-pagination [(page)]="largePage" [pageSize]="10" [total]="2400" [siblings]="2" />
+      </div>
+      <app-code-snippet [code]="codes.large" />
+    </div>
+  </div>
+</div>

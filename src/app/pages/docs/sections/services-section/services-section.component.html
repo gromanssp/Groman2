@@ -1,6 +1,6 @@
 <div class="services-section">
   <h2 class="section-title">Services &amp; Guards ({{ services.length }})</h2>
-  <p class="text-body section-desc">Injectable services located in <code>src/app/services/</code>. All services use the <code>inject()</code> pattern.</p>
+  <p class="text-body section-desc">Injectable services in <code>src/app/services/</code>. Every one of them exposes its state as signals rather than observables, so components read it directly in templates - no subscriptions, no <code>async</code> pipe, and no manual change detection under the zoneless setup.</p>
 
   @for (svc of services; track svc.name) {
     <div class="doc-card">
@@ -10,8 +10,8 @@
       </div>
       <p class="service-desc">{{ svc.description }}</p>
 
-      @if (svc.observables.length > 0) {
-        <h4 class="subsection-title">Observables</h4>
+      @if (svc.signals.length > 0) {
+        <h4 class="subsection-title">Signals</h4>
         <table class="api-table">
           <thead>
             <tr>
@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (obs of svc.observables; track obs.name) {
+            @for (obs of svc.signals; track obs.name) {
               <tr>
                 <td><code>{{ obs.name }}</code></td>
                 <td><code>{{ obs.type }}</code></td>
@@ -52,28 +52,6 @@
         </table>
       }
 
-      @if (svc.properties.length > 0) {
-        <h4 class="subsection-title">Properties</h4>
-        <table class="api-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (prop of svc.properties; track prop.name) {
-              <tr>
-                <td><code>{{ prop.name }}</code></td>
-                <td><code>{{ prop.type }}</code></td>
-                <td>{{ prop.description }}</td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      }
-
       @if (svc.extras) {
         <div class="extras-note">
           {{ svc.extras }}
@@ -81,7 +59,7 @@
       }
 
       <h4 class="subsection-title">Usage</h4>
-      <app-code-snippet [code]="svc.usage"></app-code-snippet>
+      <app-code-snippet [code]="svc.usage" />
     </div>
   }
 </div>

@@ -1,0 +1,33 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Avatars</h2>
+  <p class="text-body mb-4">
+    Initials are generated locally and the color is derived from the name, so the same person always
+    gets the same avatar - no external avatar service involved.
+  </p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Sizes & shapes</h3>
+      <div class="demo-area">
+        @for (person of people; track person) {
+          <app-avatar [name]="person" />
+        }
+        <app-avatar name="Ada Lovelace" size="lg" />
+        <app-avatar name="Alan Turing" [size]="72" [square]="true" />
+      </div>
+      <app-code-snippet [code]="codes.initials" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Presence & fallback</h3>
+      <div class="demo-area">
+        <app-avatar name="Ada Lovelace" status="online" />
+        <app-avatar name="Grace Hopper" status="away" />
+        <app-avatar name="Alan Turing" status="busy" />
+        <app-avatar name="Katherine Johnson" src="/does-not-exist.png" status="offline" />
+      </div>
+      <app-code-snippet [code]="codes.status" />
+      <app-code-snippet [code]="codes.fallback" />
+    </div>
+  </div>
+</div>

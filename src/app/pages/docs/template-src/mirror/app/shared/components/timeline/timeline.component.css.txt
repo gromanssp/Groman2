@@ -1,0 +1,53 @@
+:host { display: block; }
+
+.timeline { list-style: none; position: relative; }
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1.4rem;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+
+/* Connector line between markers */
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(var(--overlay-rgb), 0.1);
+}
+
+.timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 2px solid var(--accent-primary);
+  color: var(--accent-primary);
+}
+.marker-success { border-color: var(--success); color: var(--success); }
+.marker-warning { border-color: var(--warning); color: var(--warning); }
+.marker-danger  { border-color: var(--danger);  color: var(--danger); }
+.marker-info    { border-color: var(--info);    color: var(--info); }
+.marker-secondary { border-color: var(--text-muted); color: var(--text-muted); }
+
+.marker-icon { display: flex; width: 12px; height: 12px; }
+.marker-icon :is(svg) { width: 100%; height: 100%; }
+
+.timeline-content { flex: 1; min-width: 0; padding-top: 1px; }
+.timeline-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.timeline-title { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); }
+.timeline-time { font-size: 0.78rem; color: var(--text-muted); }
+.timeline-description { margin-top: 0.2rem; font-size: 0.85rem; color: var(--text-secondary); }
+
+.timeline-empty { padding: 1.5rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }

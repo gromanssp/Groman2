@@ -14,7 +14,7 @@
         <app-badge variant="secondary">Secondary</app-badge>
         <app-badge variant="outline">Outline</app-badge>
       </div>
-      <app-code-snippet [code]="codes.variants"></app-code-snippet>
+      <app-code-snippet [code]="codes.variants" />
     </div>
 
     <!-- Sizes -->
@@ -25,7 +25,7 @@
         <app-badge variant="primary" size="md">Medium</app-badge>
         <app-badge variant="primary" size="lg">Large</app-badge>
       </div>
-      <app-code-snippet [code]="codes.sizes"></app-code-snippet>
+      <app-code-snippet [code]="codes.sizes" />
     </div>
 
     <!-- With Buttons -->
@@ -39,7 +39,7 @@
           Messages <app-badge variant="success" size="sm">12</app-badge>
         </button>
       </div>
-      <app-code-snippet [code]="codes.withButtons"></app-code-snippet>
+      <app-code-snippet [code]="codes.withButtons" />
     </div>
 
     <!-- Interactive Counter -->
@@ -47,10 +47,10 @@
       <h3 class="card-title">Interactive Counter</h3>
       <div class="demo-area" style="align-items: center;">
         <button class="btn btn-outline-primary btn-sm" (click)="decrement()">-</button>
-        <app-badge [variant]="counter > 5 ? 'danger' : counter > 2 ? 'warning' : 'success'" size="lg">{{ counter }}</app-badge>
+        <app-badge [variant]="counter() > 5 ? 'danger' : counter() > 2 ? 'warning' : 'success'" size="lg">{{ counter() }}</app-badge>
         <button class="btn btn-outline-primary btn-sm" (click)="increment()">+</button>
       </div>
-      <app-code-snippet [code]="codes.counter"></app-code-snippet>
+      <app-code-snippet [code]="codes.counter" />
     </div>
 
     <!-- Status Indicators -->
@@ -70,7 +70,7 @@
           <span class="text-body">Connection failed</span>
         </span>
       </div>
-      <app-code-snippet [code]="codes.status"></app-code-snippet>
+      <app-code-snippet [code]="codes.status" />
     </div>
   </div>
 </div>

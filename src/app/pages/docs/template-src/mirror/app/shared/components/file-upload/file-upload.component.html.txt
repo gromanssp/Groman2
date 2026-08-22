@@ -1,0 +1,38 @@
+<label
+  class="dropzone"
+  [class.dragging]="dragging()"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)">
+  <input
+    class="sr-only"
+    type="file"
+    [accept]="accept()"
+    [multiple]="multiple()"
+    (change)="onSelect($event)" />
+
+  <svg class="dropzone-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M7 16a4 4 0 01-.88-7.9A5 5 0 1115.9 6H16a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+  </svg>
+  <span class="dropzone-label">{{ label() }}</span>
+  @if (maxSizeMb() > 0) {
+    <span class="dropzone-hint">Max {{ maxSizeMb() }} MB per file</span>
+  }
+</label>
+
+@if (hasFiles()) {
+  <ul class="file-list">
+    @for (file of files(); track file.name + file.size; let i = $index) {
+      <li class="file-item">
+        <span class="file-name">{{ file.name }}</span>
+        <span class="file-size">{{ sizeLabel(file.size) }}</span>
+        <button class="file-remove" type="button" [attr.aria-label]="'Remove ' + file.name" (click)="remove(i)">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </li>
+    }
+  </ul>
+}

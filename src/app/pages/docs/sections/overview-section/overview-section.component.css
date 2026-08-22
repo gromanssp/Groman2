@@ -81,3 +81,14 @@
   line-height: 1.4;
   margin: 0;
 }
+
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.arch-card { padding: 1.25rem; }
+.arch-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
+.arch-detail { font-size: 0.85rem; line-height: 1.6; color: var(--text-secondary); }

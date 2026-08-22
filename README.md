@@ -2,30 +2,30 @@
   <img src="https://img.shields.io/badge/Angular-21.2.4-dd0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 21" />
   <img src="https://img.shields.io/badge/TypeScript-5.9-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Chart.js-4.x-ff6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js" />
-  <img src="https://img.shields.io/badge/Standalone-Components-6366f1?style=for-the-badge" alt="Standalone" />
+  <img src="https://img.shields.io/badge/Zoneless-signals-6366f1?style=for-the-badge" alt="Zoneless" />
   <img src="https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge" alt="MIT License" />
 </p>
 
 <h1 align="center">Groman2</h1>
 
 <p align="center">
-  <strong>Modern Angular 21 Dashboard Template</strong><br/>
-  A premium dark glassmorphism admin panel with 10+ reusable components,<br/>
-  12 color themes, and a complete component showcase.
+  <strong>Zoneless Angular 21 Dashboard Template</strong><br/>
+  A glassmorphism admin panel with 28 reusable components, a 10-directive composition kit,<br/>
+  12 accent themes plus light/dark schemes, and a starter project you can download.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/v0.2.0-stable-10b981?style=flat-square" alt="Version" />
-  <img src="https://img.shields.io/badge/components-10+-6366f1?style=flat-square" alt="Components" />
+  <img src="https://img.shields.io/badge/v0.3.0-stable-10b981?style=flat-square" alt="Version" />
+  <img src="https://img.shields.io/badge/components-28-6366f1?style=flat-square" alt="Components" />
   <img src="https://img.shields.io/badge/themes-12-a855f7?style=flat-square" alt="Themes" />
-  <img src="https://img.shields.io/badge/pages-13-3b82f6?style=flat-square" alt="Pages" />
+  <img src="https://img.shields.io/badge/directives-10-3b82f6?style=flat-square" alt="Directives" />
 </p>
 
 ---
 
 ## Overview
 
-Groman2 is a fully standalone Angular 21 dashboard template built with modern best practices: **signals**, **OnPush change detection**, **lazy-loaded routes**, and **CSS custom properties**. No NgModules — every component is standalone.
+Groman2 is a **zoneless** Angular 21 dashboard template. There is no `zone.js` dependency and no polyfill entry — signals are the only thing that tells Angular to re-render. Every component is standalone and OnPush, every route is lazy, every form is a Signal Form, and the downloadable starter project is mirrored from this codebase so it can never go stale.
 
 ### Key Highlights
 
@@ -33,25 +33,33 @@ Groman2 is a fully standalone Angular 21 dashboard template built with modern be
 |---------|-------------|
 | **Dark Glassmorphism UI** | Premium glass-panel design with backdrop blur, subtle borders, and depth shadows |
 | **12 Color Themes** | 6 accent colors × 2 navbar styles (dark + colored gradient) — switchable at runtime |
-| **10 Shared Components** | Badge, Modal, Carousel, Collapse, Progress, Table, Spinner, DatePicker, CodeSnippet |
-| **Component Showcase** | 16 interactive sections with live demos, toggleable options, and copy-ready code |
+| **Zoneless change detection** | `provideZonelessChangeDetection()`, no `zone.js` in `package.json`, no polyfills entry |
+| **28 Shared Components** | Alert, Avatar, Badge, Breadcrumbs, Carousel, Chip, CodeSnippet, CollapsePanel, DataTable, DatePicker, Drawer, Dropdown, EmptyState, FileUpload, FormField, Icon, Modal, Pagination, ProgressBar, Skeleton, Spinner, Stepper, Tabs, Timeline, Toast, and the UI form controls |
+| **10-directive composition kit** | `*appLet`, `appClickOutside`, `appAutofocus`, `appRipple`, `appLazyImg`, `appCellTemplate`, `appSkeleton`, `appPermission`, `appTooltip`, `appCollapse` |
+| **Light + dark schemes** | The whole app retones from one token, `--overlay-rgb`, that every surface and border is built on |
+| **Signal Forms** | `@angular/forms/signals` for login, register, profile, wizard and calendar — no `FormsModule` |
+| **Component Showcase** | 28 interactive sections with live demos, toggleable options, and copy-ready code |
 | **Full Auth Flow** | Login, Register, Profile, and Settings pages with local auth service |
 | **Calendar** | Interactive monthly calendar with event creation, color-coded dots |
 | **Charts** | Line, Bar, Doughnut, and Polar Area charts via Chart.js + ng2-charts |
 | **Documentation Hub** | 7 doc sections: Overview, Components, Directives, Services, Pages, Security Audit, Download |
-| **Template Download** | One-click ZIP export of a clean starter project with all components included |
+| **Template Download** | One-click ZIP of a clean starter project, mirrored from `src/` so it is never out of date |
+| **Command palette** | ⌘K / Ctrl+K jumps to any page, built from the same definition as the sidebar |
 
 ---
 
 ## Tech Stack
 
 ```
-Angular 21.2.4        Standalone components, signals, @if/@for control flow
-TypeScript 5.9        Strict type checking
-Chart.js 4 + ng2-charts 10   Data visualization
-JSZip 3.10            Client-side ZIP generation for template download
-CSS Custom Properties  Runtime theming — no SCSS, no Tailwind
+Angular 21.2.4               Zoneless change detection, standalone components, signals
+@angular/forms/signals       Model-driven, type-safe forms — no FormsModule
+TypeScript 5.9               Strict mode, strictTemplates, strictStandalone
+Chart.js 4 + ng2-charts 10   Data visualization, scoped to the two chart routes
+JSZip 3.10                   Client-side ZIP generation for the template download
+CSS Custom Properties        Runtime theming — no SCSS, no Tailwind
 ```
+
+Notably **not** in the dependency list: `zone.js`.
 
 ---
 
@@ -60,55 +68,46 @@ CSS Custom Properties  Runtime theming — no SCSS, no Tailwind
 ```
 src/
 ├── app/
-│   ├── components/              # Core layout components
-│   │   ├── navbar/              #   Top bar with search, notifications, profile menu
-│   │   ├── sidebar/             #   Collapsible navigation with icons
-│   │   └── stat-card/           #   Dashboard metric cards
+│   ├── components/              # App shell
+│   │   ├── navbar/              #   Search/⌘K, theme toggle, notifications, account menu
+│   │   ├── sidebar/             #   Collapsible groups, driven by nav-items.ts
+│   │   └── stat-card/           #   Dashboard metric cards with skeleton support
 │   │
-│   ├── shared/components/       # Reusable UI components
-│   │   ├── badge/               #   Status badges (primary, success, warning, danger)
-│   │   ├── carousel/            #   Image carousel with autoplay & indicators
-│   │   ├── collapse-panel/      #   Expandable content panels
-│   │   ├── code-snippet/        #   Syntax-highlighted code blocks
-│   │   ├── data-table/          #   Sortable, striped, bordered tables
-│   │   ├── date-picker/         #   Calendar date selection
-│   │   ├── modal/               #   Dialog overlays with header/body/footer
-│   │   ├── progress-bar/        #   Animated bars with variants & labels
-│   │   ├── spinner/             #   Loading indicators (circular, dots, pulse)
-│   │   └── donation-button/     #   CTA button component
+│   ├── shared/
+│   │   ├── components/          # 28-component UI library (see index.ts barrel)
+│   │   └── ui.types.ts          # Shared size/variant vocabulary
 │   │
-│   ├── directives/              # Custom directives
-│   │   ├── tooltip.directive.ts #   Hover tooltips
-│   │   └── collapse.directive.ts#   Collapse/expand toggle
+│   ├── directives/              # Composition kit (10 directives + UI_DIRECTIVES barrel)
 │   │
-│   ├── services/                # Application services
-│   │   ├── auth.service.ts      #   Authentication (signals, localStorage)
-│   │   ├── sidebar.service.ts   #   Sidebar state management
-│   │   └── theme.service.ts     #   12 themes with CSS variable injection
+│   ├── services/                # All signal-based
+│   │   ├── auth.service.ts      #   Session as signals, localStorage-backed
+│   │   ├── auth.guard.ts        #   CanActivateFn for /profile and /settings
+│   │   ├── sidebar.service.ts   #   Collapse + mobile drawer state
+│   │   ├── theme.service.ts     #   12 accents × dark/light scheme
+│   │   ├── toast.service.ts     #   Notification queue
+│   │   ├── breakpoint.service.ts#   matchMedia as signals
+│   │   ├── payment.service.ts   #   Demo donation flow
+│   │   └── storage.ts           #   persistedSignal() helper
 │   │
-│   ├── layouts/                 # Page layouts
-│   │   ├── dashboard/           #   Sidebar + Navbar + content area
-│   │   └── auth/                #   Centered card with glow background
+│   ├── layouts/                 # Dashboard (sidebar + navbar) and Auth (centered card)
 │   │
-│   ├── pages/                   # Feature pages
-│   │   ├── home/                #   Dashboard with stat cards + charts
-│   │   ├── components/          #   16-section component showcase
-│   │   ├── calendar/            #   Monthly calendar with events
-│   │   ├── charts/              #   Chart.js visualizations
-│   │   ├── wizard/              #   Multi-step form wizard
-│   │   ├── profile/             #   User profile editor
-│   │   ├── settings/            #   Theme switcher (dark/colored navbar)
-│   │   ├── docs/                #   Documentation hub + ZIP download
-│   │   ├── login/               #   Sign in page
-│   │   ├── register/            #   Sign up page
-│   │   └── not-found/           #   404 page
+│   ├── pages/                   # Every page lazily routed
+│   │   ├── home/                #   Stat cards, theme-reactive charts, orders, activity
+│   │   ├── components/          #   28-section component showcase
+│   │   ├── docs/                #   Documentation hub
+│   │   │   ├── template-src/    #     Starter template: mirror/ + _overrides/ + manifest
+│   │   │   └── services/        #     TemplateGeneratorService (~90 lines, no duplicated code)
+│   │   ├── calendar/ charts/ wizard/ profile/ settings/ login/ register/ not-found/
 │   │
-│   ├── app.config.ts            # Application providers
-│   └── app.routes.ts            # Route definitions with lazy loading
+│   ├── app.config.ts            # Zoneless providers, router features, http
+│   └── app.routes.ts            # Fully lazy route tree with titles and breadcrumbs
 │
-├── assets/css/colors/           # Theme color CSS files
 ├── environments/                # Environment configurations
-└── styles.css                   # Global CSS variables & utility classes
+└── styles.css                   # Design tokens, light + dark schemes, utilities
+
+scripts/
+├── template-manifest.mjs        # Declares what ships in the starter ZIP
+└── sync-template.mjs            # Mirrors src/ into the template; --write or verify
 ```
 
 ---
@@ -170,7 +169,7 @@ cd groman2
 npm install
 
 # Start development server
-ng serve
+npm start
 ```
 
 Open [http://localhost:4200](http://localhost:4200) in your browser.
@@ -178,7 +177,7 @@ Open [http://localhost:4200](http://localhost:4200) in your browser.
 ### Build for Production
 
 ```bash
-ng build --configuration production
+npm run build
 ```
 
 Output will be in `dist/groman2/`.
@@ -216,13 +215,12 @@ Both dark and colored navbar variants are auto-generated.
 
 ### Badge
 ```html
-<app-badge text="New" variant="primary"></app-badge>
-<app-badge text="3" variant="danger" pill></app-badge>
+<app-badge variant="success" size="sm">Active</app-badge>
 ```
 
 ### Modal
 ```html
-<app-modal [isOpen]="show" title="Confirm" (closed)="show = false">
+<app-modal title="Confirm" [(isOpen)]="showModal">
   <p>Are you sure?</p>
   <div modal-footer>
     <button class="btn btn-gradient" (click)="confirm()">Yes</button>
@@ -230,19 +228,41 @@ Both dark and colored navbar variants are auto-generated.
 </app-modal>
 ```
 
-### Progress Bar
-```html
-<app-progress-bar [value]="75" variant="success" [striped]="true" [animated]="true" label="75%"></app-progress-bar>
-```
-
 ### Data Table
 ```html
-<app-data-table [columns]="columns" [data]="data" [striped]="true" [hover]="true"></app-data-table>
+<app-data-table [columns]="columns" [rows]="rows" [searchable]="true" [pageSize]="10">
+  <ng-template appCellTemplate="status" let-value>
+    <app-badge [variant]="value === 'Active' ? 'success' : 'secondary'">{{ value }}</app-badge>
+  </ng-template>
+</app-data-table>
 ```
 
-### Carousel
+### Signal Forms
+```typescript
+protected readonly model = signal({ email: '', role: '' });
+
+protected readonly userForm = form(this.model, path => {
+  required(path.email, { message: 'Email is required' });
+  email(path.email, { message: 'Enter a valid email address' });
+});
+```
 ```html
-<app-carousel [images]="slides" [autoPlay]="true" [interval]="5000"></app-carousel>
+<app-ui-input label="Email" type="email" [required]="true" [field]="userForm.email" />
+<app-ui-select label="Role" [options]="roles" [field]="userForm.role" />
+<button [disabled]="userForm().invalid()">Save</button>
+```
+
+### Toasts
+```typescript
+private readonly toasts = inject(ToastService);
+this.toasts.success('Profile saved', { message: 'Your changes are live.' });
+```
+
+### Directive kit
+```typescript
+import { UI_DIRECTIVES } from './directives';
+
+@Component({ imports: [...UI_DIRECTIVES] })
 ```
 
 ---
@@ -252,7 +272,10 @@ Both dark and colored navbar variants are auto-generated.
 | Decision | Rationale |
 |----------|-----------|
 | **Standalone components** | No NgModules — cleaner imports, better tree-shaking |
-| **Signals over RxJS** | Simpler state management for component-level state |
+| **Zoneless change detection** | No monkey-patched timers, smaller bundle, shorter startup. The trade-off: state mutated outside a template listener *must* be a signal, or the view will not update |
+| **Signals over RxJS** | Services expose signals, not observables — no subscriptions, no `async` pipe, and it is what makes zoneless work |
+| **Directives for cross-cutting behaviour** | Outside clicks, tooltips, ripples and skeletons live in one place instead of being copy-pasted into every component |
+| **Template mirrored, not duplicated** | The old generator kept 1,900 lines of source code as strings and drifted constantly. Now `scripts/sync-template.mjs` mirrors the real files and `npm run build` fails if they diverge |
 | **CSS custom properties** | Runtime theme switching without recompilation |
 | **Lazy loading** | Components, Docs, Profile, and Settings are lazy-loaded for faster initial bundle |
 | **OnPush change detection** | Better performance on all new components |
@@ -265,9 +288,11 @@ Both dark and colored navbar variants are auto-generated.
 | Command | Description |
 |---------|-------------|
 | `npm start` | Start dev server on port 4200 |
-| `npm run build` | Production build |
+| `npm run build` | Verify the starter template is in sync, then build for production |
 | `npm run watch` | Build in watch mode |
-| `npm test` | Run unit tests |
+| `npm test` | Run unit tests (Karma, no `zone.js/testing`) |
+| `npm run template:sync` | Regenerate the downloadable template after changing `src/` |
+| `npm run template:check` | Fail if the template has drifted from `src/` |
 
 ---
 

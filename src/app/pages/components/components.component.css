@@ -67,3 +67,13 @@
   .components-sidenav::-webkit-scrollbar { display: none; }
   .sidenav-item { white-space: nowrap; }
 }
+
+.sidenav-group {
+  padding: 0.85rem 1rem 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.sidenav-group:first-child { padding-top: 0.25rem; }

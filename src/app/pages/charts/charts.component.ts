@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -6,7 +6,8 @@ import { BaseChartDirective } from 'ng2-charts';
     selector: 'app-charts',
     templateUrl: './charts.component.html',
     styleUrl: './charts.component.css',
-    imports: [BaseChartDirective]
+    imports: [BaseChartDirective],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChartsComponent {
   private baseOptions: ChartOptions = {

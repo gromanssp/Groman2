@@ -25,53 +25,70 @@ interface PositiveFinding {
 })
 export class SecuritySectionComponent {
   readonly criticalCount = 0;
-  readonly mediumCount = 2;
+  readonly mediumCount = 1;
   readonly lowCount = 3;
 
   readonly findings: SecurityFinding[] = [
     {
       severity: 'medium',
-      title: 'innerHTML Usage (XSS Risk)',
-      files: ['stat-card.component.html', 'icons-section.component.html'],
-      description: '[innerHTML] binding used for SVG icons. While data sources are internal (not user-provided), this bypasses Angular\'s built-in XSS sanitization.',
-      recommendation: 'Use DomSanitizer for explicit sanitization or replace with inline SVG templates.'
+      title: 'Demo authentication is not real authentication',
+      files: ['auth.service.ts', 'auth.guard.ts'],
+      description:
+        'AuthService stores the session in localStorage and accepts any credentials. authGuard and the appPermission directive only hide UI - anyone can set the storage key by hand.',
+      recommendation:
+        'Replace the three async methods with real HTTP calls, keep the session in an httpOnly cookie, and enforce every role check on the server. The signal surface stays the same, so no component has to change.'
     },
     {
-      severity: 'medium',
-      title: 'Environment Placeholder Credentials',
+      severity: 'low',
+      title: 'innerHTML on the icon gallery',
+      files: ['icons-section.component.ts'],
+      description:
+        'The icons showcase renders SVG markup through bypassSecurityTrustHtml, because Angular\'s sanitizer strips <svg> from [innerHTML]. Every string is a hardcoded constant in that file, so there is no untrusted input - but the escape hatch is real.',
+      recommendation:
+        'Everywhere else in the app icons go through <app-icon [path]="…" />, which needs no sanitizer bypass. Never pass user input to bypassSecurityTrustHtml.'
+    },
+    {
+      severity: 'low',
+      title: 'Environment placeholder values',
       files: ['environment.ts', 'environment.prod.ts'],
-      description: 'Firebase configuration contains placeholder values (YOUR_API_KEY, etc.). These must be replaced before deployment.',
-      recommendation: 'Use environment variable injection for production builds. Never commit real API keys.'
-    },
-    {
-      severity: 'low',
-      title: 'Firebase Error Code Exposure',
-      files: ['login.component.ts', 'register.component.ts'],
-      description: 'Firebase auth error codes (user-not-found, wrong-password) are mapped to specific user messages, enabling user enumeration attacks.',
-      recommendation: 'Use a single generic error message for all auth failures.'
-    },
-    {
-      severity: 'low',
-      title: 'External Avatar URL Exposure',
-      files: ['profile.component.ts', 'navbar.component.html'],
-      description: 'User display names are sent to ui-avatars.com API as URL parameters.',
-      recommendation: 'Hash or truncate names, or use local avatar generation.'
+      description: 'The environment files ship with placeholder values that must be replaced before deployment.',
+      recommendation: 'Inject real values at build time. Never commit API keys.'
     },
     {
       severity: 'low',
       title: 'No Content Security Policy',
-      files: [],
+      files: ['index.html'],
       description: 'index.html does not define a Content-Security-Policy meta tag.',
-      recommendation: 'Add CSP headers to restrict script sources and prevent XSS.'
+      recommendation: 'Serve CSP headers from your host to restrict script sources. Note that the template download uses a blob URL, which needs no external origin.'
     }
   ];
 
   readonly positiveFindings: PositiveFinding[] = [
-    { title: 'Angular XSS Protection', description: 'Angular\'s built-in XSS protection via property binding is active throughout the application.' },
-    { title: 'Firebase Auth', description: 'Firebase Auth provides secure authentication with industry-standard practices.' },
-    { title: 'Route Guard', description: 'authGuard (CanActivateFn) protects all authenticated pages from unauthorized access.' },
-    { title: 'No Hardcoded Secrets', description: 'No hardcoded secrets or API keys found in source code.' },
-    { title: 'Dependency Injection', description: 'Dependency injection pattern used throughout, avoiding global mutable state.' }
+    {
+      title: 'Sanitizer bypasses removed',
+      description:
+        'Icons now render as <svg> with a bound path instead of [innerHTML]. This also fixed a real bug: the sanitizer was silently stripping the SVG, so the icons were not rendering at all.'
+    },
+    {
+      title: 'No zone.js',
+      description: 'Zoneless change detection means no monkey-patching of global timers, XHR or event APIs at startup.'
+    },
+    {
+      title: 'Route guard',
+      description: 'authGuard (CanActivateFn) protects /profile and /settings, and the auth pages live in their own layout outside the dashboard shell.'
+    },
+    {
+      title: 'No external calls for avatars',
+      description: 'Avatars are generated locally from initials with a color derived from the name. No user display name is ever sent to a third-party service.'
+    },
+    {
+      title: 'Strict TypeScript and templates',
+      description: 'strict, strictTemplates, strictStandalone and noPropertyAccessFromIndexSignature are all on.'
+    },
+    {
+      title: 'No hardcoded secrets',
+      description: 'No secrets or API keys in the source. localStorage helpers fail closed when storage is unavailable.'
+    }
   ];
 
   getSeverityVariant(severity: string): 'danger' | 'warning' | 'secondary' {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
@@ -6,7 +6,8 @@ import { CodeSnippetComponent } from '../../../../shared/components/code-snippet
     selector: 'app-spinner-section',
     templateUrl: './spinner-section.component.html',
     styleUrl: './spinner-section.component.css',
-    imports: [SpinnerComponent, CodeSnippetComponent]
+    imports: [SpinnerComponent, CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerSectionComponent {
   codes = {

@@ -1,0 +1,88 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Directives</h2>
+  <p class="text-body mb-4">
+    The composition kit. These directives are what let components stay small: behaviour that used to
+    be copy-pasted into each component now lives in one place.
+  </p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">*appLet</h3>
+      <div class="demo-area stack">
+        <ng-container *appLet="totals() as t">
+          <p class="text-body">{{ t.orders }} orders · {{ t.revenue }} USD</p>
+        </ng-container>
+      </div>
+      <app-code-snippet [code]="codes.let" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">appClickOutside</h3>
+      <div class="demo-area stack">
+        <div [appClickOutside]="menuOpen()" (clickOutside)="outsideClicks.update(n => n + 1); menuOpen.set(false)">
+          <button class="btn btn-secondary" (click)="menuOpen.set(true)">Open panel</button>
+          @if (menuOpen()) {
+            <p class="text-small mt-4">Click anywhere outside this box to close it.</p>
+          }
+        </div>
+        <span class="text-small">Outside clicks caught: {{ outsideClicks() }}</span>
+      </div>
+      <app-code-snippet [code]="codes.clickOutside" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">appRipple & appTooltip</h3>
+      <div class="demo-area">
+        <button class="btn btn-gradient" appRipple>Ripple</button>
+        <button class="btn btn-secondary" appTooltip="Saves without leaving the page" tooltipPosition="top">
+          Hover me
+        </button>
+        <button class="btn btn-outline-primary" appTooltip="Anchored to the right" tooltipPosition="right">
+          Right
+        </button>
+      </div>
+      <app-code-snippet [code]="codes.ripple" />
+      <app-code-snippet [code]="codes.tooltip" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">appCollapse</h3>
+      <div class="demo-area stack">
+        <button class="btn btn-secondary btn-sm" style="align-self: flex-start" (click)="panelOpen.update(v => !v)">
+          {{ panelOpen() ? 'Collapse' : 'Expand' }}
+        </button>
+        <div [appCollapse]="!panelOpen()">
+          <p class="text-body">
+            The directive measures the block and animates its max-height. It only writes styles, so it
+            never triggers change detection.
+          </p>
+        </div>
+      </div>
+      <app-code-snippet [code]="codes.collapse" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">appSkeleton</h3>
+      <div class="demo-area stack">
+        <button class="btn btn-secondary btn-sm" style="align-self: flex-start" (click)="loading.update(v => !v)">
+          Toggle loading
+        </button>
+        <p class="text-body" [appSkeleton]="loading()">ada&#64;example.com · Admin</p>
+      </div>
+      <app-code-snippet [code]="codes.skeleton" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">appPermission & appLazyImg</h3>
+      <div class="demo-area stack">
+        <button *appPermission="'admin'" class="btn btn-danger btn-sm">Delete workspace (admins only)</button>
+        <p class="text-small">
+          The button above renders only for the <code>admin</code> role. It is a UX affordance - the
+          route guard and the API are the real boundary.
+        </p>
+      </div>
+      <app-code-snippet [code]="codes.permission" />
+      <app-code-snippet [code]="codes.lazyImg" />
+    </div>
+  </div>
+</div>

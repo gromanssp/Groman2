@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 @Component({
     selector: 'app-buttons-section',
     templateUrl: './buttons-section.component.html',
     styleUrl: './buttons-section.component.css',
-    imports: [CodeSnippetComponent]
+    imports: [CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonsSectionComponent {
-  isLoading = false;
+  protected readonly isLoading = signal(false);
+
+  private timer: ReturnType<typeof setTimeout> | null = null;
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => this.timer && clearTimeout(this.timer));
+  }
 
   codes = {
     solid: `<button class="btn btn-primary">Primary</button>\n<button class="btn btn-secondary">Secondary</button>\n<button class="btn btn-success">Success</button>\n<button class="btn btn-danger">Danger</button>`,
@@ -20,7 +27,7 @@ export class ButtonsSectionComponent {
   };
 
   simulateLoading(): void {
-    this.isLoading = true;
-    setTimeout(() => this.isLoading = false, 2000);
+    this.isLoading.set(true);
+    this.timer = setTimeout(() => this.isLoading.set(false), 2000);
   }
 }

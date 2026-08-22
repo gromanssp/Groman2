@@ -1,0 +1,38 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Skeletons & empty states</h2>
+  <p class="text-body mb-4">Two ways to fill the gap while data loads, plus the state for when there is none.</p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Skeleton component</h3>
+      <div class="demo-area stack">
+        <app-skeleton [lines]="3" />
+        <app-skeleton shape="circle" width="48px" height="48px" />
+        <app-skeleton shape="block" height="90px" />
+      </div>
+      <app-code-snippet [code]="codes.component" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Skeleton directive</h3>
+      <div class="demo-area stack">
+        <button class="btn btn-secondary btn-sm" style="align-self: flex-start" (click)="toggle()">
+          {{ loading() ? 'Finish loading' : 'Start loading' }}
+        </button>
+        <h3 class="heading-3" [appSkeleton]="loading()">Ada Lovelace</h3>
+        <p class="text-body" [appSkeleton]="loading()">ada&#64;example.com · Admin since 1843</p>
+      </div>
+      <app-code-snippet [code]="codes.directive" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Empty state</h3>
+      <div class="demo-area stack">
+        <app-empty-state title="No projects yet" description="Create your first project to get started.">
+          <button empty-action class="btn btn-gradient">New project</button>
+        </app-empty-state>
+      </div>
+      <app-code-snippet [code]="codes.empty" />
+    </div>
+  </div>
+</div>

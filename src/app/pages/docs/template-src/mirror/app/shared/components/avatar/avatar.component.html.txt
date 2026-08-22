@@ -1,0 +1,21 @@
+<div
+  class="avatar"
+  [class.square]="square()"
+  [style.width.px]="pixels()"
+  [style.height.px]="pixels()"
+  [style.fontSize.px]="pixels() * 0.4">
+  @if (showImage()) {
+    <img class="avatar-image" [src]="src()" [alt]="name()" (error)="imageFailed.set(true)" />
+  } @else {
+    <span
+      class="avatar-initials"
+      [style.background]="'linear-gradient(135deg, hsl(' + hue() + ', 65%, 55%), hsl(' + (hue() + 40) + ', 65%, 45%))'"
+      [attr.aria-label]="name()">
+      {{ initials() }}
+    </span>
+  }
+
+  @if (status()) {
+    <span class="avatar-status status-{{ status() }}" [attr.aria-label]="status()"></span>
+  }
+</div>

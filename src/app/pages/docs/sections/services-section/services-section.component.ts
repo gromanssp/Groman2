@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
 interface ServiceMethod {
@@ -7,13 +7,7 @@ interface ServiceMethod {
   description: string;
 }
 
-interface ServiceObservable {
-  name: string;
-  type: string;
-  description: string;
-}
-
-interface ServiceProperty {
+interface ServiceSignal {
   name: string;
   type: string;
   description: string;
@@ -23,16 +17,15 @@ interface ServiceDoc {
   name: string;
   providedIn: string;
   description: string;
-  observables: ServiceObservable[];
+  /** Reactive surface - signals and computed values, not observables. */
+  signals: ServiceSignal[];
   methods: ServiceMethod[];
-  properties: ServiceProperty[];
   extras: string;
   usage: string;
 }
 
 @Component({
   selector: 'app-services-section',
-  standalone: true,
   templateUrl: './services-section.component.html',
   styleUrl: './services-section.component.css',
   imports: [CodeSnippetComponent],
@@ -43,126 +36,181 @@ export class ServicesSectionComponent {
     {
       name: 'AuthService',
       providedIn: 'root',
-      description: 'Handles user authentication via Firebase Auth including email/password and Google sign-in. Manages user state and profile data.',
-      observables: [
-        { name: 'user$', type: 'Observable<User | null>', description: 'Emits the current Firebase user or null when signed out' },
-        { name: 'profile$', type: 'Observable<UserProfile | null>', description: 'Emits the user profile from Firestore or null' }
+      description:
+        'Demo authentication backed by localStorage. The whole surface is signals, so components read it directly in templates with no subscription and no async pipe. To go to a real backend, replace the three async methods with HTTP calls and leave everything else untouched.',
+      signals: [
+        { name: 'user / profile', type: 'Signal<UserProfile | null>', description: 'The signed-in user, or null' },
+        { name: 'isAuthenticated', type: 'Signal<boolean>', description: 'computed() - whether anyone is signed in' },
+        { name: 'role', type: 'Signal<UserRole | null>', description: "computed() - drives the appPermission directive" },
+        { name: 'initials', type: 'Signal<string>', description: 'computed() - up to two uppercase initials for the avatar' }
       ],
       methods: [
-        { name: 'register', signature: 'register(email: string, password: string, displayName: string): Promise<User>', description: 'Creates a new user account with email and password' },
-        { name: 'login', signature: 'login(email: string, password: string): Promise<User>', description: 'Signs in with email and password credentials' },
-        { name: 'loginWithGoogle', signature: 'loginWithGoogle(): Promise<User>', description: 'Initiates Google OAuth sign-in flow' },
-        { name: 'logout', signature: 'logout(): Promise<void>', description: 'Signs out the current user' },
-        { name: 'getUserProfile', signature: 'getUserProfile(uid: string): Promise<UserProfile | null>', description: 'Fetches user profile data from Firestore by UID' }
+        { name: 'register', signature: 'register(email: string, password: string, displayName: string): Promise<void>', description: 'Creates an account and signs in' },
+        { name: 'login', signature: 'login(email: string, password: string): Promise<void>', description: 'Signs in with email and password' },
+        { name: 'loginWithGoogle', signature: 'loginWithGoogle(): Promise<void>', description: 'Placeholder for an OAuth flow' },
+        { name: 'logout', signature: 'logout(): void', description: 'Clears the session and the stored profile' }
       ],
-      properties: [
-        { name: 'currentUser', type: 'User | null', description: 'Synchronous access to the current Firebase user' },
-        { name: 'isAuthenticated', type: 'boolean', description: 'Whether a user is currently signed in' }
-      ],
-      extras: '',
-      usage: `import { inject } from '@angular/core';
-import { AuthService } from './services/auth.service';
+      extras: 'Storage key: groman-user. Guarded routes use authGuard, which reads isAuthenticated().',
+      usage: `private readonly auth = inject(AuthService);
 
-private authService = inject(AuthService);
+protected readonly user = this.auth.profile;
 
-// Subscribe to auth state
-this.authService.user$.subscribe(user => {
-  console.log('User:', user?.displayName);
-});
-
-// Login
-await this.authService.login('user@example.com', 'password');`
+// In the template - no subscribe, no async pipe
+@if (auth.isAuthenticated()) {
+  <span>{{ user()?.displayName }}</span>
+}`
     },
     {
       name: 'SidebarService',
       providedIn: 'root',
-      description: 'Manages sidebar collapse state for both desktop and mobile views. Used by SidebarComponent and NavbarComponent.',
-      observables: [
-        { name: 'collapsed$', type: 'Observable<boolean>', description: 'Emits whether the sidebar is collapsed on desktop' },
-        { name: 'mobileOpen$', type: 'Observable<boolean>', description: 'Emits whether the sidebar is open on mobile' }
+      description:
+        'Sidebar state for desktop collapse and the mobile drawer. The desktop collapse is a persistedSignal, so it survives reloads; the mobile drawer always starts closed.',
+      signals: [
+        { name: 'collapsed', type: 'Signal<boolean>', description: 'Desktop collapse state (persisted)' },
+        { name: 'mobileOpen', type: 'Signal<boolean>', description: 'Mobile drawer state' }
       ],
       methods: [
-        { name: 'toggle', signature: 'toggle(): void', description: 'Toggles the sidebar collapse state' },
-        { name: 'collapse', signature: 'collapse(): void', description: 'Collapses the sidebar' },
-        { name: 'expand', signature: 'expand(): void', description: 'Expands the sidebar' },
-        { name: 'toggleMobile', signature: 'toggleMobile(): void', description: 'Toggles the mobile sidebar' },
-        { name: 'openMobile', signature: 'openMobile(): void', description: 'Opens the mobile sidebar' },
-        { name: 'closeMobile', signature: 'closeMobile(): void', description: 'Closes the mobile sidebar' }
+        { name: 'toggle', signature: 'toggle(): void', description: 'Flips the desktop collapse' },
+        { name: 'collapse / expand', signature: 'collapse(): void / expand(): void', description: 'Sets the collapse state explicitly' },
+        { name: 'toggleMobile', signature: 'toggleMobile(): void', description: 'Flips the mobile drawer' },
+        { name: 'openMobile / closeMobile', signature: 'openMobile(): void / closeMobile(): void', description: 'Sets the drawer state explicitly' }
       ],
-      properties: [
-        { name: 'isCollapsed', type: 'boolean', description: 'Current collapse state (synchronous)' }
-      ],
-      extras: '',
-      usage: `private sidebarService = inject(SidebarService);
+      extras: 'Storage key: groman-sidebar-collapsed.',
+      usage: `private readonly sidebar = inject(SidebarService);
+protected readonly collapsed = this.sidebar.collapsed;
 
-// Toggle sidebar
-this.sidebarService.toggle();
-
-// React to state changes
-this.sidebarService.collapsed$.subscribe(collapsed => {
-  console.log('Collapsed:', collapsed);
-});`
-    },
-    {
-      name: 'PaymentService',
-      providedIn: 'root',
-      description: 'Handles donation payments including creation, completion tracking, and history retrieval via Firestore.',
-      observables: [],
-      methods: [
-        { name: 'createDonation', signature: 'createDonation(amount: number, message?: string): Promise<string>', description: 'Creates a new donation record and returns the donation ID' },
-        { name: 'completeDonation', signature: 'completeDonation(donationId: string): Promise<void>', description: 'Marks a donation as completed' },
-        { name: 'getUserDonations', signature: 'getUserDonations(): Promise<Donation[]>', description: 'Retrieves all donations for the current user' },
-        { name: 'getTotalDonations', signature: 'getTotalDonations(): Promise<number>', description: 'Returns the total amount of all donations' }
-      ],
-      properties: [],
-      extras: '',
-      usage: `private paymentService = inject(PaymentService);
-
-// Create a donation
-const donationId = await this.paymentService.createDonation(10, 'Great project!');
-
-// Complete the donation
-await this.paymentService.completeDonation(donationId);
-
-// Get donation history
-const donations = await this.paymentService.getUserDonations();`
+<aside [class.collapsed]="collapsed()"> ... </aside>`
     },
     {
       name: 'ThemeService',
       providedIn: 'root',
-      description: 'Manages the application color theme. Persists the selected theme to localStorage and applies it by loading the corresponding CSS file.',
-      observables: [],
-      methods: [
-        { name: 'applyTheme', signature: 'applyTheme(key: string): void', description: 'Applies a theme by key and persists the selection' },
-        { name: 'getTheme', signature: 'getTheme(): string', description: 'Returns the current theme key' }
+      description:
+        'Owns both the accent theme and the dark/light color scheme. An effect writes CSS custom properties onto <html> whenever either changes, so no component has to know about theming at all.',
+      signals: [
+        { name: 'themeKey', type: 'Signal<string>', description: 'Active accent theme key (persisted)' },
+        { name: 'activeTheme', type: 'Signal<ThemeConfig>', description: 'computed() - the full config for the active key' },
+        { name: 'colorScheme', type: "Signal<'dark' | 'light'>", description: 'Active color scheme (persisted)' },
+        { name: 'isLight', type: 'Signal<boolean>', description: 'computed() - convenience flag for the navbar toggle' }
       ],
-      properties: [],
-      extras: 'Available themes: indigo, blue, green, purple, red, teal. Storage key: groman-theme (localStorage).',
-      usage: `private themeService = inject(ThemeService);
+      methods: [
+        { name: 'setTheme', signature: 'setTheme(key: string): void', description: 'Switches accent theme; unknown keys are ignored' },
+        { name: 'setColorScheme', signature: "setColorScheme(scheme: 'dark' | 'light'): void", description: 'Switches the color scheme' },
+        { name: 'toggleColorScheme', signature: 'toggleColorScheme(): void', description: 'Flips between dark and light' }
+      ],
+      extras:
+        'Twelve themes: indigo, blue, green, purple, red and teal, each with a dark and a colored navbar variant. Storage keys: groman-theme, groman-color-scheme. The light scheme works by flipping a single token, --overlay-rgb, which every surface and border in the app is built on.',
+      usage: `private readonly theme = inject(ThemeService);
 
-// Apply a theme
-this.themeService.applyTheme('purple');
+this.theme.setTheme('purple');
+this.theme.toggleColorScheme();
 
-// Get current theme
-const current = this.themeService.getTheme(); // 'purple'`
+// Charts and anything else can react to the accent
+protected readonly chartData = computed(() => ({
+  datasets: [{ borderColor: this.theme.activeTheme().primary, data: [...] }]
+}));`
+    },
+    {
+      name: 'ToastService',
+      providedIn: 'root',
+      description:
+        'Notification queue held in a signal and rendered by <app-toast-host />, which is mounted once in the dashboard layout. Auto-dismiss timers are tracked per toast and cleaned up on dismiss.',
+      signals: [{ name: 'toasts', type: 'Signal<Toast[]>', description: 'The current queue, oldest first' }],
+      methods: [
+        { name: 'success / error / warning / info', signature: "success(title: string, options?: { message?: string; duration?: number }): string", description: 'Queues a toast and returns its id' },
+        { name: 'show', signature: 'show(variant: ToastVariant, title: string, options?): string', description: 'Generic form of the four helpers' },
+        { name: 'dismiss', signature: 'dismiss(id: string): void', description: 'Removes one toast and clears its timer' },
+        { name: 'clear', signature: 'clear(): void', description: 'Removes everything' }
+      ],
+      extras: 'Default duration is 4000 ms; pass duration: 0 for a toast that stays until dismissed.',
+      usage: `private readonly toasts = inject(ToastService);
+
+this.toasts.success('Profile saved', { message: 'Your changes are live.' });
+this.toasts.error('Upload failed', { message: 'The file was larger than 5 MB.' });
+this.toasts.info('Sync in progress', { duration: 0 }); // sticky`
+    },
+    {
+      name: 'BreakpointService',
+      providedIn: 'root',
+      description:
+        'Viewport queries as signals. Under zoneless change detection, reading window.innerWidth in a template never re-renders anything - this service is the fix. Repeated queries share a single matchMedia listener.',
+      signals: [
+        { name: 'isMobile', type: 'Signal<boolean>', description: 'Below the md breakpoint (768px), where the sidebar becomes a drawer' },
+        { name: 'isTablet / isDesktop', type: 'Signal<boolean>', description: 'Below / above the lg breakpoint (992px)' }
+      ],
+      methods: [
+        { name: 'matches', signature: 'matches(query: string): Signal<boolean>', description: 'Any media query as a signal' },
+        { name: 'up / down', signature: "up(bp: Breakpoint): Signal<boolean> / down(bp): Signal<boolean>", description: 'Min-width / max-width helpers for sm, md, lg, xl' }
+      ],
+      extras: 'Breakpoints: sm 576, md 768, lg 992, xl 1200.',
+      usage: `private readonly breakpoint = inject(BreakpointService);
+
+protected toggleSidebar(): void {
+  this.breakpoint.isMobile() ? this.sidebar.toggleMobile() : this.sidebar.toggle();
+}`
+    },
+    {
+      name: 'persistedSignal()',
+      providedIn: 'services/storage.ts',
+      description:
+        'A writable signal mirrored into localStorage: it reads the stored value once on creation and writes it back on every change. It replaces the hand-rolled read/write calls that used to be scattered across four services.',
+      signals: [],
+      methods: [
+        { name: 'persistedSignal', signature: 'persistedSignal<T>(key: string, initial: T): WritableSignal<T>', description: 'Signal backed by localStorage' },
+        { name: 'readStorage / writeStorage / removeStorage', signature: 'readStorage<T>(key, fallback): T', description: 'Safe one-off helpers that swallow quota and private-mode errors' }
+      ],
+      extras: 'Must be created in an injection context, because it registers an effect().',
+      usage: `@Injectable({ providedIn: 'root' })
+export class SidebarService {
+  private readonly _collapsed = persistedSignal('groman-sidebar-collapsed', false);
+  readonly collapsed = this._collapsed.asReadonly();
+}`
+    },
+    {
+      name: 'PaymentService',
+      providedIn: 'root',
+      description: 'Demo donation flow persisted to localStorage, used by the donation button component.',
+      signals: [],
+      methods: [
+        { name: 'createDonation', signature: 'createDonation(amount: number, message?: string): Promise<string>', description: 'Creates a pending donation and returns its id' },
+        { name: 'completeDonation', signature: 'completeDonation(donationId: string): Promise<void>', description: 'Marks a donation completed' },
+        { name: 'getUserDonations', signature: 'getUserDonations(): Promise<Donation[]>', description: "Donations for the signed-in user" },
+        { name: 'getTotalDonations', signature: 'getTotalDonations(): Promise<number>', description: 'Sum of completed donations' }
+      ],
+      extras: 'Storage key: groman-donations.',
+      usage: `const id = await this.payments.createDonation(10, 'Great project!');
+await this.payments.completeDonation(id);`
+    },
+    {
+      name: 'TemplateGeneratorService',
+      providedIn: 'root',
+      description:
+        'Builds the downloadable starter ZIP in the browser. It reads template/manifest.json, fetches each listed file and zips it with JSZip (loaded on demand). It contains no copies of source code - the files are mirrored from src/ by scripts/sync-template.mjs, and npm run build fails if the two ever diverge.',
+      signals: [
+        { name: 'processed', type: 'Signal<number>', description: 'Files zipped so far, for the progress bar' },
+        { name: 'totalFiles', type: 'Signal<number>', description: 'Total files in the manifest' }
+      ],
+      methods: [
+        { name: 'loadManifest', signature: 'loadManifest(): Promise<TemplateManifest>', description: 'Fetches and caches the manifest' },
+        { name: 'generateTemplate', signature: 'generateTemplate(): Promise<void>', description: 'Builds the ZIP and triggers the download' }
+      ],
+      extras: 'Run npm run template:sync after changing anything under src/ that ships in the template.',
+      usage: `private readonly generator = inject(TemplateGeneratorService);
+
+await this.generator.generateTemplate();`
     },
     {
       name: 'authGuard',
       providedIn: 'CanActivateFn',
-      description: 'A functional route guard that checks if the user is authenticated. Redirects unauthenticated users to /auth/login.',
-      observables: [],
+      description: 'Functional route guard that redirects unauthenticated visitors to /auth/login. Applied to the profile and settings routes.',
+      signals: [],
       methods: [
-        { name: 'authGuard', signature: 'authGuard(): Observable<boolean>', description: 'Returns true if user is authenticated, otherwise redirects to login' }
+        { name: 'authGuard', signature: 'authGuard(): boolean', description: 'Returns true when AuthService.isAuthenticated() is true' }
       ],
-      properties: [],
-      extras: '',
-      usage: `import { authGuard } from './services/auth.guard';
-
-// In route configuration
-{
-  path: 'dashboard',
-  component: DashboardComponent,
-  canActivate: [authGuard]
+      extras: 'Pair it with the appPermission directive for role-level UI, and enforce the same rules on your API.',
+      usage: `{
+  path: 'settings',
+  canActivate: [authGuard],
+  loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent)
 }`
     }
   ];

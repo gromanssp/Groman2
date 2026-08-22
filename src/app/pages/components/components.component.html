@@ -1,21 +1,25 @@
 <div class="page-container">
   <header class="page-header">
     <h1 class="heading-2">Component Library</h1>
-    <p class="text-body">Interactive showcase of all available UI components with usage examples.</p>
+    <p class="text-body">
+      Interactive showcase of every UI component, each one standalone, OnPush and signal-based.
+    </p>
   </header>
+
   <div class="components-layout">
     <nav class="components-sidenav glass-panel">
-      @for (item of navItems; track item) {
-        <a
-          [routerLink]="item.path"
-          routerLinkActive="active"
-          class="sidenav-item">
-          {{ item.label }}
-        </a>
+      @for (group of navGroups; track group.title) {
+        <p class="sidenav-group">{{ group.title }}</p>
+        @for (item of group.items; track item.path) {
+          <a [routerLink]="item.path" routerLinkActive="active" class="sidenav-item">
+            {{ item.label }}
+          </a>
+        }
       }
     </nav>
+
     <div class="components-content">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </div>
 </div>

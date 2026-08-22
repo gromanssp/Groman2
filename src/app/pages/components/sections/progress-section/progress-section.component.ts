@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { ProgressBarComponent } from '../../../../shared/components/progress-bar/progress-bar.component';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
@@ -6,10 +6,11 @@ import { CodeSnippetComponent } from '../../../../shared/components/code-snippet
     selector: 'app-progress-section',
     templateUrl: './progress-section.component.html',
     styleUrl: './progress-section.component.css',
-    imports: [ProgressBarComponent, CodeSnippetComponent]
+    imports: [ProgressBarComponent, CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressSectionComponent {
-  dynamicValue = 45;
+  protected readonly dynamicValue = signal(45);
 
   codes = {
     values: `<app-progress-bar [value]="25" label="25%">\n</app-progress-bar>`,
@@ -21,10 +22,10 @@ export class ProgressSectionComponent {
   };
 
   increase(): void {
-    this.dynamicValue = Math.min(100, this.dynamicValue + 10);
+    this.dynamicValue.update(value => Math.min(100, value + 10));
   }
 
   decrease(): void {
-    this.dynamicValue = Math.max(0, this.dynamicValue - 10);
+    this.dynamicValue.update(value => Math.max(0, value - 10));
   }
 }

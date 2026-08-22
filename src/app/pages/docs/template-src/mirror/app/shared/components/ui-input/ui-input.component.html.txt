@@ -1,0 +1,15 @@
+<app-form-field
+  [label]="label()"
+  [hint]="hint()"
+  [error]="errorMessage()"
+  [controlId]="controlId"
+  [required]="required()">
+  <input
+    class="form-control"
+    [id]="controlId"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [attr.autocomplete]="autocomplete() || null"
+    [class.is-invalid]="!!errorMessage()"
+    [formField]="field()" />
+</app-form-field>

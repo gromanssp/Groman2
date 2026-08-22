@@ -1,0 +1,38 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Dropdowns</h2>
+  <p class="text-body mb-4">
+    A generic anchored panel. Outside clicks are handled by <code>appClickOutside</code>, so the
+    listener is written once instead of in every menu.
+  </p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Action menu</h3>
+      <div class="demo-area">
+        <app-dropdown>
+          <button dropdown-trigger class="btn btn-secondary">Actions</button>
+          <button class="dropdown-item" (click)="run('edit')">Edit</button>
+          <button class="dropdown-item" (click)="run('duplicate')">Duplicate</button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="run('delete')">Delete</button>
+        </app-dropdown>
+        <span class="text-small">Last action: {{ lastAction() }}</span>
+      </div>
+      <app-code-snippet [code]="codes.basic" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Alignment & sticky panel</h3>
+      <div class="demo-area">
+        <app-dropdown align="start" panelWidth="260px" [closeOnSelect]="false">
+          <button dropdown-trigger class="btn btn-outline-primary">Filters</button>
+          <p class="dropdown-label">Status</p>
+          <label class="dropdown-item"><input type="checkbox" /> Active</label>
+          <label class="dropdown-item"><input type="checkbox" /> Pending</label>
+          <label class="dropdown-item"><input type="checkbox" /> Archived</label>
+        </app-dropdown>
+      </div>
+      <app-code-snippet [code]="codes.align" />
+    </div>
+  </div>
+</div>

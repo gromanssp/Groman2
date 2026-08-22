@@ -1,0 +1,29 @@
+<div class="section-container">
+  <h2 class="heading-3 mb-4">Toasts</h2>
+  <p class="text-body mb-4">
+    Transient notifications driven by <code>ToastService</code>. The queue is a signal, so the host
+    re-renders without any manual change detection.
+  </p>
+
+  <div class="components-grid">
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Variants</h3>
+      <div class="demo-area">
+        <button class="btn btn-success btn-sm" (click)="fire('success')">Success</button>
+        <button class="btn btn-danger btn-sm" (click)="fire('error')">Error</button>
+        <button class="btn btn-secondary btn-sm" (click)="fire('warning')">Warning</button>
+        <button class="btn btn-primary btn-sm" (click)="fire('info')">Info</button>
+      </div>
+      <app-code-snippet [code]="codes.service" />
+    </div>
+
+    <div class="glass-panel showcase-card">
+      <h3 class="card-title">Sticky & clearing</h3>
+      <div class="demo-area">
+        <button class="btn btn-gradient btn-sm" (click)="fireSticky()">Sticky toast</button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="clear()">Clear all</button>
+      </div>
+      <app-code-snippet [code]="codes.host" />
+    </div>
+  </div>
+</div>

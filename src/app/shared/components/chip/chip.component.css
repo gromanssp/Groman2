@@ -1,0 +1,43 @@
+:host { display: inline-block; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  background: rgba(var(--overlay-rgb), 0.07);
+  border: 1px solid rgba(var(--overlay-rgb), 0.1);
+  border-radius: var(--radius-round);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.chip-sm { padding: 0.1rem 0.55rem; font-size: 0.75rem; }
+.chip-lg { padding: 0.4rem 0.9rem; font-size: 0.9rem; }
+
+.chip-primary { background: rgba(99, 102, 241, 0.15); border-color: rgba(99, 102, 241, 0.3); color: var(--accent-primary); }
+.chip-success { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: var(--success); }
+.chip-warning { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.3); color: var(--warning); }
+.chip-danger  { background: rgba(239, 68, 68, 0.15);  border-color: rgba(239, 68, 68, 0.3);  color: var(--danger); }
+.chip-info    { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: var(--info); }
+.chip-ghost   { background: transparent; border-color: transparent; }
+.chip-outline { background: transparent; }
+
+.chip.selected { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+.chip-remove {
+  display: flex;
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+.chip-remove:hover { opacity: 1; }
+.chip-remove svg { width: 100%; height: 100%; }

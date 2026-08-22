@@ -22,7 +22,7 @@
   white-space: nowrap;
   user-select: none;
 }
-.nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.nav-link:hover { color: var(--text-primary); background: rgba(var(--overlay-rgb), 0.05); }
 .nav-link.disabled { opacity: 0.4; pointer-events: none; }
 
 /* Tabs */
@@ -38,7 +38,7 @@
 .nav-tabs .nav-link.active {
   color: var(--accent-primary);
   border-bottom-color: var(--accent-primary);
-  background: rgba(255,255,255,0.03);
+  background: rgba(var(--overlay-rgb), 0.03);
 }
 
 /* Pills */
@@ -60,7 +60,7 @@
 }
 .nav-vertical .nav-link.active {
   color: var(--accent-primary);
-  background: rgba(255,255,255,0.05);
+  background: rgba(var(--overlay-rgb), 0.05);
   border-right-color: var(--accent-primary);
 }
 

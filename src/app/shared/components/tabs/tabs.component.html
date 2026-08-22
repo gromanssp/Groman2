@@ -1,0 +1,33 @@
+<div class="tabs tabs-{{ variant() }}">
+  <div class="tab-list" role="tablist">
+    @for (tab of tabs(); track $index) {
+      <button
+        class="tab-trigger"
+        type="button"
+        role="tab"
+        [id]="'tab-' + $index"
+        [attr.aria-selected]="$index === selectedIndex()"
+        [attr.aria-controls]="'tabpanel-' + $index"
+        [tabIndex]="$index === selectedIndex() ? 0 : -1"
+        [class.active]="$index === selectedIndex()"
+        [disabled]="tab.disabled()"
+        (click)="select($index)"
+        (keydown)="onKeydown($event, $index)">
+        @if (tab.icon()) {
+          <app-icon class="tab-icon" [path]="tab.icon()" [size]="16" />
+        }
+        {{ tab.label() }}
+      </button>
+    }
+  </div>
+
+  @if (activeTab(); as tab) {
+    <div
+      class="tab-panel"
+      role="tabpanel"
+      [id]="'tabpanel-' + selectedIndex()"
+      [attr.aria-labelledby]="'tab-' + selectedIndex()">
+      <ng-container *ngTemplateOutlet="tab.template" />
+    </div>
+  }
+</div>

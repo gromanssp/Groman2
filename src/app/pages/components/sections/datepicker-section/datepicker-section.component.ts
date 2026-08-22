@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DatePickerComponent } from '../../../../shared/components/date-picker/date-picker.component';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
@@ -6,7 +6,8 @@ import { CodeSnippetComponent } from '../../../../shared/components/code-snippet
     selector: 'app-datepicker-section',
     templateUrl: './datepicker-section.component.html',
     styleUrl: './datepicker-section.component.css',
-    imports: [DatePickerComponent, CodeSnippetComponent]
+    imports: [DatePickerComponent, CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatepickerSectionComponent {
   minDate = new Date();

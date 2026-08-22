@@ -1,0 +1,49 @@
+<div class="stepper stepper-{{ orientation() }}">
+  <ol class="step-header">
+    @if (orientation() === 'horizontal') {
+      <div class="step-track" aria-hidden="true">
+        <div class="step-track-fill" [style.width.%]="progress()"></div>
+      </div>
+    }
+
+    @for (step of steps(); track $index) {
+      <li class="step-item" [class.active]="$index === activeIndex()" [class.done]="$index < activeIndex()">
+        <button
+          class="step-bullet"
+          type="button"
+          [attr.aria-current]="$index === activeIndex() ? 'step' : null"
+          [disabled]="linear() && $index > activeIndex()"
+          (click)="goTo($index)">
+          @if ($index < activeIndex()) {
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          } @else {
+            {{ $index + 1 }}
+          }
+        </button>
+        <span class="step-labels">
+          <span class="step-label">{{ step.label() }}</span>
+          @if (step.description()) {
+            <span class="step-description">{{ step.description() }}</span>
+          }
+        </span>
+      </li>
+    }
+  </ol>
+
+  @if (activeStep(); as step) {
+    <div class="step-panel">
+      <ng-container *ngTemplateOutlet="step.template" />
+    </div>
+  }
+
+  <div class="step-actions">
+    <button class="btn btn-secondary" type="button" [disabled]="isFirst()" (click)="back()">
+      {{ backLabel() }}
+    </button>
+    <button class="btn btn-gradient" type="button" [disabled]="!canAdvance()" (click)="next()">
+      {{ isLast() ? finishLabel() : nextLabel() }}
+    </button>
+  </div>
+</div>

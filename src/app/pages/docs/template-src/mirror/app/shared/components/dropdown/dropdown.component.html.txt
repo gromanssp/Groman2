@@ -1,0 +1,15 @@
+<div class="dropdown" [appClickOutside]="open()" (clickOutside)="close()">
+  <div class="dropdown-trigger" [attr.aria-expanded]="open()" aria-haspopup="menu" (click)="toggle()">
+    <ng-content select="[dropdown-trigger]" />
+  </div>
+
+  @if (open()) {
+    <div
+      class="dropdown-panel align-{{ align() }}"
+      role="menu"
+      [style.width]="panelWidth()"
+      (click)="onPanelClick()">
+      <ng-content />
+    </div>
+  }
+</div>

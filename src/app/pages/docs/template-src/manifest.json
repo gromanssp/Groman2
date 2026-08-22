@@ -1,0 +1,634 @@
+{
+  "name": "groman2-template",
+  "generatedFrom": "src/ (mirrored) + template-src/_overrides",
+  "files": [
+    {
+      "src": "_overrides/editorconfig.txt",
+      "dest": ".editorconfig"
+    },
+    {
+      "src": "_overrides/gitignore.txt",
+      "dest": ".gitignore"
+    },
+    {
+      "src": "_overrides/angular.json.txt",
+      "dest": "angular.json"
+    },
+    {
+      "src": "_overrides/package.json.txt",
+      "dest": "package.json"
+    },
+    {
+      "src": "_overrides/README.md.txt",
+      "dest": "README.md"
+    },
+    {
+      "src": "mirror/app/app.component.css.txt",
+      "dest": "src/app/app.component.css"
+    },
+    {
+      "src": "mirror/app/app.component.html.txt",
+      "dest": "src/app/app.component.html"
+    },
+    {
+      "src": "mirror/app/app.component.ts.txt",
+      "dest": "src/app/app.component.ts"
+    },
+    {
+      "src": "_overrides/app.config.ts.txt",
+      "dest": "src/app/app.config.ts"
+    },
+    {
+      "src": "_overrides/app.routes.ts.txt",
+      "dest": "src/app/app.routes.ts"
+    },
+    {
+      "src": "mirror/app/components/navbar/navbar.component.css.txt",
+      "dest": "src/app/components/navbar/navbar.component.css"
+    },
+    {
+      "src": "mirror/app/components/navbar/navbar.component.html.txt",
+      "dest": "src/app/components/navbar/navbar.component.html"
+    },
+    {
+      "src": "mirror/app/components/navbar/navbar.component.ts.txt",
+      "dest": "src/app/components/navbar/navbar.component.ts"
+    },
+    {
+      "src": "_overrides/nav-items.ts.txt",
+      "dest": "src/app/components/sidebar/nav-items.ts"
+    },
+    {
+      "src": "mirror/app/components/sidebar/sidebar.component.css.txt",
+      "dest": "src/app/components/sidebar/sidebar.component.css"
+    },
+    {
+      "src": "mirror/app/components/sidebar/sidebar.component.html.txt",
+      "dest": "src/app/components/sidebar/sidebar.component.html"
+    },
+    {
+      "src": "mirror/app/components/sidebar/sidebar.component.ts.txt",
+      "dest": "src/app/components/sidebar/sidebar.component.ts"
+    },
+    {
+      "src": "mirror/app/components/stat-card/stat-card.component.css.txt",
+      "dest": "src/app/components/stat-card/stat-card.component.css"
+    },
+    {
+      "src": "mirror/app/components/stat-card/stat-card.component.html.txt",
+      "dest": "src/app/components/stat-card/stat-card.component.html"
+    },
+    {
+      "src": "mirror/app/components/stat-card/stat-card.component.ts.txt",
+      "dest": "src/app/components/stat-card/stat-card.component.ts"
+    },
+    {
+      "src": "mirror/app/directives/autofocus.directive.ts.txt",
+      "dest": "src/app/directives/autofocus.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/cell-template.directive.ts.txt",
+      "dest": "src/app/directives/cell-template.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/click-outside.directive.ts.txt",
+      "dest": "src/app/directives/click-outside.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/collapse.directive.ts.txt",
+      "dest": "src/app/directives/collapse.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/index.ts.txt",
+      "dest": "src/app/directives/index.ts"
+    },
+    {
+      "src": "mirror/app/directives/lazy-img.directive.ts.txt",
+      "dest": "src/app/directives/lazy-img.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/let.directive.ts.txt",
+      "dest": "src/app/directives/let.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/permission.directive.ts.txt",
+      "dest": "src/app/directives/permission.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/ripple.directive.ts.txt",
+      "dest": "src/app/directives/ripple.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/skeleton.directive.ts.txt",
+      "dest": "src/app/directives/skeleton.directive.ts"
+    },
+    {
+      "src": "mirror/app/directives/tooltip.directive.ts.txt",
+      "dest": "src/app/directives/tooltip.directive.ts"
+    },
+    {
+      "src": "mirror/app/layouts/auth/auth.component.css.txt",
+      "dest": "src/app/layouts/auth/auth.component.css"
+    },
+    {
+      "src": "mirror/app/layouts/auth/auth.component.html.txt",
+      "dest": "src/app/layouts/auth/auth.component.html"
+    },
+    {
+      "src": "mirror/app/layouts/auth/auth.component.ts.txt",
+      "dest": "src/app/layouts/auth/auth.component.ts"
+    },
+    {
+      "src": "mirror/app/layouts/dashboard/dashboard.component.css.txt",
+      "dest": "src/app/layouts/dashboard/dashboard.component.css"
+    },
+    {
+      "src": "mirror/app/layouts/dashboard/dashboard.component.html.txt",
+      "dest": "src/app/layouts/dashboard/dashboard.component.html"
+    },
+    {
+      "src": "mirror/app/layouts/dashboard/dashboard.component.ts.txt",
+      "dest": "src/app/layouts/dashboard/dashboard.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/calendar/calendar.component.css.txt",
+      "dest": "src/app/pages/calendar/calendar.component.css"
+    },
+    {
+      "src": "mirror/app/pages/calendar/calendar.component.html.txt",
+      "dest": "src/app/pages/calendar/calendar.component.html"
+    },
+    {
+      "src": "mirror/app/pages/calendar/calendar.component.ts.txt",
+      "dest": "src/app/pages/calendar/calendar.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/home/home.component.css.txt",
+      "dest": "src/app/pages/home/home.component.css"
+    },
+    {
+      "src": "mirror/app/pages/home/home.component.html.txt",
+      "dest": "src/app/pages/home/home.component.html"
+    },
+    {
+      "src": "mirror/app/pages/home/home.component.ts.txt",
+      "dest": "src/app/pages/home/home.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/login/login.component.css.txt",
+      "dest": "src/app/pages/login/login.component.css"
+    },
+    {
+      "src": "mirror/app/pages/login/login.component.html.txt",
+      "dest": "src/app/pages/login/login.component.html"
+    },
+    {
+      "src": "mirror/app/pages/login/login.component.ts.txt",
+      "dest": "src/app/pages/login/login.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/not-found/not-found.component.css.txt",
+      "dest": "src/app/pages/not-found/not-found.component.css"
+    },
+    {
+      "src": "mirror/app/pages/not-found/not-found.component.html.txt",
+      "dest": "src/app/pages/not-found/not-found.component.html"
+    },
+    {
+      "src": "mirror/app/pages/not-found/not-found.component.ts.txt",
+      "dest": "src/app/pages/not-found/not-found.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/profile/profile.component.css.txt",
+      "dest": "src/app/pages/profile/profile.component.css"
+    },
+    {
+      "src": "mirror/app/pages/profile/profile.component.html.txt",
+      "dest": "src/app/pages/profile/profile.component.html"
+    },
+    {
+      "src": "mirror/app/pages/profile/profile.component.ts.txt",
+      "dest": "src/app/pages/profile/profile.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/register/register.component.css.txt",
+      "dest": "src/app/pages/register/register.component.css"
+    },
+    {
+      "src": "mirror/app/pages/register/register.component.html.txt",
+      "dest": "src/app/pages/register/register.component.html"
+    },
+    {
+      "src": "mirror/app/pages/register/register.component.ts.txt",
+      "dest": "src/app/pages/register/register.component.ts"
+    },
+    {
+      "src": "mirror/app/pages/settings/settings.component.css.txt",
+      "dest": "src/app/pages/settings/settings.component.css"
+    },
+    {
+      "src": "mirror/app/pages/settings/settings.component.html.txt",
+      "dest": "src/app/pages/settings/settings.component.html"
+    },
+    {
+      "src": "mirror/app/pages/settings/settings.component.ts.txt",
+      "dest": "src/app/pages/settings/settings.component.ts"
+    },
+    {
+      "src": "mirror/app/services/auth.guard.ts.txt",
+      "dest": "src/app/services/auth.guard.ts"
+    },
+    {
+      "src": "mirror/app/services/auth.service.ts.txt",
+      "dest": "src/app/services/auth.service.ts"
+    },
+    {
+      "src": "mirror/app/services/breakpoint.service.ts.txt",
+      "dest": "src/app/services/breakpoint.service.ts"
+    },
+    {
+      "src": "mirror/app/services/payment.service.ts.txt",
+      "dest": "src/app/services/payment.service.ts"
+    },
+    {
+      "src": "mirror/app/services/sidebar.service.ts.txt",
+      "dest": "src/app/services/sidebar.service.ts"
+    },
+    {
+      "src": "mirror/app/services/storage.ts.txt",
+      "dest": "src/app/services/storage.ts"
+    },
+    {
+      "src": "mirror/app/services/theme.service.ts.txt",
+      "dest": "src/app/services/theme.service.ts"
+    },
+    {
+      "src": "mirror/app/services/toast.service.ts.txt",
+      "dest": "src/app/services/toast.service.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/alert/alert.component.css.txt",
+      "dest": "src/app/shared/components/alert/alert.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/alert/alert.component.html.txt",
+      "dest": "src/app/shared/components/alert/alert.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/alert/alert.component.ts.txt",
+      "dest": "src/app/shared/components/alert/alert.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/avatar/avatar.component.css.txt",
+      "dest": "src/app/shared/components/avatar/avatar.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/avatar/avatar.component.html.txt",
+      "dest": "src/app/shared/components/avatar/avatar.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/avatar/avatar.component.ts.txt",
+      "dest": "src/app/shared/components/avatar/avatar.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/badge/badge.component.css.txt",
+      "dest": "src/app/shared/components/badge/badge.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/badge/badge.component.html.txt",
+      "dest": "src/app/shared/components/badge/badge.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/badge/badge.component.ts.txt",
+      "dest": "src/app/shared/components/badge/badge.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/breadcrumbs/breadcrumbs.component.css.txt",
+      "dest": "src/app/shared/components/breadcrumbs/breadcrumbs.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/breadcrumbs/breadcrumbs.component.html.txt",
+      "dest": "src/app/shared/components/breadcrumbs/breadcrumbs.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/breadcrumbs/breadcrumbs.component.ts.txt",
+      "dest": "src/app/shared/components/breadcrumbs/breadcrumbs.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/carousel/carousel.component.css.txt",
+      "dest": "src/app/shared/components/carousel/carousel.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/carousel/carousel.component.html.txt",
+      "dest": "src/app/shared/components/carousel/carousel.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/carousel/carousel.component.ts.txt",
+      "dest": "src/app/shared/components/carousel/carousel.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/chip/chip.component.css.txt",
+      "dest": "src/app/shared/components/chip/chip.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/chip/chip.component.html.txt",
+      "dest": "src/app/shared/components/chip/chip.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/chip/chip.component.ts.txt",
+      "dest": "src/app/shared/components/chip/chip.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/code-snippet/code-snippet.component.css.txt",
+      "dest": "src/app/shared/components/code-snippet/code-snippet.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/code-snippet/code-snippet.component.html.txt",
+      "dest": "src/app/shared/components/code-snippet/code-snippet.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/code-snippet/code-snippet.component.ts.txt",
+      "dest": "src/app/shared/components/code-snippet/code-snippet.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/collapse-panel/collapse-panel.component.css.txt",
+      "dest": "src/app/shared/components/collapse-panel/collapse-panel.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/collapse-panel/collapse-panel.component.html.txt",
+      "dest": "src/app/shared/components/collapse-panel/collapse-panel.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/collapse-panel/collapse-panel.component.ts.txt",
+      "dest": "src/app/shared/components/collapse-panel/collapse-panel.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/data-table/data-table.component.css.txt",
+      "dest": "src/app/shared/components/data-table/data-table.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/data-table/data-table.component.html.txt",
+      "dest": "src/app/shared/components/data-table/data-table.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/data-table/data-table.component.ts.txt",
+      "dest": "src/app/shared/components/data-table/data-table.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/date-picker/date-picker.component.css.txt",
+      "dest": "src/app/shared/components/date-picker/date-picker.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/date-picker/date-picker.component.html.txt",
+      "dest": "src/app/shared/components/date-picker/date-picker.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/date-picker/date-picker.component.ts.txt",
+      "dest": "src/app/shared/components/date-picker/date-picker.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/donation-button/donation-button.component.css.txt",
+      "dest": "src/app/shared/components/donation-button/donation-button.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/donation-button/donation-button.component.html.txt",
+      "dest": "src/app/shared/components/donation-button/donation-button.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/donation-button/donation-button.component.ts.txt",
+      "dest": "src/app/shared/components/donation-button/donation-button.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/drawer/drawer.component.css.txt",
+      "dest": "src/app/shared/components/drawer/drawer.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/drawer/drawer.component.html.txt",
+      "dest": "src/app/shared/components/drawer/drawer.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/drawer/drawer.component.ts.txt",
+      "dest": "src/app/shared/components/drawer/drawer.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/dropdown/dropdown.component.css.txt",
+      "dest": "src/app/shared/components/dropdown/dropdown.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/dropdown/dropdown.component.html.txt",
+      "dest": "src/app/shared/components/dropdown/dropdown.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/dropdown/dropdown.component.ts.txt",
+      "dest": "src/app/shared/components/dropdown/dropdown.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/empty-state/empty-state.component.ts.txt",
+      "dest": "src/app/shared/components/empty-state/empty-state.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/file-upload/file-upload.component.css.txt",
+      "dest": "src/app/shared/components/file-upload/file-upload.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/file-upload/file-upload.component.html.txt",
+      "dest": "src/app/shared/components/file-upload/file-upload.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/file-upload/file-upload.component.ts.txt",
+      "dest": "src/app/shared/components/file-upload/file-upload.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/form-field/form-field.component.ts.txt",
+      "dest": "src/app/shared/components/form-field/form-field.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/icon/icon.component.ts.txt",
+      "dest": "src/app/shared/components/icon/icon.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/index.ts.txt",
+      "dest": "src/app/shared/components/index.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/modal/modal.component.css.txt",
+      "dest": "src/app/shared/components/modal/modal.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/modal/modal.component.html.txt",
+      "dest": "src/app/shared/components/modal/modal.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/modal/modal.component.ts.txt",
+      "dest": "src/app/shared/components/modal/modal.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/pagination/pagination.component.css.txt",
+      "dest": "src/app/shared/components/pagination/pagination.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/pagination/pagination.component.html.txt",
+      "dest": "src/app/shared/components/pagination/pagination.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/pagination/pagination.component.ts.txt",
+      "dest": "src/app/shared/components/pagination/pagination.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/progress-bar/progress-bar.component.css.txt",
+      "dest": "src/app/shared/components/progress-bar/progress-bar.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/progress-bar/progress-bar.component.html.txt",
+      "dest": "src/app/shared/components/progress-bar/progress-bar.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/progress-bar/progress-bar.component.ts.txt",
+      "dest": "src/app/shared/components/progress-bar/progress-bar.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/skeleton/skeleton.component.ts.txt",
+      "dest": "src/app/shared/components/skeleton/skeleton.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/spinner/spinner.component.css.txt",
+      "dest": "src/app/shared/components/spinner/spinner.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/spinner/spinner.component.html.txt",
+      "dest": "src/app/shared/components/spinner/spinner.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/spinner/spinner.component.ts.txt",
+      "dest": "src/app/shared/components/spinner/spinner.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/stepper/step.directive.ts.txt",
+      "dest": "src/app/shared/components/stepper/step.directive.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/stepper/stepper.component.css.txt",
+      "dest": "src/app/shared/components/stepper/stepper.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/stepper/stepper.component.html.txt",
+      "dest": "src/app/shared/components/stepper/stepper.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/stepper/stepper.component.ts.txt",
+      "dest": "src/app/shared/components/stepper/stepper.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/tabs/tab.directive.ts.txt",
+      "dest": "src/app/shared/components/tabs/tab.directive.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/tabs/tabs.component.css.txt",
+      "dest": "src/app/shared/components/tabs/tabs.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/tabs/tabs.component.html.txt",
+      "dest": "src/app/shared/components/tabs/tabs.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/tabs/tabs.component.ts.txt",
+      "dest": "src/app/shared/components/tabs/tabs.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/timeline/timeline.component.css.txt",
+      "dest": "src/app/shared/components/timeline/timeline.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/timeline/timeline.component.html.txt",
+      "dest": "src/app/shared/components/timeline/timeline.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/timeline/timeline.component.ts.txt",
+      "dest": "src/app/shared/components/timeline/timeline.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/toast/toast-host.component.ts.txt",
+      "dest": "src/app/shared/components/toast/toast-host.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/toast/toast.component.css.txt",
+      "dest": "src/app/shared/components/toast/toast.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/toast/toast.component.html.txt",
+      "dest": "src/app/shared/components/toast/toast.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/toast/toast.component.ts.txt",
+      "dest": "src/app/shared/components/toast/toast.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-checkbox/ui-checkbox.component.ts.txt",
+      "dest": "src/app/shared/components/ui-checkbox/ui-checkbox.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-input/ui-input.component.css.txt",
+      "dest": "src/app/shared/components/ui-input/ui-input.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-input/ui-input.component.html.txt",
+      "dest": "src/app/shared/components/ui-input/ui-input.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-input/ui-input.component.ts.txt",
+      "dest": "src/app/shared/components/ui-input/ui-input.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-select/ui-select.component.ts.txt",
+      "dest": "src/app/shared/components/ui-select/ui-select.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-switch/ui-switch.component.css.txt",
+      "dest": "src/app/shared/components/ui-switch/ui-switch.component.css"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-switch/ui-switch.component.html.txt",
+      "dest": "src/app/shared/components/ui-switch/ui-switch.component.html"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-switch/ui-switch.component.ts.txt",
+      "dest": "src/app/shared/components/ui-switch/ui-switch.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/components/ui-textarea/ui-textarea.component.ts.txt",
+      "dest": "src/app/shared/components/ui-textarea/ui-textarea.component.ts"
+    },
+    {
+      "src": "mirror/app/shared/ui.types.ts.txt",
+      "dest": "src/app/shared/ui.types.ts"
+    },
+    {
+      "src": "mirror/environments/environment.prod.ts.txt",
+      "dest": "src/environments/environment.prod.ts"
+    },
+    {
+      "src": "mirror/environments/environment.ts.txt",
+      "dest": "src/environments/environment.ts"
+    },
+    {
+      "src": "_overrides/index.html.txt",
+      "dest": "src/index.html"
+    },
+    {
+      "src": "mirror/main.ts.txt",
+      "dest": "src/main.ts"
+    },
+    {
+      "src": "mirror/styles.css.txt",
+      "dest": "src/styles.css"
+    },
+    {
+      "src": "_overrides/tsconfig.app.json.txt",
+      "dest": "tsconfig.app.json"
+    },
+    {
+      "src": "_overrides/tsconfig.json.txt",
+      "dest": "tsconfig.json"
+    }
+  ]
+}

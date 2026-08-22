@@ -1,0 +1,32 @@
+<div class="pagination">
+  <span class="pagination-range">{{ rangeLabel() }}</span>
+
+  <div class="pagination-controls">
+    <button class="page-btn" type="button" aria-label="Previous page" [disabled]="isFirst()" (click)="goTo(page() - 1)">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    @for (item of pages(); track $index) {
+      @if (item === null) {
+        <span class="page-gap" aria-hidden="true">…</span>
+      } @else {
+        <button
+          class="page-btn"
+          type="button"
+          [class.active]="item === page()"
+          [attr.aria-current]="item === page() ? 'page' : null"
+          (click)="goTo(item)">
+          {{ item }}
+        </button>
+      }
+    }
+
+    <button class="page-btn" type="button" aria-label="Next page" [disabled]="isLast()" (click)="goTo(page() + 1)">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
@@ -6,16 +6,17 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
     selector: 'app-modals-section',
     templateUrl: './modals-section.component.html',
     styleUrl: './modals-section.component.css',
-    imports: [CodeSnippetComponent, ModalComponent]
+    imports: [CodeSnippetComponent, ModalComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalsSectionComponent {
-  showSmall = false;
-  showMedium = false;
-  showLarge = false;
+  protected readonly showSmall = signal(false);
+  protected readonly showMedium = signal(false);
+  protected readonly showLarge = signal(false);
 
   codes = {
-    small: `<app-modal [isOpen]="showSmall" title="Small Modal"\n  size="sm" (closed)="showSmall = false">\n  <p>Content here...</p>\n</app-modal>`,
-    medium: `<app-modal [isOpen]="showMedium" title="Medium Modal"\n  size="md" (closed)="showMedium = false">\n  <p>Content here...</p>\n</app-modal>`,
-    large: `<app-modal [isOpen]="showLarge" title="Large Modal"\n  size="lg" (closed)="showLarge = false">\n  <p>Content here...</p>\n</app-modal>`
+    small: `<app-modal [(isOpen)]="showSmall">\n  <p>Content here...</p>\n</app-modal>`,
+    medium: `<app-modal [(isOpen)]="showMedium">\n  <p>Content here...</p>\n</app-modal>`,
+    large: `<app-modal [(isOpen)]="showLarge">\n  <p>Content here...</p>\n</app-modal>`
   };
 }

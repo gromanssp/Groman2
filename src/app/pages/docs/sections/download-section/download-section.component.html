@@ -5,9 +5,38 @@
     <p class="description">{{ description }}</p>
   </div>
 
-  <h3 class="section-title">Included Files</h3>
-  <div class="doc-card">
-    <app-code-snippet [code]="fileTree"></app-code-snippet>
+  <div class="download-area">
+    <button class="download-button" type="button" [disabled]="isGenerating()" (click)="downloadTemplate()">
+      @if (isGenerating()) {
+        <app-spinner variant="circular" size="sm" color="#ffffff" />
+        <span>Generating template…</span>
+      } @else {
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download Groman2 Template</span>
+      }
+    </button>
+
+    @if (isGenerating()) {
+      <app-progress-bar
+        class="download-progress"
+        [value]="progress()"
+        [striped]="true"
+        [animated]="true"
+        [label]="processed() + ' / ' + totalFiles() + ' files'" />
+    }
+
+    <p class="download-note">
+      ZIP archive with {{ fileCount() }} files — components, directives, services, styles and
+      configuration, ready to run.
+    </p>
+
+    @if (errorMessage()) {
+      <app-alert variant="danger" title="Download failed">{{ errorMessage() }}</app-alert>
+    }
   </div>
 
   <h3 class="section-title">Getting Started</h3>
@@ -20,25 +49,15 @@
         </li>
       }
     </ol>
+    <app-code-snippet [code]="quickStart" />
   </div>
 
-  <div class="download-area">
-    <button
-      class="download-button"
-      (click)="downloadTemplate()"
-      [disabled]="isGenerating()">
-      @if (isGenerating()) {
-        <app-spinner variant="circular" size="sm" color="#ffffff"></app-spinner>
-        <span>Generating Template...</span>
-      } @else {
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        <span>Download Groman2 Template</span>
-      }
-    </button>
-    <p class="download-note">ZIP archive with all components, services, and styles pre-configured.</p>
+  <h3 class="section-title">Included Files</h3>
+  <div class="doc-card">
+    <p class="description">
+      Generated from <code>manifest.json</code>, which is produced by
+      <code>npm run template:sync</code> — the same manifest the download button reads.
+    </p>
+    <app-code-snippet [code]="fileTree()" />
   </div>
 </div>

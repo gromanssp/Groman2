@@ -1,0 +1,11 @@
+<span class="chip chip-{{ variant() }} chip-{{ size() }}" [class.selected]="selected()">
+  <ng-content select="[chip-icon]" />
+  <span class="chip-label"><ng-content /></span>
+  @if (removable()) {
+    <button class="chip-remove" type="button" aria-label="Remove" (click)="removed.emit()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  }
+</span>

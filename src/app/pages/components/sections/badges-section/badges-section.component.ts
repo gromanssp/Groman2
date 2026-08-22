@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { CodeSnippetComponent } from '../../../../shared/components/code-snippet/code-snippet.component';
 
@@ -6,10 +6,11 @@ import { CodeSnippetComponent } from '../../../../shared/components/code-snippet
     selector: 'app-badges-section',
     templateUrl: './badges-section.component.html',
     styleUrl: './badges-section.component.css',
-    imports: [BadgeComponent, CodeSnippetComponent]
+    imports: [BadgeComponent, CodeSnippetComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BadgesSectionComponent {
-  counter = 3;
+  protected readonly counter = signal(3);
 
   codes = {
     variants: `<app-badge variant="primary">Primary</app-badge>\n<app-badge variant="success">Success</app-badge>\n<app-badge variant="warning">Warning</app-badge>\n<app-badge variant="danger">Danger</app-badge>\n<app-badge variant="secondary">Secondary</app-badge>\n<app-badge variant="outline">Outline</app-badge>`,
@@ -20,10 +21,10 @@ export class BadgesSectionComponent {
   };
 
   increment(): void {
-    this.counter++;
+    this.counter.update(value => value + 1);
   }
 
   decrement(): void {
-    if (this.counter > 0) this.counter--;
+    this.counter.update(value => Math.max(0, value - 1));
   }
 }
