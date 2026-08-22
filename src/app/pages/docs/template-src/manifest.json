@@ -603,14 +603,6 @@
       "dest": "src/app/shared/ui.types.ts"
     },
     {
-      "src": "mirror/environments/environment.prod.ts.txt",
-      "dest": "src/environments/environment.prod.ts"
-    },
-    {
-      "src": "mirror/environments/environment.ts.txt",
-      "dest": "src/environments/environment.ts"
-    },
-    {
       "src": "_overrides/index.html.txt",
       "dest": "src/index.html"
     },

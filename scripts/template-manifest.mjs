@@ -23,8 +23,7 @@ export const MIRRORED_DIRS = [
   'app/pages/calendar',
   'app/pages/login',
   'app/pages/register',
-  'app/pages/not-found',
-  'environments'
+  'app/pages/not-found'
 ];
 
 /** Individual mirrored files, relative to `src/`. */

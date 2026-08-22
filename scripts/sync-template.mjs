@@ -47,7 +47,8 @@ async function collectMirrored() {
   for (const dir of MIRRORED_DIRS) {
     const absolute = join(SRC, dir);
     if (!existsSync(absolute)) {
-      throw new Error(`Manifest lists a missing directory: src/${dir}`);
+      console.warn(`Skipping missing directory: src/${dir}`);
+      continue;
     }
     files.push(...(await walk(absolute)).map(file => relative(SRC, file)));
   }
