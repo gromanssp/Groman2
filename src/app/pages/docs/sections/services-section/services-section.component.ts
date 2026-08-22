@@ -184,7 +184,7 @@ await this.payments.completeDonation(id);`
       name: 'TemplateGeneratorService',
       providedIn: 'root',
       description:
-        'Builds the downloadable starter ZIP in the browser. It reads template/manifest.json, fetches each listed file and zips it with JSZip (loaded on demand). It contains no copies of source code - the files are mirrored from src/ by scripts/sync-template.mjs, and npm run build fails if the two ever diverge.',
+        'Builds the downloadable starter ZIP in the browser. It reads template/manifest.json, fetches each listed file and zips it with JSZip (loaded on demand). It contains no copies of source code - the files are mirrored from src/ by scripts/sync-template.mjs, and pnpm run build fails if the two ever diverge.',
       signals: [
         { name: 'processed', type: 'Signal<number>', description: 'Files zipped so far, for the progress bar' },
         { name: 'totalFiles', type: 'Signal<number>', description: 'Total files in the manifest' }
@@ -193,7 +193,7 @@ await this.payments.completeDonation(id);`
         { name: 'loadManifest', signature: 'loadManifest(): Promise<TemplateManifest>', description: 'Fetches and caches the manifest' },
         { name: 'generateTemplate', signature: 'generateTemplate(): Promise<void>', description: 'Builds the ZIP and triggers the download' }
       ],
-      extras: 'Run npm run template:sync after changing anything under src/ that ships in the template.',
+      extras: 'Run pnpm run template:sync after changing anything under src/ that ships in the template.',
       usage: `private readonly generator = inject(TemplateGeneratorService);
 
 await this.generator.generateTemplate();`

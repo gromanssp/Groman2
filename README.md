@@ -155,8 +155,10 @@ Login and Register pages with a centered glassmorphism card, gradient glow backg
 
 ### Prerequisites
 
-- **Node.js** ≥ 18.19
-- **npm** ≥ 9.0
+- **Node.js** ≥ 24.0 (Vercel 24.x, pnpm 11 requiere ≥22)
+- **pnpm** ≥ 11.0 (`corepack enable && corepack prepare pnpm@11.13.1 --activate`)
+
+> **Vercel:** Enable `ENABLE_EXPERIMENTAL_COREPACK=1` in Project → Settings → Environment Variables so Vercel uses `packageManager: pnpm@11.13.1` via Corepack.
 
 ### Installation
 
@@ -166,10 +168,10 @@ git clone https://github.com/your-username/groman2.git
 cd groman2
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm start
+pnpm start
 ```
 
 Open [http://localhost:4200](http://localhost:4200) in your browser.
@@ -177,10 +179,10 @@ Open [http://localhost:4200](http://localhost:4200) in your browser.
 ### Build for Production
 
 ```bash
-npm run build
+pnpm run build
 ```
 
-Output will be in `dist/groman2/`.
+Output will be in `dist/groman2/browser/` (Angular `application` builder).
 
 ---
 
@@ -275,7 +277,7 @@ import { UI_DIRECTIVES } from './directives';
 | **Zoneless change detection** | No monkey-patched timers, smaller bundle, shorter startup. The trade-off: state mutated outside a template listener *must* be a signal, or the view will not update |
 | **Signals over RxJS** | Services expose signals, not observables — no subscriptions, no `async` pipe, and it is what makes zoneless work |
 | **Directives for cross-cutting behaviour** | Outside clicks, tooltips, ripples and skeletons live in one place instead of being copy-pasted into every component |
-| **Template mirrored, not duplicated** | The old generator kept 1,900 lines of source code as strings and drifted constantly. Now `scripts/sync-template.mjs` mirrors the real files and `npm run build` fails if they diverge |
+| **Template mirrored, not duplicated** | The old generator kept 1,900 lines of source code as strings and drifted constantly. Now `scripts/sync-template.mjs` mirrors the real files and `pnpm run build` fails if they diverge |
 | **CSS custom properties** | Runtime theme switching without recompilation |
 | **Lazy loading** | Components, Docs, Profile, and Settings are lazy-loaded for faster initial bundle |
 | **OnPush change detection** | Better performance on all new components |
@@ -287,12 +289,12 @@ import { UI_DIRECTIVES } from './directives';
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | Start dev server on port 4200 |
-| `npm run build` | Verify the starter template is in sync, then build for production |
-| `npm run watch` | Build in watch mode |
-| `npm test` | Run unit tests (Karma, no `zone.js/testing`) |
-| `npm run template:sync` | Regenerate the downloadable template after changing `src/` |
-| `npm run template:check` | Fail if the template has drifted from `src/` |
+| `pnpm start` | Start dev server on port 4200 |
+| `pnpm run build` | Verify the starter template is in sync, then build for production |
+| `pnpm run watch` | Build in watch mode |
+| `pnpm test` | Run unit tests (Karma, no `zone.js/testing`) |
+| `pnpm run template:sync` | Regenerate the downloadable template after changing `src/` |
+| `pnpm run template:check` | Fail if the template has drifted from `src/` |
 
 ---
 

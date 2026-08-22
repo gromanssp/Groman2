@@ -49,12 +49,12 @@ export class DownloadSectionComponent {
 
   protected readonly instructions = [
     'Extract the downloaded ZIP file',
-    'Run npm install to install dependencies',
-    'Run npm start to launch the dev server',
+    'Run pnpm install to install dependencies',
+    'Run pnpm start to launch the dev server',
     'Open http://localhost:4200 in your browser'
   ];
 
-  protected readonly quickStart = `unzip groman2-template.zip\ncd groman2-template\nnpm install\nnpm start`;
+  protected readonly quickStart = `unzip groman2-template.zip\ncd groman2-template\npnpm install\npnpm start`;
 
   protected async downloadTemplate(): Promise<void> {
     this.isGenerating.set(true);

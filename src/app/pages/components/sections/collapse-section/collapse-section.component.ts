@@ -23,7 +23,7 @@ export class CollapseSectionComponent {
   ]);
 
   protected readonly accordionPanels = signal<Panel[]>([
-    { title: 'Getting Started', content: 'Install the Angular CLI globally using npm install -g @angular/cli. Then create a new project with ng new my-app and serve it with ng serve.', expanded: true },
+    { title: 'Getting Started', content: 'Install the Angular CLI globally using pnpm add -g @angular/cli. Then create a new project with ng new my-app and serve it with ng serve.', expanded: true },
     { title: 'Project Structure', content: 'An Angular workspace contains one or more projects. A project is a set of files that make up an application or a library. The src folder contains the source files for the root-level application project.', expanded: false },
     { title: 'Deployment', content: 'When you are ready to deploy your Angular application, use ng build to compile the application into an output directory. The build artifacts will be stored in the dist/ directory.', expanded: false }
   ]);

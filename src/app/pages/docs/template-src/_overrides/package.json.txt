@@ -2,6 +2,11 @@
   "name": "groman2-template",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.13.1",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=11.0.0"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

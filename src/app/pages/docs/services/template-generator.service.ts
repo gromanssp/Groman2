@@ -20,7 +20,7 @@ const TEMPLATE_ROOT = 'template';
  * mirrored from this app's own `src/` by `scripts/sync-template.mjs`.
  *
  * Nothing here duplicates source code, so the download can never drift from the
- * app you are looking at - `npm run template:check` fails the build if it does.
+ * app you are looking at - `pnpm run template:check` fails the build if it does.
  */
 @Injectable({ providedIn: 'root' })
 export class TemplateGeneratorService {

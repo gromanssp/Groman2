@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
+# pnpm — keep pnpm-lock.yaml committed for Vercel (do not ignore)
+pnpm-debug.log
 yarn.lock
 
 # IDE
@@ -14,6 +15,7 @@ yarn.lock
 # Angular
 .angular/
 dist/
+out-tsc/
 build/
 
 # Flutter

@@ -2,7 +2,7 @@
 /**
  * Keeps the downloadable starter template in sync with this app's source.
  *
- *   node scripts/sync-template.mjs          # verify (used by `npm run template:check`)
+ *   node scripts/sync-template.mjs          # verify (used by `pnpm run template:check`)
  *   node scripts/sync-template.mjs --write  # regenerate after changing src/
  *
  * Mirrored files are copied to `src/app/pages/docs/template-src/` with a `.txt`
@@ -113,7 +113,7 @@ async function run() {
   if (problems.length > 0) {
     console.error('Template is out of sync with src/:\n');
     for (const problem of problems) console.error(`  - ${problem}`);
-    console.error('\nRun: npm run template:sync');
+    console.error('\nRun: pnpm run template:sync');
     process.exit(1);
   }
 

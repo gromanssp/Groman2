@@ -6,8 +6,8 @@ system, a reusable component library and a directive kit for composing UI.
 ## Getting started
 
 ```bash
-npm install
-npm start
+pnpm install
+pnpm start
 ```
 
 Then open http://localhost:4200.
@@ -85,7 +85,7 @@ so a single token switch retheme the whole app.
 ## Commands
 
 ```bash
-npm start        # dev server
-npm run build    # production build
-npm test         # unit tests
+pnpm start        # dev server
+pnpm run build    # production build
+pnpm test         # unit tests
 ```

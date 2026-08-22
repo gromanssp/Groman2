@@ -70,7 +70,7 @@ export class OverviewSectionComponent {
       title: 'A template that cannot drift',
       detail:
         'The downloadable ZIP is mirrored from this app\'s own src/ by scripts/sync-template.mjs, and ' +
-        'npm run build fails if the two ever diverge.'
+        'pnpm run build fails if the two ever diverge.'
     }
   ];
 
@@ -94,19 +94,19 @@ scripts/
 \u2514\u2500\u2500 sync-template.mjs      # Mirrors src/ into the template, verifies sync`;
 
   readonly quickStartCode = `# Install dependencies
-npm install
+pnpm install
 
 # Start the dev server
-npm start          # http://localhost:4200
+pnpm start          # http://localhost:4200
 
 # Production build (verifies the starter template is in sync first)
-npm run build
+pnpm run build
 
 # Unit tests (Karma, no zone.js/testing)
-npm test
+pnpm test
 
 # Regenerate the downloadable template after changing src/
-npm run template:sync`;
+pnpm run template:sync`;
 
   readonly zonelessCode = `// src/app/app.config.ts
 export const appConfig: ApplicationConfig = {
